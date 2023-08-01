@@ -8,9 +8,9 @@
     $con = new Conexion();
     $conexion = $con->conectarbd();
     $sql="SELECT
-    p.id_porcentaje as idporcentaje,
-    p.por_mes        as mes,
-    p.por_tipo as tiptar
+        p.id_porcentaje as idporcentaje,
+        p.por_mes        as mes,
+        p.por_tipo as tiptar
     FROM porcentajes as p";
     $respuesta = mysqli_query($conexion, $sql);
 ?>
@@ -25,23 +25,24 @@
                     </div>
                 </div>
                 <div class="card-body text-center">
-                    <form id="frmaddregistro" method="post" onclick="addregistro()">
+                    <form id="frmaddregistro" method="post" onsubmit="addregistro()">
                         <div class="row text-center">
+                        <input type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
-                                    <input type="text" class="form-control" id="ticket" placeholder="000000">
+                                    <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
-                                    <select id="idtiptar" class="form-select" aria-label="Default select example">
+                                    <select id="idtiptar" name="idtiptar" class="form-select" aria-label="Default select example">
                                         <option selected>Seleccione</option>
                                         <?php
                                             while($tiptar = mysqli_fetch_array($respuesta)) {
                                         ?>
-                                                <option value="<?php echo $tiptar['idporcentaje']?>"><?php echo $tiptar['tiptar'];?></option>
+                                            <option value="<?php echo $tiptar['idporcentaje']?>"><?php echo $tiptar['tiptar'];?></option>
                                         <?php }?>
                                     </select>
                                 </div>
@@ -49,7 +50,7 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">% tarjeta</label>
-                                    <input type="text" class="form-control" id="portar" placeholder="000000">
+                                    <input type="text" class="form-control" name="portar" id="portar" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">

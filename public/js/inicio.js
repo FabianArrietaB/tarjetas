@@ -6,6 +6,10 @@ $(document).ready(function(){
     $('#tablaregistros').load('tablas/registros.php');
 });
 
+$(document).ready(function(){
+    $('#tablaresumen').load('tablas/resumen.php');
+});
+
 function addregistro(){
     $.ajax({
         type: "POST",
@@ -42,16 +46,18 @@ $('#frmaddregistro').change(function(){
     //condicion para limpiar campos
     if($('#idtiptar').val()==0){
         $('#portar').val("");
+        $('#tiptar').val("");
         return
     }
+    
     $.ajax({
         type:"POST",
         data:"idtiptar=" + $('#idtiptar').val(),
-        url:"../controlador/registros/detalle.php",
+        url:"../controller/registros/detalle.php",
         success:function(respuesta){
             respuesta=jQuery.parseJSON(respuesta);
-            $('#idtiptar').val(respuesta['idtiptar']);
-            $('#portar').val(respuesta['portar']);
+            $('#portar').val(respuesta['mes']);
+            $('#tiptar').val(respuesta['tipr']);
         }
     });
 });

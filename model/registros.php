@@ -4,13 +4,33 @@
     class Registros extends Conexion {
 
         public function addregistro($datos){
-            $conexion = Conexion::conectar();
+            $conexion = Conexion::conectarbd();
             $sql = "INSERT INTO registros (id_operador, reg_numticket, reg_tipcuenta, reg_valor, reg_iva, reg_tardesc, reg_diferencia, reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
             $query->bind_param("isisssss", $datos['idoperador'], $datos['ticket'], $datos['idtiptar'], $datos['valor'], $datos['iva'], $datos['comisi'], $datos['diferencia'], $fecha);
             $respuesta = $query->execute();
             return $respuesta;
+        }
+
+        public function detallePorcentaje($idtiptar){
+            $conexion = Conexion::conectarbd();
+            $sql ="SELECT
+            p.id_porcentaje as idporcentaje,
+            p.por_tipo      as tipo,
+            p.por_mes       as mes,
+            p.por_tipR      as tipr
+            FROM porcentajes AS p
+            WHERE p.id_porcentaje = '$idtiptar'";
+        $respuesta = mysqli_query($conexion,$sql);
+        $alumno = mysqli_fetch_array($respuesta);
+        $datos = array(
+            'idporcentaje' => $alumno['idporcentaje'],
+            'tipo' => $alumno['tipo'],
+            'mes' => $alumno['mes'],
+            'tipr' => $alumno['tipr'],
+        );
+        return $datos;
         }
     }
 ?>

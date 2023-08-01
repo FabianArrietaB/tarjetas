@@ -15,17 +15,24 @@
         <div class="card border-primary">
             <div class="card-header text-center">
                 <div class="title">
+                    <h2>RESUMEN CAJA</h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row student text-center" style="align-items: center">
+                    <div id="tablaresumen"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-primary">
+            <div class="card-header text-center">
+                <div class="title">
                     <h2>INFORMACION GENERAL</h2>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row student text-center" style="align-items: center">
-                    <div class="col-6">
-                        <div id="tablaporcentajes"></div>
-                    </div>
-                    <div class="col-6">
-                        <div id="tabladatos"></div>
-                    </div>
+                    <div id="tablaporcentajes"></div>
                 </div>
             </div>
         </div>

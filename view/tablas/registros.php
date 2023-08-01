@@ -5,18 +5,22 @@
     $conexion = $con->conectarbd();
     $idusuario = $_SESSION['usuario']['id'];
     $sql = "SELECT
-        r.id_registro   as idregistro,
-        r.id_operador   as idoperador,
-        r.reg_numticket as ticket,
-        r.reg_tipcuenta as idtipcuenta,
-        p.por_mes       as mes,
-        r.reg_valor     as valor,
+        r.id_registro     as idregistro,
+        r.id_operador     as idoperador,
+        r.reg_numticket   as ticket,
+        r.reg_tipcuenta   as idtipcuenta,
+        r.reg_tiptar      as tiptar,
+        r.reg_valor       as valor,
+        r.reg_iva         as iva,
+        r.reg_rtefte      as retfte,
+        r.reg_rteiva      as rteiva,
+        r.reg_rteica      as rteica,
+        r.reg_comision    as comision,
         r.reg_tardesc     as descu,
+        r.reg_banco       as banco,
         r.reg_diferencia  as difer,
-        r.reg_iva       as iva,
-        r.reg_fecope    as fecha
-        FROM registros  AS r
-        INNER JOIN porcentajes AS p ON p.id_porcentaje = r.reg_tipcuenta";
+        r.reg_fecope      as fecha
+        FROM registros    AS r";
     $query = mysqli_query($conexion, $sql);
 ?>
 <!-- inicio Tabla -->
@@ -49,13 +53,13 @@
                 <td><?php echo '$ ' . number_format($registros['valor']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['iva']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor'] - $registros['iva']); ?></td>
-                <td><?php echo '$ ' . number_format(($registros['valor'] - $registros['iva']) * 0.015); ?></td>
-                <td><?php echo '$ ' . number_format(($registros['valor'] - $registros['iva']) * $registros['mes']); ?></td>
-                <td><?php echo '$ ' . number_format($registros['iva'] * 0.15); ?></td>
-                <td><?php echo '$ ' . number_format(($registros['valor'] - $registros['iva']) * 0.005); ?></td>
-                <td><?php echo '$ ' . number_format($registros['descu']);?></td>
-                <td><?php echo '$ ' . number_format($registros['valor'] - (($registros['valor'] - $registros['iva']) * $registros['mes']));?></td>
-                <td><?php echo '$ ' . number_format($registros['difer']);?></td>
+                <td><?php echo '$ ' . number_format(round($registros['retfte'])); ?></td>
+                <td><?php echo '$ ' . number_format(round($registros['comision'])); ?></td>
+                <td><?php echo '$ ' . number_format(round($registros['rteiva'])); ?></td>
+                <td><?php echo '$ ' . number_format(round($registros['rteica'])); ?></td>
+                <td><?php echo '$ ' . number_format(round($registros['descu'])); ?></td>
+                <td><?php echo '$ ' . number_format(round($registros['banco'])); ?></td>
+                <td><?php echo '$ ' . number_format(round($registros['difer'])); ?></td>
                 <td>
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleusuario('<?php echo $usuarios['idusuario']?>')"><i class="fa-solid fa-pen-to-square fa-beat fa-xl"></i></button>
                 </td>
