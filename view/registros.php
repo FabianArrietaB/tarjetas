@@ -24,15 +24,15 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" onclick="addregistro()">
                         <div class="row text-center">
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="ticket" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
                                     <select class="form-select" aria-label="Default select example">
@@ -48,25 +48,24 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Valor</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="valor" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Iva</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="iva" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Neto</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="neto" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Comision</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                            <div class="col-1">
+                                <div >
+                                    <button class="btn btn-success" type="button">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -74,25 +73,25 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete Fuente</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="retfue" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete IVA</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="retiva" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete ICA</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="retica" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Comision</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="email" class="form-control" id="comisi" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
