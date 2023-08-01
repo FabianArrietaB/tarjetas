@@ -36,3 +36,22 @@ function addregistro(){
     });
     return false;
 }
+
+//CONSULTAR DATOS PORCENTAJE
+$('#frmaddregistro').change(function(){
+    //condicion para limpiar campos
+    if($('#idtiptar').val()==0){
+        $('#portar').val("");
+        return
+    }
+    $.ajax({
+        type:"POST",
+        data:"idtiptar=" + $('#idtiptar').val(),
+        url:"../controlador/registros/detalle.php",
+        success:function(respuesta){
+            respuesta=jQuery.parseJSON(respuesta);
+            $('#idtiptar').val(respuesta['idtiptar']);
+            $('#portar').val(respuesta['portar']);
+        }
+    });
+});
