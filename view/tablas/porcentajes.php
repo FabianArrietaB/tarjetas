@@ -33,7 +33,12 @@
         ?>
             <tr>
                 <td><?php echo $porcentajes['tipo'];?></td>
-                <td><?php echo $porcentajes['mes']; ?></td>
+                <td>
+                    <?php
+                    $valor = $porcentajes['mes'] * 100;
+                    echo $valor . ' %';
+                    ?>
+                </td>
                 <td><?php echo $porcentajes['tipr']; ?></td>
                 <td>
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleusuario('<?php echo $usuarios['idusuario']?>')"><i class="fa-solid fa-pen-to-square fa-beat fa-xl"></i></button>

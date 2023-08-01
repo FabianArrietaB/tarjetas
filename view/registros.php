@@ -27,7 +27,7 @@
                 <div class="card-body text-center">
                     <form id="frmaddregistro" method="post" onsubmit="addregistro()">
                         <div class="row text-center">
-                        <input type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
+                        <input hidden type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
@@ -50,25 +50,25 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">% tarjeta</label>
-                                    <input type="text" class="form-control" name="portar" id="portar" placeholder="000000">
+                                    <input type="text" class="form-control" name="portar" name="portar" id="portar" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Valor</label>
-                                    <input type="text" class="form-control" id="valor" placeholder="000000">
+                                    <input type="text" class="form-control" name="valor" id="valor" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Iva</label>
-                                    <input type="text" class="form-control" id="iva" placeholder="000000">
+                                    <input type="text" class="form-control" name="iva" id="iva" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Neto</label>
-                                    <input type="text" class="form-control" id="neto" placeholder="000000" readonly>
+                                    <input type="text" class="form-control" name="neto" id="neto" placeholder="000000" readonly>
                                 </div>
                             </div>
                             
@@ -77,37 +77,37 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete Fuente</label>
-                                    <input type="text" class="form-control" id="retfue" placeholder="000000" readonly>
+                                    <input type="text" class="form-control" name="retfue" id="retfue" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete IVA</label>
-                                    <input type="text" class="form-control" id="retiva" placeholder="000000" readonly>
+                                    <input type="text" class="form-control" name="retiva" id="retiva" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete ICA</label>
-                                    <input type="text" class="form-control" id="retica" placeholder="000000" readonly>
+                                    <input type="text" class="form-control" name="retica" id="retica" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Comision</label>
-                                    <input type="text" class="form-control" id="comisi" placeholder="000000" readonly>
+                                    <input type="text" class="form-control" name="comisi" id="comisi" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Banco</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="000000" readonly>
+                                    <input type="text" class="form-control" name="banco" id="banco" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Diferencia</label>
-                                    <input type="text" class="form-control" id="diferencia" placeholder="000000" readonly>
+                                    <input type="text" class="form-control" name="diferencia" id="diferencia" placeholder="000000" readonly>
                                 </div>
                             </div>
                         </div>
