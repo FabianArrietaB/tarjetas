@@ -34,7 +34,7 @@
                                     <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
                                     <select id="idtiptar" name="idtiptar" class="form-select" aria-label="Default select example">
@@ -47,10 +47,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-1">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">% tarjeta</label>
-                                    <input type="text" class="form-control" name="portar" name="portar" id="portar" placeholder="000000">
+                                    <label for="exampleFormControlInput1" class="form-label">%</label>
+                                    <input type="text" class="form-control"  name="portar" id="portar" placeholder="000">
                                 </div>
                             </div>
                             <div class="col-2">
@@ -114,7 +114,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div >
-                                    <button class="btn btn-success" type="button">Agregar</button>
+                                    <button class="btn btn-success" >Agregar</button>
                                 </div>
                             </div>
                         </div>

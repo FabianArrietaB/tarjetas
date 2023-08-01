@@ -49,7 +49,6 @@ $('#frmaddregistro').change(function(){
         $('#tiptar').val("");
         return
     }
-    
     $.ajax({
         type:"POST",
         data:"idtiptar=" + $('#idtiptar').val(),
@@ -60,4 +59,41 @@ $('#frmaddregistro').change(function(){
             $('#tiptar').val(respuesta['tipr']);
         }
     });
+});
+
+jQuery('#valor , #iva , #portar').on('change',function(){
+    //Obtengo el valor
+    var valor = $('#valor').val();
+    //Obtengo iva
+    var iva = $('#iva').val();
+    //Obtengo %tarjeta
+    var portar = $('#portar').val();
+    //En caso de que alguno de los dos este en blanco, el neto estará en blanco.
+    if(valor.length==0 || iva.length==0){
+        $('#neto').val("");
+        $('#retfue').val("");
+        $('#retiva').val("");
+        $('#retica').val("");
+        $('#comisi').val("");
+        $('#banco').val("");
+        $('#diferencia').val("");
+        return;
+    }
+    //Realizo el cálculo
+    var neto = valor - iva;
+    var retfue = neto * 0.015;
+    var retiva = iva * 0.15;
+    var retica = neto * 0.005;
+    var comision = neto * portar / 100;
+    var banco = valor - comision;
+    var descuento = retfue + retiva + retica + comision;
+    var diferencia = valor - descuento;
+    //Lo muestro en el div neto
+    $('#neto').val(neto);
+    $('#retfue').val(retfue);
+    $('#retiva').val(retiva);
+    $('#retica').val(retica);
+    $('#comisi').val(comision);
+    $('#banco').val(banco);
+    $('#diferencia').val(diferencia);
 });

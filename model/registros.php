@@ -17,18 +17,18 @@
         public function detallePorcentaje($idtiptar){
             $conexion = Conexion::conectarbd();
             $sql ="SELECT
-            p.id_porcentaje as idporcentaje,
-            p.por_tipo      as tipo,
-            p.por_mes       as mes,
-            p.por_tipR      as tipr
-            FROM porcentajes AS p
+            p.id_porcentaje  as idporcentaje,
+            p.por_tipo       as tipo,
+            (p.por_mes * 100) as mes,
+            p.por_tipR       as tipr
+            FROM porcentajes as p
             WHERE p.id_porcentaje = '$idtiptar'";
         $respuesta = mysqli_query($conexion,$sql);
         $alumno = mysqli_fetch_array($respuesta);
         $datos = array(
             'idporcentaje' => $alumno['idporcentaje'],
             'tipo' => $alumno['tipo'],
-            'mes' => $alumno['mes'],
+            'mes' => number_format($alumno['mes'], 2),
             'tipr' => $alumno['tipr'],
         );
         return $datos;
