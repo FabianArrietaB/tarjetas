@@ -9,6 +9,7 @@
     $conexion = $con->conectarbd();
     $sql="SELECT
     p.id_porcentaje as idporcentaje,
+    p.por_mes        as mes,
     p.por_tipo as tiptar
     FROM porcentajes as p";
     $respuesta = mysqli_query($conexion, $sql);
@@ -23,19 +24,19 @@
                         <h2>AGREGAR REGISTRO</h2>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form method="post" onclick="addregistro()">
+                <div class="card-body text-center">
+                    <form id="frmaddregistro" method="post" onclick="addregistro()">
                         <div class="row text-center">
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
-                                    <input type="email" class="form-control" id="ticket" placeholder="000000">
+                                    <input type="text" class="form-control" id="ticket" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select id="idtiptar" class="form-select" aria-label="Default select example">
                                         <option selected>Seleccione</option>
                                         <?php
                                             while($tiptar = mysqli_fetch_array($respuesta)) {
@@ -48,62 +49,65 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Valor</label>
-                                    <input type="email" class="form-control" id="valor" placeholder="000000">
+                                    <input type="text" class="form-control" id="valor" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Iva</label>
-                                    <input type="email" class="form-control" id="iva" placeholder="000000">
+                                    <input type="text" class="form-control" id="iva" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Neto</label>
-                                    <input type="email" class="form-control" id="neto" placeholder="000000">
+                                    <input type="text" class="form-control" id="neto" placeholder="000000" readonly>
                                 </div>
                             </div>
-                            <div class="col-1">
-                                <div >
-                                    <button class="btn btn-success" type="button">Agregar</button>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="row">
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete Fuente</label>
-                                    <input type="email" class="form-control" id="retfue" placeholder="000000">
+                                    <input type="text" class="form-control" id="retfue" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete IVA</label>
-                                    <input type="email" class="form-control" id="retiva" placeholder="000000">
+                                    <input type="text" class="form-control" id="retiva" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete ICA</label>
-                                    <input type="email" class="form-control" id="retica" placeholder="000000">
+                                    <input type="text" class="form-control" id="retica" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Comision</label>
-                                    <input type="email" class="form-control" id="comisi" placeholder="000000">
+                                    <input type="text" class="form-control" id="comisi" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Banco</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Diferencia</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                    <input type="text" class="form-control" id="diferencia" placeholder="000000" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div >
+                                    <button class="btn btn-success" type="button">Agregar</button>
                                 </div>
                             </div>
                         </div>
