@@ -48,6 +48,12 @@
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">% tarjeta</label>
+                                    <input type="text" class="form-control" id="portar" placeholder="000000">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Valor</label>
                                     <input type="text" class="form-control" id="valor" placeholder="000000">
                                 </div>
