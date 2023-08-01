@@ -25,16 +25,16 @@
                 </div>
                 <div class="card-body">
                     <form method="post">
-                        <div class="row">
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Ticket</span>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <div class="row text-center">
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Ticket</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Tipo Tarjeta</span>
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
                                     <select class="form-select" aria-label="Default select example">
                                         <option selected>Seleccione</option>
                                         <?php
@@ -45,42 +45,66 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Valor</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Iva</span>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Iva</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Neto</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Comision</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Ticket</span>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Rete Fuente</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Rete IVA</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Rete ICA</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Iva</span>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Comision</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Banco</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Diferencia</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000000">
                                 </div>
                             </div>
                         </div>
