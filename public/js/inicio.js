@@ -10,6 +10,10 @@ $(document).ready(function(){
     $('#tablaresumen').load('tablas/resumen.php');
 });
 
+$(document).ready(function(){
+    $('#tablageneral').load('tablas/general.php');
+});
+
 function addregistro(){
     $.ajax({
         type: "POST",

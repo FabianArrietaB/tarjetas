@@ -25,6 +25,9 @@
                         <a class="nav-link active" href="registros.php">REGISTROS</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" href="consultas.php">GENERAL</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="usuarios.php">USUARIOS</a>
                     </li>
                     <?php } ?>
