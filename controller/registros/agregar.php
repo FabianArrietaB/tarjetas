@@ -15,7 +15,7 @@
     "diferencia"     => $_POST['diferencia'],
    );
 
-   include "../../models/registros.php";
+   include "../../model/registros.php";
    $Registros = new Registros();
    echo $Registros->addregistro($datos);
 ?>

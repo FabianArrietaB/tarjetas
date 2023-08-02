@@ -18,7 +18,7 @@ function addregistro(){
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                //console.log(respuesta);
+                console.log(respuesta);
                 $('#tablaregistros').load('tablas/registros.php');
                 $('#frmaddregistro')[0].reset();
                 Swal.fire({

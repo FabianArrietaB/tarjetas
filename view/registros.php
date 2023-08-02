@@ -25,15 +25,9 @@
                     </div>
                 </div>
                 <div class="card-body text-center">
-                    <form id="frmaddregistro" method="post" onsubmit="addregistro()">
+                    <form id="frmaddregistro" method="post" onsubmit="return addregistro()">
                         <div class="row text-center">
-                        <input hidden type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Ticket</label>
-                                    <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000">
-                                </div>
-                            </div>
+                            <input hidden type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
@@ -51,6 +45,12 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">%</label>
                                     <input type="text" class="form-control"  name="portar" id="portar" placeholder="000">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Ticket</label>
+                                    <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000">
                                 </div>
                             </div>
                             <div class="col-2">
@@ -114,7 +114,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div >
-                                    <button class="btn btn-success" >Agregar</button>
+                                    <button type="submit" class="btn btn-success" >Agregar</button>
                                 </div>
                             </div>
                         </div>
