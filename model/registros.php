@@ -22,7 +22,7 @@
                                         reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
-            $prefijo = $datos['pretik'] .' - '. $datos['ticket'],
+            $prefijo = $datos['pretik'] .' - '. $datos['ticket'];
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
             $query->bind_param("isisssssssssss",
                                 $datos['idoperador'],
