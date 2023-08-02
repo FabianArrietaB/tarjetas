@@ -10,7 +10,7 @@
         <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                <?php if ($_SESSION['usuario']['rol'] == 1) { ?>
+                <?php if ($_SESSION['usuario']['rol'] == 1 || $_SESSION['usuario']['rol'] == 2) { ?>
                     <li class="nav-item">
                         <a class="nav-link active" href="inicio.php">INICIO</a>
                     </li>

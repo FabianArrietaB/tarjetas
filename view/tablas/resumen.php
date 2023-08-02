@@ -2,6 +2,9 @@
     session_start();
     include "../../model/conexion.php";
     $hoy = date("Y-m-d");
+    if(isset($_GET['date'])){
+        $hoy = $_GET['date'];
+    }
     $con = new Conexion();
     $conexion = $con->conectarbd();
     $idusuario = $_SESSION['usuario']['id'];

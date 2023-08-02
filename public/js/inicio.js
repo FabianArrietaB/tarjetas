@@ -61,6 +61,7 @@ $('#frmaddregistro').change(function(){
     });
 });
 
+//CALCULAR VALORES
 jQuery('#valor , #iva , #portar').on('change',function(){
     //Obtengo el valor
     var valor = $('#valor').val();
@@ -97,3 +98,13 @@ jQuery('#valor , #iva , #portar').on('change',function(){
     $('#banco').val(banco);
     $('#diferencia').val(diferencia);
 });
+
+//
+function obtenerfecha(){
+    var fecha = $('#date').val();
+    $.ajax({
+        method: 'GET',
+    }).done(function(info) {
+        $('#tablaresumen').load('tablas/resumen.php?date='+fecha);
+    })
+}
