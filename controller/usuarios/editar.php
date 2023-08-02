@@ -9,7 +9,7 @@
         "usuario"    => $_POST['usuariou'],
         "password"   => md5($_POST['passwordu']),
     );
-    include "../../models/usuarios.php";
+    include "../../model/usuarios.php";
     $Usuarios = new Usuarios();
     echo $Usuarios->editarusuario($datos);
 ?>

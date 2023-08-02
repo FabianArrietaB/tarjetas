@@ -17,14 +17,12 @@
     <table class="table table-light text-center">
         <thead>
             <tr>
-                <th scope="col" >tipo</th>
-                <th scope="col" >mes</th>
-                <th scope="col" >tipr</th>
-                <th>
-                    <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#create"><i class="fa-solid fa-square-plus fa-lg"></i></button>
-                    </div>
-                </th>
+                <th scope="col" >Tipo Tarjeta</th>
+                <th scope="col" >%</th>
+                <th scope="col" >Franquisia</th>
+                <!-- <th>
+                    
+                </th> -->
             </tr>
         </thead>
         <tbody>
@@ -40,9 +38,9 @@
                     ?>
                 </td>
                 <td><?php echo $porcentajes['tipr']; ?></td>
-                <td>
+                <!-- <td>
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleusuario('<?php echo $usuarios['idusuario']?>')"><i class="fa-solid fa-pen-to-square fa-beat fa-xl"></i></button>
-                </td>
+                </td> -->
             </tr>
         <?php } ?>
         </tbody>

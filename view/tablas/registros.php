@@ -20,7 +20,8 @@
         r.reg_banco       as banco,
         r.reg_diferencia  as difer,
         r.reg_fecope      as fecha
-        FROM registros    AS r";
+        FROM registros    AS r
+        ORDER BY r.id_registro DESC";
     $query = mysqli_query($conexion, $sql);
 ?>
 <!-- inicio Tabla -->
@@ -40,7 +41,6 @@
                 <th scope="col" >Descuento</th>
                 <th scope="col" >Banco</th>
                 <th scope="col" >Diferencia</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -60,9 +60,6 @@
                 <td><?php echo '$ ' . number_format(round($registros['descu'])); ?></td>
                 <td><?php echo '$ ' . number_format(round($registros['banco'])); ?></td>
                 <td><?php echo '$ ' . number_format(round($registros['difer'])); ?></td>
-                <td>
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleusuario('<?php echo $usuarios['idusuario']?>')"><i class="fa-solid fa-pen-to-square fa-beat fa-xl"></i></button>
-                </td>
             </tr>
         <?php } ?>
         </tbody>

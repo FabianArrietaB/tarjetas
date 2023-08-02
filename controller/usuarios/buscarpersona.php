@@ -1,7 +1,6 @@
 <?php
-    include "../../models/conexion.php";
+    include "../../model/conexion.php";
     $con = new Conexion();
-    
     $conexion = $con->conectar();
     $search = strip_tags(trim($_GET['persona']));
     // Do Prepared Query

@@ -1,6 +1,6 @@
 <?php
     $idusuario = $_POST['idusuario'];
-    include "../../models/usuarios.php";
+    include "../../model/usuarios.php";
     $Usuarios = new Usuarios();
     echo $Usuarios->eliminarusuario($idusuario);
 ?>

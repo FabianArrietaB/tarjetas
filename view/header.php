@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Bogota');
 if (!empty($_SESSION["user_estado"])) {
   header("location:../index.php");
 }

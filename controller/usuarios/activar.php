@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../../models/usuarios.php";
+    include "../../model/usuarios.php";
     $Usuario   = new Usuarios();
     $idusuario  = $_POST['idusuario'];
     $estado     = $_POST['estado'];

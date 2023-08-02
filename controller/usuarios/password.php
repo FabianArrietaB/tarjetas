@@ -6,7 +6,7 @@
    "newpassword" => md5($_POST['newpassword']),
    );
 
-   include "../../models/usuarios.php";
+   include "../../model/usuarios.php";
    $Usuarios = new Usuarios();
    echo $Usuarios->cambiocontraseña($datos);
 ?>

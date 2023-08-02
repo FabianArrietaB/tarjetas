@@ -3,7 +3,9 @@
     include "header.php";
     include "navbar.php";
     if(isset($_SESSION['usuario']) &&
-    $_SESSION['usuario']['rol'] == 4){
+    $_SESSION['usuario']['rol'] == 4 ||
+    $_SESSION['usuario']['rol'] == 2 ||
+    $_SESSION['usuario']['rol'] == 1){
     include "../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectarbd();
@@ -36,7 +38,7 @@
                                         <?php
                                             while($tiptar = mysqli_fetch_array($respuesta)) {
                                         ?>
-                                            <option value="<?php echo $tiptar['idporcentaje']?>"><?php echo $tiptar['tiptar'];?></option>
+                                            <option value="<?php echo $tiptar['idporcentaje']?>"><?php echo $tiptar['idporcentaje']?> . <?php echo $tiptar['tiptar'];?></option>
                                         <?php }?>
                                     </select>
                                 </div>
@@ -71,7 +73,6 @@
                                     <input type="text" class="form-control" name="neto" id="neto" placeholder="000000" readonly>
                                 </div>
                             </div>
-                            
                         </div>
                         <div class="row">
                             <div class="col-2">
@@ -130,9 +131,6 @@
                     <div class="title">
                         <h2>LISTA REGISTROS</h2>
                     </div>
-                    <form method="GET">
-                        <input class="form-control me-3" type="search" placeholder="Buscar" id="filtro" name="filtro">
-                    </form>
                 </div>
                 <div class="card-body">
                     <div id="tablaregistros"></div>

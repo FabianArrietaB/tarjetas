@@ -3,14 +3,21 @@
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">SISTEMAS</a>
+        <a class="navbar-brand" href="#">TARJETAS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <?php if ($_SESSION['usuario']['rol'] == 4) { ?>
+                <?php if ($_SESSION['usuario']['rol'] == 1) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="inicio.php">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="registros.php">REGISTROS</a>
+                    </li>
+                    <?php } else if ($_SESSION['usuario']['rol'] == 4) { ?>
                     <li class="nav-item">
                         <a class="nav-link active" href="inicio.php">INICIO</a>
                     </li>
@@ -24,6 +31,7 @@
                 </ul>
             </div>
         </div>
+        <span class="navbar-brand">fecha: <?php echo date("Y-m-d")?></span>
         <span class="navbar-brand" href="#">Usuario:</span>
         <a class="mr-sm-2 btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#contraseña" onclick="detallepass('<?php echo $idusuario?>')"><?php echo $_SESSION['usuario']['nombre'] ?></a>
         <a href="../controller/usuarios/salir.php" class="btn btn-danger" type="submit">

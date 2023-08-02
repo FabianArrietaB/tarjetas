@@ -10,7 +10,7 @@
    "idsede"     => $_POST['idsede'],
    );
 
-   include "../../models/usuarios.php";
+   include "../../model/usuarios.php";
    $Usuarios = new Usuarios();
    echo $Usuarios->agregarusuario($datos);
 ?>
