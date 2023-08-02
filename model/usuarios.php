@@ -24,67 +24,20 @@
 
         public function activarusuario($idusuario, $estado){
             $conexion = Conexion::conectar();
-            //CONSULTA DETALLE DE LA USUARIO
-            $estact = "SELECT u.user_nombre AS usuario FROM usuarios as u WHERE u.id_usuario = '$idusuario'";
-            $resultado = mysqli_query($conexion, $estact);
-            $respuesta = mysqli_fetch_array($resultado);
-            //VALIDACION DEL ESTADO
-            $usuario = $respuesta['usuario'];
-            $hoy = date("Y-m-d");
-            $registro = 'CAMBIO';
-            $modulo = 'TAREAS';
-            $idoperador = $_SESSION['usuario']['id'];
-            if ($respuesta > 0) {
-                if($estado == 1){
-                    $estado = 0;
-                    $nomest = 'INACTIVO';
-                }else{
-                    $estado = 1;
-                    $nomest = 'ACTIVO';
-                }
-                //REGISTRO AUDITORIA
-                $insertbitacora = "INSERT INTO bitacora (bit_tipeve, bit_fecope, bit_operador, bit_modulo, bit_detall) VALUES (?,?,?,?,?)";
-                $query = $conexion->prepare($insertbitacora);
-                $detalle = 'EL ESTADO DEL USUARIO ' . $usuario . ' A ' . $nomest;
-                $query->bind_param("ssiss", $registro, $hoy, $idoperador, $modulo, $detalle);
-                $respuesta = $query->execute();
-                $sql = "UPDATE usuarios SET user_estado = ? WHERE id_usuario = ?";
-                $query = $conexion->prepare($sql);
-                $query->bind_param('ii', $estado, $idusuario);
-                $respuesta = $query->execute();
-                $query->close();
-            }
+            $sql = "UPDATE usuarios SET user_estado = ? WHERE id_usuario = ?";
+            $query = $conexion->prepare($sql);
+            $query->bind_param('ii', $estado, $idusuario);
+            $respuesta = $query->execute();
+            $query->close();
             return $respuesta;
         }
 
         public function agregarusuario($datos){
             $conexion = Conexion::conectar();
-            //CONSULTA AREA
-            $idarea = $datos['idarea'];
-            $sqlarea = "SELECT a.are_nombre as area FROM areas as a WHERE a.id_area ='$idarea'";
-            $resarea = mysqli_query($conexion, $sqlarea);
-            $rwarea = mysqli_fetch_array($resarea);
-            $area = $rwarea['area'];
-            //CONSULTA SEDE
-            $idsede = $datos['idsede'];
-            $sqlsede = "SELECT s.sed_nombre as sede FROM sedes as s WHERE s.id_sede ='$idsede'";
-            $ressede = mysqli_query($conexion, $sqlsede);
-            $rwsede = mysqli_fetch_array($ressede);
-            $sede = $rwsede['sede'];
             $sql = "INSERT INTO usuarios (id_operador, id_persona, id_sede, id_rol, id_area, user_nombre, user_password) VALUES( ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $query->bind_param("iiiiiss", $datos['idoperador'], $datos['idpersona'], $datos['idsede'], $datos['idrol'], $datos['idarea'], $datos['usuario'], $datos['password']);
             $respuesta = $query->execute();
-            if ( $respuesta > 0){
-                //REGISTRO AUDITORIA
-                $insertbitacora = "INSERT INTO bitacora (bit_tipeve, bit_fecope, bit_operador, bit_modulo, bit_detall, bit_idsede) VALUES (?, ?, ?, ?, ?, ?)";
-                $query = $conexion->prepare($insertbitacora);
-                $registro = 'REGISTRO';
-                $modulo = 'USUARIOS';
-                $detalle = 'EL USUARIO ' . $datos['usuario'] . ' EN LA SEDE ' . $sede . ' EN EL AREA ' . $area;
-                $query->bind_param("ssissi", $registro, $hoy, $datos['idoperador'], $modulo, $detalle, $idsede);
-                $respuesta = $query->execute();
-            }
             return $respuesta;
         }
 
@@ -139,18 +92,6 @@
                                 $datos['password'],
                                 $datos['idusuario']);
             $respuesta = $query->execute();
-            if ( $respuesta > 0){
-                $hoy = date("Y-m-d");
-                $registro = 'MODIFICO';
-                $modulo = 'USUARIOS';
-                //REGISTRO AUDITORIA
-                $insertbitacora = "INSERT INTO bitacora (bit_tipeve, bit_fecope, bit_operador, bit_modulo, bit_detall, bit_idsede) VALUES (?,?,?,?,?,?)";
-                $query = $conexion->prepare($insertbitacora);
-                $detalle = 'AL USUARIO ' . $datos['usuario'];
-                $query->bind_param("ssissi", $registro, $hoy, $datos['idoperador'], $modulo, $detalle, $datos['idsede']);
-                $respuesta = $query->execute();
-            }
-            $query->close();
             return $respuesta;
         }
 
@@ -186,18 +127,6 @@
                                         $datos['usuarioid']);
                 $respuesta = $query->execute();
             $query->close();
-            $hoy = date("Y-m-d");
-            $registro = 'CAMBIO';
-            $modulo = 'USUARIOS';
-            if ( $respuesta > 0){
-                //REGISTRO AUDITORIA
-                $insertbitacora = "INSERT INTO bitacora (bit_tipeve, bit_fecope, bit_operador, bit_modulo, bit_detall, bit_idsede) VALUES (?,?,?,?,?,?)";
-                $query = $conexion->prepare($insertbitacora);
-                $detalle = 'SU CONTRASEÑA';
-                $query->bind_param("ssissi", $registro, $hoy, $datos['idoperador'], $modulo, $detalle, $sede);
-                $respuesta = $query->execute();
-                
-            }
             return $respuesta;
         }
     }

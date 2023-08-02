@@ -14,6 +14,10 @@ $(document).ready(function(){
     $('#tablageneral').load('tablas/general.php');
 });
 
+$(document).ready(function(){
+    $('#tablaregistrosgeneral').load('tablas/tablageneral.php');
+});
+
 function addregistro(){
     $.ajax({
         type: "POST",
@@ -45,7 +49,62 @@ function addregistro(){
     return false;
 }
 
-//CONSULTAR DATOS PORCENTAJE
+function detalleregistro(idregistro){
+    $.ajax({
+        type: "POST",
+        data: "idregistro=" + idregistro,
+        url: "../controller/registros/detalleregistro.php",
+        success: function(respuesta){
+            respuesta = jQuery.parseJSON(respuesta);
+            //console.log(respuesta)
+            $('#idregistro').val(respuesta['idregistro']);
+            $('#tiptaru').val(respuesta['tiptar']);
+            $('#idtiptaru').val(respuesta['idtipcuenta']);
+            $('#portaru').val(respuesta['portar']);
+            $('#ticketu').val(respuesta['ticket']);
+            $('#valoru').val(respuesta['valor']);
+            $('#ivau').val(respuesta['iva']);
+            $('#netou').val(respuesta['neto']);
+            $('#retfueu').val(respuesta['retfte']);
+            $('#retivau').val(respuesta['rteiva']);
+            $('#reticau').val(respuesta['rteica']);
+            $('#comisiu').val(respuesta['comision']);
+            $('#bancou').val(respuesta['banco']);
+            $('#diferenciau').val(respuesta['difer']);
+        }
+    });
+}
+
+function editarregistro(){
+    $.ajax({
+        type: "POST",
+        data: $('#frmeditarregistro').serialize(),
+        url: "../controller/registros/editar.php",
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                $('#editar').modal('hide');
+                $('#tablaregistros').load('tablas/registros.php');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro Actualizado Exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al Editar!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    });
+    return false;
+}
+//CONSULTAR DATOS PORCENTAJE INGRESOR
 $('#frmaddregistro').change(function(){
     //condicion para limpiar campos
     if($('#idtiptar').val()==0){
@@ -65,8 +124,28 @@ $('#frmaddregistro').change(function(){
     });
 });
 
-//CALCULAR VALORES
-jQuery('#valor , #iva , #portar').on('change',function(){
+//CONSULTAR DATOS PORCENTAJE UPDATE
+$('#frmeditarregistro').change(function(){
+    //condicion para limpiar campos
+    if($('#idtiptaru').val()==0){
+        $('#portaru').val("");
+        $('#tiptaru').val("");
+        return
+    }
+    $.ajax({
+        type:"POST",
+        data:"idtiptaru=" + $('#idtiptaru').val(),
+        url:"../controller/registros/porcentaje.php",
+        success:function(respuesta){
+            respuesta=jQuery.parseJSON(respuesta);
+            $('#portaru').val(respuesta['mes']);
+            $('#tiptaru').val(respuesta['tipr']);
+        }
+    });
+});
+
+//CALCULAR VALORES INSERTAR
+jQuery('#valor, #iva, #portar').on('change',function(){
     //Obtengo el valor
     var valor = $('#valor').val();
     //Obtengo iva
@@ -103,7 +182,45 @@ jQuery('#valor , #iva , #portar').on('change',function(){
     $('#diferencia').val(diferencia);
 });
 
-//
+//CALCULAR VALORES UPDATE
+jQuery('#valoru , #ivau , #portaru').on('change',function(){
+    //Obtengo el valor
+    var valoru = $('#valoru').val();
+    //Obtengo iva
+    var ivau = $('#ivau').val();
+    //Obtengo %tarjeta
+    var portaru = $('#portaru').val();
+    //En caso de que alguno de los dos este en blanco, el neto estará en blanco.
+    if(valor.length==0 || iva.length==0){
+        $('#neto').val("");
+        $('#retfue').val("");
+        $('#retiva').val("");
+        $('#retica').val("");
+        $('#comisi').val("");
+        $('#banco').val("");
+        $('#diferencia').val("");
+        return;
+    }
+    //Realizo el cálculo
+    var netou = valoru - ivau;
+    var retfueu = netou * 0.015;
+    var retivau = ivau * 0.15;
+    var reticau = netou * 0.005;
+    var comisionu = netou * portaru / 100;
+    var bancou = valoru - comisionu;
+    var descuentou = retfueu + retivau + reticau + comisionu;
+    var diferenciau = valoru - descuentou;
+    //Lo muestro en el div neto
+    $('#netou').val(netou);
+    $('#retfueu').val(retfueu);
+    $('#retivau').val(retivau);
+    $('#reticau').val(reticau);
+    $('#comisiu').val(comisionu);
+    $('#bancou').val(bancou);
+    $('#diferenciau').val(diferenciau);
+});
+
+//CONSULTA USAURIO
 function obtenerfecha(){
     var fecha = $('#date').val();
     $.ajax({
@@ -111,4 +228,18 @@ function obtenerfecha(){
     }).done(function(info) {
         $('#tablaresumen').load('tablas/resumen.php?date='+fecha);
     })
+}
+
+//CONSULTA ADMINISTRADOR Y SUPERVISOR
+function generar(){
+    var date = $('#date').val();
+    var idoperador = $('#idoperador').val();
+    $.ajax({
+        method: 'GET',
+    }).done(function(info) {
+        $('#tablageneral').load('tablas/general.php?date='+date+'&idoperador='+idoperador);
+        $('#tablaregistrosgeneral').load('tablas/tablageneral.php?date='+date+'&idoperador='+idoperador);
+    })
+    console.log(date)
+    console.log(idoperador)
 }

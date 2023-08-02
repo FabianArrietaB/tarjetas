@@ -4,11 +4,10 @@
     include "navbar.php";
     if(isset($_SESSION['usuario']) &&
     $_SESSION['usuario']['rol'] == 4 ||
-    $_SESSION['usuario']['rol'] == 2 ||
     $_SESSION['usuario']['rol'] == 1){
     include "../model/conexion.php";
     $con = new Conexion();
-    $conexion = $con->conectarbd();
+    $conexion = $con->conectar();
     $sql="SELECT
         p.id_porcentaje as idporcentaje,
         p.por_mes        as mes,
@@ -52,7 +51,15 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
-                                    <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000">
+                                    <div class="input-group">
+                                        <select id="pretik" name="pretik" class="form-select" aria-label="Default select example">
+                                            <option value="CM01">CM01</option>
+                                            <option value="CM02">CM02</option>
+                                            <option value="CBM">CBM</option>
+                                            <option value="CFC">CFC</option>
+                                        </select>
+                                        <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -83,6 +90,12 @@
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Comision</label>
+                                    <input type="text" class="form-control" name="comisi" id="comisi" placeholder="000000" readonly>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete IVA</label>
                                     <input type="text" class="form-control" name="retiva" id="retiva" placeholder="000000" readonly>
                                 </div>
@@ -91,12 +104,6 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Rete ICA</label>
                                     <input type="text" class="form-control" name="retica" id="retica" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Comision</label>
-                                    <input type="text" class="form-control" name="comisi" id="comisi" placeholder="000000" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -142,6 +149,7 @@
 <!-- fin del contenido principal -->
 <!-- por ultimo se carga el footer -->
 <?php
+    include "tablas/editar.php";
     include "footer.php";
 ?>
 <!-- carga ficheros javascript -->

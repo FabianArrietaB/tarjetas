@@ -1,7 +1,14 @@
 <?php
     session_start();
-    if ($_SESSION['usuario']['rol'] == 4) {
     include "../../model/conexion.php";
+    $hoy = "";
+    $operador = "";
+    if(isset($_GET['date'])){
+        $hoy = $_GET['date'];
+    }
+    if(isset($_GET['idoperador'])){
+        $operador = $_GET['idoperador'];
+    }
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
@@ -22,34 +29,12 @@
         r.reg_diferencia  as difer,
         r.reg_fecope      as fecha
         FROM registros    AS r
-        ORDER BY r.id_registro DESC";
+        WHERE r.reg_fecope = '$hoy'";
+        if($operador != ""){
+            $sql .=" AND r.id_operador = '$operador'";
+        }
+        $sql .=" ORDER BY r.id_registro DESC";
     $query = mysqli_query($conexion, $sql);
-} else {
-     include "../../model/conexion.php";
-    $con = new Conexion();
-    $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
-    $sql = "SELECT
-        r.id_registro     as idregistro,
-        r.id_operador     as idoperador,
-        r.reg_numticket   as ticket,
-        r.reg_tipcuenta   as idtipcuenta,
-        r.reg_tiptar      as tiptar,
-        r.reg_valor       as valor,
-        r.reg_iva         as iva,
-        r.reg_rtefte      as retfte,
-        r.reg_rteiva      as rteiva,
-        r.reg_rteica      as rteica,
-        r.reg_comision    as comision,
-        r.reg_tardesc     as descu,
-        r.reg_banco       as banco,
-        r.reg_diferencia  as difer,
-        r.reg_fecope      as fecha
-        FROM registros    AS r
-        WHERE r.id_operador = '$idusuario'
-        ORDER BY r.id_registro DESC";
-    $query = mysqli_query($conexion, $sql);
-}
 ?>
 <!-- inicio Tabla -->
 <div class="table-responsive">
@@ -68,7 +53,6 @@
                 <th scope="col" >Descuento</th>
                 <th scope="col" >Banco</th>
                 <th scope="col" >Diferencia</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -88,9 +72,6 @@
                 <td><?php echo '$ ' . number_format(round($registros['descu'])); ?></td>
                 <td><?php echo '$ ' . number_format(round($registros['banco'])); ?></td>
                 <td><?php echo '$ ' . number_format(round($registros['difer'])); ?></td>
-                <td>
-                    <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
-                </td>
             </tr>
         <?php } ?>
         </tbody>

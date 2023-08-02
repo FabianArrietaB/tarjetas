@@ -2,7 +2,7 @@
     session_start();
     include "../../model/conexion.php";
     $con = new Conexion();
-    $conexion = $con->conectarbd();
+    $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
     $sql = "SELECT
         p.id_porcentaje as idporcentaje,

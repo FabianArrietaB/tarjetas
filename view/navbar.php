@@ -10,12 +10,19 @@
         <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                <?php if ($_SESSION['usuario']['rol'] == 1 || $_SESSION['usuario']['rol'] == 2) { ?>
+                <?php if ($_SESSION['usuario']['rol'] == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link active" href="inicio.php">INICIO</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="registros.php">REGISTROS</a>
+                    </li>
+                    <?php } else if ($_SESSION['usuario']['rol'] == 2) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="inicio.php">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="consultas.php">GENERAL</a>
                     </li>
                     <?php } else if ($_SESSION['usuario']['rol'] == 4) { ?>
                     <li class="nav-item">
@@ -34,7 +41,7 @@
                 </ul>
             </div>
         </div>
-        <span class="navbar-brand">fecha: <?php echo date("Y-m-d")?></span>
+        
         <span class="navbar-brand" href="#">Usuario:</span>
         <a class="mr-sm-2 btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#contraseña" onclick="detallepass('<?php echo $idusuario?>')"><?php echo $_SESSION['usuario']['nombre'] ?></a>
         <a href="../controller/usuarios/salir.php" class="btn btn-danger" type="submit">

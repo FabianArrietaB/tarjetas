@@ -1,0 +1,22 @@
+<?php
+   session_start();
+   $datos = array(
+    'idoperador'     => $_SESSION['usuario']['id'],
+    "idregistro"     => $_POST['idregistro'],
+    "ticket"         => $_POST['ticketu'],
+    "idtiptar"       => $_POST['idtiptaru'],
+    "tiptar"         => $_POST['tiptaru'],
+    "valor"          => $_POST['valoru'],
+    "iva"            => $_POST['ivau'],
+    "retfue"         => $_POST['retfueu'],
+    "retiva"         => $_POST['retivau'],
+    "retica"         => $_POST['reticau'],
+    "comisi"         => $_POST['comisiu'],
+    "banco"          => $_POST['bancou'],
+    "diferencia"     => $_POST['diferenciau'],
+   );
+
+   include "../../model/registros.php";
+   $Registros = new Registros();
+   echo $Registros->editarregistro($datos);
+?>
