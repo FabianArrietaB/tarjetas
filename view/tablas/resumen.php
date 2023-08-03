@@ -63,8 +63,8 @@
                 <th scope="col" >Total ReteIva</th>
                 <th scope="col" >Total ReteIca</th>
                 <th scope="col" >Total Comision</th>
-                <th scope="col"class="bg-danger" style="color:#fff">Descuento</th>
-                <th scope="col"class="bg-success" style="color:#fff">Total</th>
+                <th scope="col" class="bg-danger" style="color:#fff">Descuento</th>
+                <th scope="col" class="bg-success" style="color:#fff">Total</th>
             </tr>
         </thead>
         <tbody class="table-light">
@@ -72,7 +72,7 @@
             while ($valor = mysqli_fetch_array($query)){
         ?>
             <tr>
-                <td><?php echo $valor['tarjeta'];?></td>
+                <td class="bg--light" ><?php echo $valor['tarjeta'];?></td>
                 <td><?php echo '$ ' . number_format(round($valor['diferencia']));?></td>
                 <td><?php echo '$ ' . number_format(round($valor['retefuente']));?></td>
                 <td><?php echo '$ ' . number_format(round($valor['reteiva']));?></td>
