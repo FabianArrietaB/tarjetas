@@ -142,5 +142,46 @@
             $query->close();
             return $respuesta;
         }
+
+        public function detallegeneral($dategen, $sede){
+            $conexion = Conexion::conectar();
+            $sql ="SELECT
+            r.id_registro     as idregistro,
+            r.id_sede         as idsede,
+            r.reg_numticket   as ticket,
+            r.reg_tipcuenta   as idtipcuenta,
+            r.reg_tiptar      as tiptar,
+            r.reg_valor       as valor,
+            r.reg_iva         as iva,
+            r.reg_rtefte      as retfte,
+            r.reg_rteiva      as rteiva,
+            r.reg_rteica      as rteica,
+            r.reg_comision    as comision,
+            r.reg_tardesc     as descu,
+            r.reg_banco       as banco,
+            r.reg_diferencia  as difer
+            from registros as r
+            WHERE r.id_sede = '$sede' AND r.reg_fecope = '$dategen'";
+            $respuesta = mysqli_query($conexion,$sql);
+            $registro = mysqli_fetch_array($respuesta);
+            $datos = array(
+                'idregistro' => $registro['idregistro'],
+                'idsede' => $registro['idsede'],
+                'ticket' => $registro['ticket'],
+                'idtipcuenta' => $registro['idtipcuenta'],
+                'tiptar' => $registro['tiptar'],
+                'valor' => $registro['valor'],
+                'iva' => $registro['iva'],
+                'neto' => $registro['valor'] - $registro['iva'],
+                'retfte' => $registro['retfte'],
+                'rteiva' => $registro['rteiva'],
+                'rteica' => $registro['rteica'],
+                'comision' => $registro['comision'],
+                'descu' => $registro['descu'],
+                'banco' => $registro['banco'],
+                'difer' => $registro['difer'],
+            );
+            return $datos;
+        }
     }
 ?>

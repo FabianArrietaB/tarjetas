@@ -220,7 +220,7 @@ jQuery('#valoru , #ivau , #portaru').on('change',function(){
     $('#diferenciau').val(diferenciau);
 });
 
-//CONSULTA USAURIO
+//CONSULTA USUARIO
 function obtenerfecha(){
     var fecha = $('#date').val();
     $.ajax({
@@ -231,6 +231,7 @@ function obtenerfecha(){
 }
 
 //CONSULTA ADMINISTRADOR Y SUPERVISOR
+//RESUMEN CAJA
 function generar(){
     var date = $('#date').val();
     var idoperador = $('#idoperador').val();
@@ -238,8 +239,36 @@ function generar(){
         method: 'GET',
     }).done(function(info) {
         $('#tablageneral').load('tablas/general.php?date='+date+'&idoperador='+idoperador);
-        $('#tablaregistrosgeneral').load('tablas/tablageneral.php?date='+date+'&idoperador='+idoperador);
     })
     console.log(date)
     console.log(idoperador)
+}
+//RESUMEN DIFERENCIA
+function infgeneral(){
+    var dategen = $('#dategen').val();
+    var sede = $('#sede').val();
+    $.ajax({
+        method: 'GET',
+        data:"dategen=" + dategen +"&sede=" + sede,
+        url: "../controller/registros/detallegeneral.php",
+        success: function(data){
+            data = jQuery.parseJSON(data);
+            console.log(data)
+            var html = '';
+            var i;
+            for (i = 0; i < data.length; i++) {
+              html += '<tr>' +
+                '<td>' + data[i][0].tiptar + '</td>' +
+                '<td>' + data[i][0].difer + '</td>' +
+                '<td>' + data[i][0].retfte + '</td>' +
+                '<td>' + data[i][0].rteiva + '</td>' +
+                '<td>' + data[i][0].rteica + '</td>' +
+                '<td>' + data[i][0].comision + '</td>' +
+                '</tr>';
+            }
+        $('#infgeneral').html(html);
+        }
+    });
+    console.log(dategen)
+    console.log(sede)
 }

@@ -16,14 +16,14 @@
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
         r.reg_tiptar      as tiptar,
+        SUM(r.reg_tardesc) as tardescuento,
         SUM(r.reg_diferencia) as diferencia,
         SUM(r.reg_rtefte)     as retefuente,
         SUM(r.reg_rteiva)     as reteiva,
         SUM(r.reg_rteica)     as reteica,
         SUM(r.reg_comision)   as comision
     FROM registros  AS r
-    INNER JOIN porcentajes AS p ON p.id_porcentaje = r.reg_tipcuenta
-    ";
+    INNER JOIN porcentajes AS p ON p.id_porcentaje = r.reg_tipcuenta ";
     if($operador != "" && $hoy != ""){
         $sql .="WHERE r.reg_fecope = '$hoy' AND r.id_operador = '$operador'";
     }
@@ -41,6 +41,7 @@
                 <th scope="col" >Total ReteIva</th>
                 <th scope="col" >Total ReteIca</th>
                 <th scope="col" >Total Comision</th>
+                <th scope="col"class="bg-danger" style="color:#fff">Descuento</th>
                 <th scope="col"class="bg-success" style="color:#fff">Total</th>
             </tr>
         </thead>
@@ -55,6 +56,7 @@
                     <td><?php echo '$ ' . number_format(round($valor['reteiva']));?></td>
                     <td><?php echo '$ ' . number_format(round($valor['reteica']));?></td>
                     <td><?php echo '$ ' . number_format(round($valor['comision']));?></td>
+                    <td class="bg-danger" style="color:#fff"><?php echo '$ ' . number_format(round($valor['tardescuento']));?></td>
                     <td class="bg-success" style="color:#fff"><?php echo '$ ' . number_format(round($valor['diferencia'] + $valor['retefuente'] + $valor['reteiva'] + $valor['reteica'] + $valor['comision']));?></td>
                 </tr>
             <?php } ?>
@@ -133,6 +135,21 @@
                     $sql=$conexion->query("SELECT round(SUM(reg_comision)) as 'comision' from registros");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['comision'];
+                    echo '$ '. number_format($precio);
+                }
+                ?>
+            </td>
+            <td class="bg-danger" style="color:#fff">
+                <?php
+                if($operador != "" && $hoy != ""){
+                    $sql=$conexion->query("SELECT round(SUM(reg_tardesc)) as 'total' from registros where id_operador = '$operador' AND reg_fecope = '$hoy'");
+                    $data = mysqli_fetch_array($sql);
+                    $precio = $data['total'];
+                    echo '$ '. number_format($precio);
+                } else {
+                    $sql=$conexion->query("SELECT round(SUM(reg_tardesc))  as 'total' from registros");
+                    $data = mysqli_fetch_array($sql);
+                    $precio = $data['total'];
                     echo '$ '. number_format($precio);
                 }
                 ?>
