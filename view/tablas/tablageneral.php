@@ -12,34 +12,20 @@
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
-    $sqlgeneral = "SELECT
-        r.id_registro     as idregistro,
-        r.id_operador     as idoperador,
-        r.reg_tiptar      as tiptar,
-        SUM(r.reg_diferencia) as diferencia,
-        SUM(r.reg_rtefte)     as retefuente,
-        SUM(r.reg_rteiva)     as reteiva,
-        SUM(r.reg_rteica)     as reteica,
-        SUM(r.reg_comision)   as comision
-    FROM registros  AS r
-    WHERE r.reg_fecope = '$hoy'";
-    if($sede != ""){
-        $sqlgeneral .=" AND r.id_sede = '$sede'";
-    }
-    $sqlgeneral .="GROUP BY r.reg_tiptar";
-    $rwgeneral = mysqli_query($conexion, $sqlgeneral);
     $sqlunico = "SELECT
         r.id_registro     AS idregistro,
         r.id_operador     AS idoperador,
         CONCAT(r.reg_tiptar, ' ' ,u.user_nombre) AS caja,
-        r.reg_tiptar      AS tiptar,
+        r.reg_tiptar          AS tiptar,
         SUM(r.reg_diferencia) AS diferencia,
         SUM(r.reg_rtefte)     AS retefuente,
         SUM(r.reg_rteiva)     AS reteiva,
         SUM(r.reg_rteica)     AS reteica,
-        SUM(r.reg_comision)   AS comision
-    FROM registros  AS r
-    INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
+        SUM(r.reg_comision)   AS comision,
+        t.totaldiferecias	    AS totaldiferecias
+    FROM registros AS r
+    INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador,
+    (SELECT SUM(reg_diferencia) AS totaldiferecias FROM registros WHERE reg_fecope = '$hoy') AS t
     WHERE r.reg_fecope = '$hoy'";
     if($sede != ""){
         $sqlunico .=" AND r.id_sede = '$sede'";
@@ -50,7 +36,7 @@
 <!-- inicio Tabla -->
 <?php if(mysqli_num_rows($rwunico) > 0) { ?>
     <div class="table-responsive">
-    <table class="table table-light text-center">
+    <table class="table table-primary text-center">
         <thead>
             <tr>
                 <th scope="col" >Tarjeta | Caja</th>
@@ -61,18 +47,57 @@
                 <th scope="col" >Comision</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-light">
             <?php
-            while ($valor = mysqli_fetch_array($rwunico)){ ?>
-            <tr>
-                <td><?php echo $valor['caja'];?></td>
-                <td><?php echo '$ ' . number_format(round($valor['diferencia']));?></td>
-                <td><?php echo '$ ' . number_format(round($valor['retefuente']));?></td>
-                <td><?php echo '$ ' . number_format(round($valor['reteiva']));?></td>
-                <td><?php echo '$ ' . number_format(round($valor['reteica']));?></td>
-                <td><?php echo '$ ' . number_format(round($valor['comision']));?></td>
-            </tr>
+            $tipo_tarjeta = '';
+            $sub_total = 0;
+            $totalrtefte = 0;
+            $totalrteiva = 0;
+            $totalrteica = 0;
+            $totalcomisi = 0;
+            while ($valor = mysqli_fetch_array($rwunico)) {
+                if ($tipo_tarjeta != $valor['tiptar']) {
+                    if ($tipo_tarjeta != '') { ?>
+                            <tr>
+                                <td class="table-info"><b><?php echo 'TOTAL ' . $tipo_tarjeta?></b></td>
+                                <td class="table-info"><b><?php echo '$ ' . number_format(round($sub_total));?></b></td>
+                                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalrtefte));?></b></td>
+                                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalrteiva));?></b></td>
+                                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalrteica));?></b></td>
+                                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalcomisi));?></b></td>
+                            </tr>
+                        <?php
+                            $sub_total = 0;
+                            $totalrtefte = 0;
+                            $totalrteiva = 0;
+                            $totalrteica = 0;
+                            $totalcomisi = 0;
+                    }
+                        $tipo_tarjeta = $valor['tiptar'];
+                }
+                            $sub_total += $valor['diferencia'];
+                            $totalrtefte += $valor['retefuente'];
+                            $totalrteiva += $valor['reteiva'];
+                            $totalrteica += $valor['reteica'];
+                            $totalcomisi += $valor['comision'];
+                        ?>
+                        <tr>
+                            <td><?php echo $valor['caja'];?></td>
+                            <td><?php echo '$ ' . number_format(round($valor['diferencia']));?></td>
+                            <td><?php echo '$ ' . number_format(round($valor['retefuente']));?></td>
+                            <td><?php echo '$ ' . number_format(round($valor['reteiva']));?></td>
+                            <td><?php echo '$ ' . number_format(round($valor['reteica']));?></td>
+                            <td><?php echo '$ ' . number_format(round($valor['comision']));?></td>
+                        </tr>
             <?php } ?>
+            <tr>
+                <td class="table-info"><b><?php echo 'TOTAL ' . $tipo_tarjeta?></b></td>
+                <td class="table-info"><b><?php echo '$ ' . number_format(round($sub_total));?></b></td>
+                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalrtefte));?></b></td>
+                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalrteiva));?></b></td>
+                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalrteica));?></b></td>
+                <td class="table-info"><b><?php echo '$ ' . number_format(round($totalcomisi));?></b></td>
+            </tr>
         </tbody>
     </table>
 </div>
