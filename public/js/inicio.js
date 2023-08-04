@@ -255,3 +255,40 @@ function infgeneral(){
     console.log(dategen)
     console.log(sede)
 }
+
+//CALCULAR VALORES DIFERENCIA
+jQuery('#bandif, #banretfte, #banretiva, #banretica, #bancomisi').on('change',function(){
+    //VALORES BASE DE DATOS
+    var bddif = $('#bddif').val();
+    var bdretfte = $('#bdretfte').val();
+    var bdretiva = $('#bdretiva').val();
+    var bdretica = $('#bdretica').val();
+    var bdcomisi = $('#bdcomisi').val();
+    //VALORES A DIGITAR
+    var bandif = $('#bandif').val();
+    var banretfte = $('#banretfte').val();
+    var banretiva = $('#banretiva').val();
+    var banretica = $('#banretica').val();
+    var bancomisi = $('#bancomisi').val();
+    //En caso de que alguno de los valores este en blanco, estará en blanco.
+    if(bandif.length==0 || banretfte.length==0 || banretiva.length==0 || banretica.length==0 || bancomisi.length==0){
+        $('#datdif').val("");
+        $('#datretfte').val("");
+        $('#datretiva').val("");
+        $('#datretica').val("");
+        $('#datcomisi').val("");
+        return;
+    }
+    //Realizo el cálculo
+    var datdif = bddif - bandif;
+    var datretfte = bdretfte - banretfte;
+    var datretiva = bdretiva - banretiva;
+    var datretica = bdretica - banretica;;
+    var datcomisi = bdcomisi - bancomisi;
+    //Lo muestro en el div neto
+    $('#datdif').val(datdif);
+    $('#datretfte').val(datretfte);
+    $('#datretiva').val(datretiva);
+    $('#datretica').val(datretica);
+    $('#datcomisi').val(datcomisi);
+});
