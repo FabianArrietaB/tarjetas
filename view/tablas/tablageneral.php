@@ -48,8 +48,8 @@
     $rwunico = mysqli_query($conexion, $sqlunico);
 ?>
 <!-- inicio Tabla -->
-
-<div class="table-responsive">
+<?php if(mysqli_num_rows($rwunico) > 0) { ?>
+    <div class="table-responsive">
     <table class="table table-light text-center">
         <thead>
             <tr>
@@ -63,8 +63,7 @@
         </thead>
         <tbody>
             <?php
-                while ($valor = mysqli_fetch_array($rwunico)){
-            ?>
+            while ($valor = mysqli_fetch_array($rwunico)){ ?>
             <tr>
                 <td><?php echo $valor['caja'];?></td>
                 <td><?php echo '$ ' . number_format(round($valor['diferencia']));?></td>
@@ -76,99 +75,10 @@
             <?php } ?>
         </tbody>
     </table>
-    <div class="container-fluid">
-        <form id="frmadddiferencia" method="post" onsubmit="return adddiferencia()">
-            <?php
-                while ($valor = mysqli_fetch_array($rwgeneral)){
-            ?>
-            <div class="row text-center">
-                <div class="col-2">
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label"><?php echo $valor['tiptar'] ?></label>
-                        <input hidden type="text">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">TOTAL DIFERENCIAS</label>
-                        <input readonly type="text" class="form-control text-center" name="bddif" id="bddif" value="<?php echo '$ ' . number_format(round($valor['diferencia']))?>" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">VALOR BANCO</label>
-                        <input type="text" class="form-control text-center" name="bandif" id="bandif" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">DIFERENCIA</label>
-                        <input type="text" class="form-control text-center" name="datdif" id="dif" placeholder="000000" readonly>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">TOTAL RETEFUENTE</label>
-                        <input readonly type="text" class="form-control text-center" name="bdretfte" id="bdretfte" value="<?php echo '$ ' . number_format(round($valor['retefuente']))?>" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">VALOR BANCO</label>
-                        <input type="text" class="form-control text-center" name="banretfte" id="banretfte" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">DIFERENCIA</label>
-                        <input type="text" class="form-control text-center" name="datretfte" id="datretfte" placeholder="000000" readonly>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">TOTAL RETEIVA</label>
-                        <input readonly type="text" class="form-control text-center" name="bdretiva" id="bdretiva" value="<?php echo '$ ' . number_format(round($valor['reteiva']))?>" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">VALOR BANCO</label>
-                        <input type="text" class="form-control text-center" name="banretiva" id="banretiva" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">DIFERENCIA</label>
-                        <input type="text" class="form-control text-center" name="datretiva" id="datretiva" placeholder="000000" readonly>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">TOTAL RETEICA</label>
-                        <input readonly type="text" class="form-control text-center" name="bdretica" id="bdnretica" value="<?php echo '$ ' . number_format(round($valor['reteica']))?>" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">VALOR BANCO</label>
-                        <input type="text" class="form-control text-center" name="banretica" id="banretica" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">DIFERENCIA</label>
-                        <input type="text" class="form-control text-center" name="datretica" id="datretica" placeholder="000000" readonly>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">TOTAL COMISION</label>
-                        <input readonly type="text" class="form-control text-center" name="bdcomisi" id="bdcomisi" value="<?php echo '$ ' . number_format(round($valor['comision']))?>" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">VALOR BANCO</label>
-                        <input type="text" class="form-control text-center" name="bancomisi" id="bancomisi" placeholder="000000" required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="exampleFormControlInput1" class="form-label">DIFERENCIA</label>
-                        <input type="text" class="form-control text-center" name="datcomisi" id="datcomisi" placeholder="000000" readonly>
-                    </div>
-                </div>
-            </div>
-            <?php } ?>
-                <div class="row">
-                    <div class="col-12">
-                        <div >
-                            <button type="submit" class="btn btn-success" >Agregar</button>
-                        </div>
-                    </div>
-                </div>
-           
-        </form>
-    </div>
 </div>
+<?php } else {
+    echo "No hay Datos que Mostrar"
+?>
+<?php } ?>
+
 <!-- fin de la tabla -->
