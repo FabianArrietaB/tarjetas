@@ -34,6 +34,7 @@
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
+    $sede = $_SESSION['usuario']['id'];
     $sql = "SELECT
         r.id_registro    as idregistro,
         r.reg_tipcuenta  as idtipcuenta,
@@ -47,8 +48,15 @@
         SUM(r.reg_comision)   as comision
     FROM registros  AS r
     INNER JOIN porcentajes AS p ON p.id_porcentaje = r.reg_tipcuenta
-    WHERE r.reg_fecope = '$hoy' AND r.id_operador = '$idusuario'
-    GROUP BY p.por_tipR";
+    WHERE r.reg_fecope = '$hoy'
+    ";
+    if($sede = "1"){
+        $sql .=" AND r.id_operador = '$idusuario'";
+    }
+    if($sede != "1"){
+        $sql .=" AND r.id_sede = '$sede'";
+    }
+    $sql .="GROUP BY p.por_tipR";
     $query = mysqli_query($conexion, $sql);
 }
 ?>
