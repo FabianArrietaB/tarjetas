@@ -251,49 +251,16 @@ function infgeneral(){
     $.ajax({
         method: 'GET',
     }).done(function(info) {
-        $('#tablaregistrosgeneral').load('tablas/tablageneral.php?dategen='+dategen+'&sede='+sede+'&franquicia='+franquicia);
+        $('#tablaregistrosgeneral').load('tablas/tablageneral.php?dategen='+dategen+'&sede='+sede);
+        $('#tablageneral').load('tablas/general.php?dategen='+dategen+'&sede='+sede+'&franquicia='+franquicia);
     })
     //console.log(dategen)
     //console.log(sede)
-    console.log(franquicia)
+    //console.log(franquicia)
 }
 
 //CALCULAR DIFERENCIAS
-// jQuery('#bandif , #banrte , #baniva , #banica , #bancom').on('change',function(){
-//     //Obtengo el valor
-//     var bddif = $('#bddif').val();
-//     var bdrte = $('#bdrte').val();
-//     var bdiva = $('#bdiva').val();
-//     var bdica = $('#bdica').val();
-//     var bdcom = $('#bdcom').val();
-//     //Obtengo el valor
-//     var bandif = $('#bandif').val();
-//     var banrte = $('#banrte').val();
-//     var baniva = $('#baniva').val();
-//     var banica = $('#banica').val();
-//     var bancom = $('#bancom').val();
-//     //En caso de que alguno de los dos este en blanco, el neto estará en blanco.
-//     if(bandif.length==0 || banrte.length==0 || baniva.length==0 || banica.length==0 || bancom.length==0){
-//         $('#dif').val("");
-//         $('#difrte').val("");
-//         $('#difiva').val("");
-//         $('#difica').val("");
-//         $('#difcom').val("");
-//         return;
-//     }
-//     //Realizo el cálculo
-//     var dif = bddif - bandif;
-//     var difrte = bdrte - banrte;
-//     var difiva = bdiva - baniva;
-//     var difica = bdica - banica;
-//     var difcom = bdcom - bancom;
-//     //Lo muestro en el div
-//     $('#dif').val(dif);
-//     $('#difrte').val(difrte);
-//     $('#difiva').val(difiva);
-//     $('#difica').val(difica);
-//     $('#difcom').val(difcom);
-// });
-
-
-
+function carga(val){
+    var bddif = val;
+    alert(bddif);
+}

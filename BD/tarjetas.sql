@@ -40,22 +40,36 @@ insert  into `areas`(`id_area`,`are_nombre`) values
 (9,'RRHH'),
 (10,'SISTEMAS');
 
-/*Table structure for table `auditoria` */
+/*Table structure for table `conciliacion` */
 
-DROP TABLE IF EXISTS `auditoria`;
+DROP TABLE IF EXISTS `conciliacion`;
 
-CREATE TABLE `auditoria` (
-  `id_auditoria` int(11) NOT NULL,
-  `aud_difbanco` float DEFAULT NULL,
-  `aud_difrtefte` float DEFAULT NULL,
-  `aud_difrteiva` float DEFAULT NULL,
-  `aud_difretica` float DEFAULT NULL,
-  `aud_difretcom` float DEFAULT NULL,
-  `aud_fecope` float DEFAULT NULL,
+CREATE TABLE `conciliacion` (
+  `id_auditoria` int(11) NOT NULL AUTO_INCREMENT,
+  `id_sede` int(11) DEFAULT NULL,
+  `con_franquisia` float DEFAULT NULL,
+  `con_difenuevo` float DEFAULT NULL,
+  `con_difebanco` float DEFAULT NULL,
+  `con_rteftenew` float DEFAULT NULL,
+  `con_rtefteban` float DEFAULT NULL,
+  `con_rteivanew` float DEFAULT NULL,
+  `con_rteivaban` float DEFAULT NULL,
+  `con_rteicanew` float DEFAULT NULL,
+  `con_rteicaban` float DEFAULT NULL,
+  `con_comisinew` float DEFAULT NULL,
+  `con_comisiban` float DEFAULT NULL,
+  `con_fecconcil` date DEFAULT NULL,
+  `aud_fecope` date DEFAULT NULL,
   PRIMARY KEY (`id_auditoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-/*Data for the table `auditoria` */
+/*Data for the table `conciliacion` */
+
+insert  into `conciliacion`(`id_auditoria`,`id_sede`,`con_franquisia`,`con_difenuevo`,`con_difebanco`,`con_rteftenew`,`con_rtefteban`,`con_rteivanew`,`con_rteivaban`,`con_rteicanew`,`con_rteicaban`,`con_comisinew`,`con_comisiban`,`con_fecconcil`,`aud_fecope`) values 
+(1,1,0,6808870,6813460,101036,101248,58537,56420,33678,33751,123836,121082,'2023-07-28','2023-07-29'),
+(2,1,0,291120,291131,3885,3886,7381,7381,1295,1295,4518,4506,'2023-07-28','2023-07-29'),
+(3,1,0,2710400,2712980,36593,0,64298,0,12198,0,44692,0,'2023-07-29','2023-07-31'),
+(4,1,0,3749440,3749800,53966,0,50579,0,17989,0,62965,0,'2023-07-29','2023-07-31');
 
 /*Table structure for table `personas` */
 
@@ -212,7 +226,7 @@ CREATE TABLE `registros` (
   `reg_fecope` date NOT NULL,
   `reg_fecupd` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `registros` */
 
@@ -305,7 +319,8 @@ insert  into `registros`(`id_registro`,`id_sede`,`id_operador`,`reg_numticket`,`
 (91,1,5,'CM01 - 3120',6,'MASTERCARD',111800,0,1677.0000,0.0000,559.0000,1855.8800,4091.8800,109944.1200,107708.1200,'2023-08-03','2023-08-03 15:15:11'),
 (92,1,5,'CM01 - 3121',11,'MASTERCARD',672000,107294,8470.5900,16094.1000,2823.5300,10390.5904,37778.8104,661609.4096,634221.1896,'2023-08-03','2023-08-03 15:15:11'),
 (93,1,5,'CM01 - 3122',5,'MASTERCARD',722000,115277,9100.8450,17291.5500,3033.6150,11163.7032,40589.7132,710836.2968,681410.2868,'2023-08-03','2023-08-03 15:15:12'),
-(94,1,5,'CM01 - 3123',11,'MASTERCARD',178200,20452,2366.2200,3067.8000,788.7400,2902.5632,9125.3232,175297.4368,169074.6768,'2023-08-03','2023-08-03 15:15:13');
+(94,1,5,'CM01 - 3123',11,'MASTERCARD',178200,20452,2366.2200,3067.8000,788.7400,2902.5632,9125.3232,175297.4368,169074.6768,'2023-08-03','2023-08-03 15:15:13'),
+(95,NULL,1,'CFC - 3124',1,'VISA',50000,0,750.0000,0.0000,250.0000,870.0000,1870.0000,49130.0000,48130.0000,'2023-08-04','2023-08-04 08:27:56');
 
 /*Table structure for table `roles` */
 

@@ -2,174 +2,168 @@
     session_start();
     include "../../model/conexion.php";
     $hoy = "";
-    $operador = "";
-    if(isset($_GET['date'])){
-        $hoy = $_GET['date'];
+    $sede = "";
+    $franquicia = "";
+    if(isset($_GET['dategen'])){
+        $hoy = $_GET['dategen'];
     }
-    if(isset($_GET['idoperador'])){
-        $operador = $_GET['idoperador'];
+    if(isset($_GET['sede'])){
+        $sede = $_GET['sede'];
+    }
+    if(isset($_GET['franquicia'])){
+        $franquicia = $_GET['franquicia'];
     }
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
-    $sql = "SELECT
-        r.id_registro     as idregistro,
-        r.id_operador     as idoperador,
-        r.reg_tiptar      as tiptar,
-        SUM(r.reg_tardesc) as tardescuento,
-        SUM(r.reg_diferencia) as diferencia,
-        SUM(r.reg_rtefte)     as retefuente,
-        SUM(r.reg_rteiva)     as reteiva,
-        SUM(r.reg_rteica)     as reteica,
-        SUM(r.reg_comision)   as comision
-    FROM registros  AS r
-    INNER JOIN porcentajes AS p ON p.id_porcentaje = r.reg_tipcuenta ";
-    if($operador != "" && $hoy != ""){
-        $sql .="WHERE r.reg_fecope = '$hoy' AND r.id_operador = '$operador'";
-    }
-    $sql .=" GROUP BY p.por_tipR";
-    $query = mysqli_query($conexion, $sql);
+    //CONSULTA DIFERENCIA
+    $sqldiferencia = "SELECT
+    r.id_registro     AS idregistro,
+    r.id_operador     AS idoperador,
+    r.reg_tiptar          AS tiptar,
+    SUM(r.reg_diferencia) AS diferencia,
+    SUM(r.reg_rtefte)     AS retefuente,
+    SUM(r.reg_rteiva)     AS reteiva,
+    SUM(r.reg_rteica)     AS reteica,
+    SUM(r.reg_comision)   AS comision
+FROM registros AS r
+INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
+WHERE r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
+$querydiferencia = mysqli_query($conexion, $sqldiferencia);
+$rwdiferencia = mysqli_fetch_array($querydiferencia);
 ?>
 <!-- inicio Tabla -->
-<div class="table-responsive">
-    <table class="table table-primary text-center">
-        <thead>
-            <tr>
-                <th scope="col" >Tarjeta</th>
-                <th scope="col" >Total Diferencia</th>
-                <th scope="col" >Total ReteFuente</th>
-                <th scope="col" >Total ReteIva</th>
-                <th scope="col" >Total ReteIca</th>
-                <th scope="col" >Total Comision</th>
-                <th scope="col"class="bg-danger" style="color:#fff">Descuento</th>
-                <th scope="col"class="bg-success" style="color:#fff">Total</th>
-            </tr>
-        </thead>
-        <tbody class="table-light">
-            <?php
-                while ($valor = mysqli_fetch_array($query)){
-            ?>
-                <tr>
-                    <td><?php echo $valor['tiptar'];?></td>
-                    <td><?php echo '$ ' . number_format(round($valor['diferencia']));?></td>
-                    <td><?php echo '$ ' . number_format(round($valor['retefuente']));?></td>
-                    <td><?php echo '$ ' . number_format(round($valor['reteiva']));?></td>
-                    <td><?php echo '$ ' . number_format(round($valor['reteica']));?></td>
-                    <td><?php echo '$ ' . number_format(round($valor['comision']));?></td>
-                    <td class="bg-danger" style="color:#fff"><?php echo '$ ' . number_format(round($valor['tardescuento']));?></td>
-                    <td class="bg-success" style="color:#fff"><?php echo '$ ' . number_format(round($valor['diferencia'] + $valor['retefuente'] + $valor['reteiva'] + $valor['reteica'] + $valor['comision']));?></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-        <tfoot>
-            <!-- sumatoria total del reporte-->
-            <td class="bg-grays-active color-palette"><b>Total </b></td>
-            <td>
-                <?php
-                if($operador != "" && $hoy != ""){
-                    $sql=$conexion->query("SELECT round(SUM(reg_diferencia)) as 'precio' from registros where id_operador = '$operador' AND reg_fecope = '$hoy' ");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['precio'];
-                    echo '$ '. number_format($precio);
-                } else {
-                    $sql=$conexion->query("SELECT round(SUM(reg_diferencia)) as 'precio' from registros");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['precio'];
-                    echo '$ '. number_format($precio);
-                }
-                ?>
-            </td>
-            <td>
-                <?php
-                if($operador != "" && $hoy != ""){
-                    $sql=$conexion->query("SELECT round(SUM(reg_rtefte)) as 'rtefte' from registros where id_operador = '$operador' AND reg_fecope = '$hoy'");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['rtefte'];
-                    echo '$ '. number_format($precio);
-                } else {
-                    $sql=$conexion->query("SELECT round(SUM(reg_rtefte)) as 'rtefte' from registros");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['rtefte'];
-                    echo '$ '. number_format($precio);
-                }
-                ?>
-            </td>
-            <td>
-                <?php
-                    if($operador != "" && $hoy != ""){
-                    $sql=$conexion->query("SELECT round(SUM(reg_rteiva)) as 'rteiva' from registros where id_operador = '$operador' AND reg_fecope = '$hoy'");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['rteiva'];
-                    echo '$ '. number_format($precio);
-                } else {
-                    $sql=$conexion->query("SELECT round(SUM(reg_rteiva)) as 'rteiva' from registros");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['rteiva'];
-                    echo '$ '. number_format($precio);
-                }
-                ?>
-            </td>
-            <td>
-                <?php
-                if($operador != "" && $hoy != ""){
-                    $sql=$conexion->query("SELECT round(SUM(reg_rteica)) as 'rteica' from registros where id_operador = '$operador' AND reg_fecope = '$hoy'");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['rteica'];
-                    echo '$ '. number_format($precio);
-                } else {
-                    $sql=$conexion->query("SELECT round(SUM(reg_rteica)) as 'rteica' from registros");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['rteica'];
-                    echo '$ '. number_format($precio);
-                }
-                ?>
-            </td>
-            <td>
-                <?php
-                if($operador != "" && $hoy != ""){
-                    $sql=$conexion->query("SELECT round(SUM(reg_comision)) as 'comision' from registros where id_operador = '$operador' AND reg_fecope = '$hoy'");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['comision'];
-                    echo '$ '. number_format($precio);
-                } else {
-                    $sql=$conexion->query("SELECT round(SUM(reg_comision)) as 'comision' from registros");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['comision'];
-                    echo '$ '. number_format($precio);
-                }
-                ?>
-            </td>
-            <td class="bg-danger" style="color:#fff">
-                <?php
-                if($operador != "" && $hoy != ""){
-                    $sql=$conexion->query("SELECT round(SUM(reg_tardesc)) as 'total' from registros where id_operador = '$operador' AND reg_fecope = '$hoy'");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['total'];
-                    echo '$ '. number_format($precio);
-                } else {
-                    $sql=$conexion->query("SELECT round(SUM(reg_tardesc))  as 'total' from registros");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['total'];
-                    echo '$ '. number_format($precio);
-                }
-                ?>
-            </td>
-            <td class="bg-success" style="color:#fff">
-                <?php
-                if($operador != "" && $hoy != ""){
-                    $sql=$conexion->query("SELECT round(SUM(reg_diferencia) + SUM(reg_rtefte) + SUM(reg_rteiva) + SUM(reg_rteica) + SUM(reg_comision))  as 'total' from registros where id_operador = '$operador' AND reg_fecope = '$hoy'");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['total'];
-                    echo '$ '. number_format($precio);
-                } else {
-                    $sql=$conexion->query("SELECT round(SUM(reg_diferencia) + SUM(reg_rtefte) + SUM(reg_rteiva) + SUM(reg_rteica) + SUM(reg_comision))  as 'total' from registros");
-                    $data = mysqli_fetch_array($sql);
-                    $precio = $data['total'];
-                    echo '$ '. number_format($precio);
-                }
-                ?>
-            </td>
-        </tfoot>
-    </table>
-</div>
+<?php if($sede != "") { ?>
+<form id="frmadddiferencia" method="post" onsubmit="return adddiferencia()">
+    <div  class="row text-center">
+        <fieldset class="group-border mb-3">
+            <div class="row mb-3">
+                <div class="col-8">
+                    <legend  class="group-border">DIFERENCIA <?php echo $rwdiferencia['tiptar'] ?> </legend>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Fecha Registro</label>
+                        <input type="date" class="form-control"  name="fecha" id="fecha" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="DATO REGISTRADO" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="VALOR DOMICILIO" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="NUEVO VALOR" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="VALOR BANCO" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="DIFERENCIA" readonly>
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="bddif" name="bddif" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['diferencia']) ?>" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="domdif" name="domdif" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="newdif" name="newdif" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="bandif" name="bandif" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="dif" name="dif" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="bdrte" name="bdrte" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['retefuente']) ?>" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="banrte" name="banrte" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="domrte" name="domrte" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="newrte" name="newrte" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="difrte" name="difrte" class="form-control text-center input-sm" placeholder="Diferencia" >
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="bdiva" name="bdiva" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteiva']) ?>" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="baniva" name="baniva" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="bancom" name="domiva" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="dif" name="newiva" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="difiva" name="difiva" class="form-control text-center input-sm" placeholder="Diferencia" >
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="bdica" name="bdica" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteica']) ?>" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="banica" name="banica" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="bancom" name="domica" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="dif" name="newica" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="difica" name="difica" class="form-control text-center input-sm" placeholder="Diferencia" >
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="bdcom" name="bdcom" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['comision']) ?>" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="bancom" name="bancom" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="bancom" name="domcom" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="dif" name="newcom" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="difcom" name="difcom" class="form-control text-center input-sm" placeholder="Diferencia" >
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div >
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</form>
+<?php } else {
+?>
+<?php } ?>
+
 <!-- fin de la tabla -->
