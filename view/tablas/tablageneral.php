@@ -3,15 +3,20 @@
     include "../../model/conexion.php";
     $hoy = "";
     $sede = "";
+    $franquicia = "";
     if(isset($_GET['dategen'])){
         $hoy = $_GET['dategen'];
     }
     if(isset($_GET['sede'])){
         $sede = $_GET['sede'];
     }
+    if(isset($_GET['franquicia'])){
+        $franquicia = $_GET['franquicia'];
+    }
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
+    //CONSULTA RESUMEN
     $sqlunico = "SELECT
         r.id_registro     AS idregistro,
         r.id_operador     AS idoperador,
@@ -21,17 +26,30 @@
         SUM(r.reg_rtefte)     AS retefuente,
         SUM(r.reg_rteiva)     AS reteiva,
         SUM(r.reg_rteica)     AS reteica,
-        SUM(r.reg_comision)   AS comision,
-        t.totaldiferecias	    AS totaldiferecias
+        SUM(r.reg_comision)   AS comision
     FROM registros AS r
-    INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador,
-    (SELECT SUM(reg_diferencia) AS totaldiferecias FROM registros WHERE reg_fecope = '$hoy') AS t
+    INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
     WHERE r.reg_fecope = '$hoy'";
     if($sede != ""){
         $sqlunico .=" AND r.id_sede = '$sede'";
     }
     $sqlunico .="GROUP BY r.reg_tiptar, r.id_operador";
     $rwunico = mysqli_query($conexion, $sqlunico);
+    //CONSULTA DIFERENCIA
+    $sqldiferencia = "SELECT
+    r.id_registro     AS idregistro,
+    r.id_operador     AS idoperador,
+    r.reg_tiptar          AS tiptar,
+    SUM(r.reg_diferencia) AS diferencia,
+    SUM(r.reg_rtefte)     AS retefuente,
+    SUM(r.reg_rteiva)     AS reteiva,
+    SUM(r.reg_rteica)     AS reteica,
+    SUM(r.reg_comision)   AS comision
+FROM registros AS r
+INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
+WHERE r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
+$querydiferencia = mysqli_query($conexion, $sqldiferencia);
+$rwdiferencia = mysqli_fetch_array($querydiferencia);
 ?>
 <!-- inicio Tabla -->
 <?php if(mysqli_num_rows($rwunico) > 0) { ?>
@@ -103,182 +121,68 @@
 </div>
 <form id="frmadddiferencia" method="post" onsubmit="return adddiferencia()">
     <div  class="row text-center">
-        <fieldset id="difmas" class="group-border">
-            <legend  class="group-border">Diferencia Mastercard</legend>
+        <fieldset class="group-border">
+            <legend  class="group-border">Diferencia <?php echo $rwdiferencia['tiptar'] ?> </legend>
             <div class="row text-center">
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" id="bddifmas" name="bddifmas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
+                        <input type="text" id="bddif" name="bddif" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['diferencia']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="bandifmas" name="bandifmas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
+                        <input type="text" id="bandif" name="bandif" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difmas" name="difmas" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdrtemas" name="bdrtemas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banrtemas" name="banrtemas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="difrtemas" name="difrtemas" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
+                        <input type="text" id="dif" name="dif" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
                     </div>
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" id="bdivamas" name="bdivamas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
+                        <input type="text" id="bdrte" name="bdrte" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['retefuente']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="banivamas" name="banivamas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
+                        <input type="text" id="banrte" name="banrte" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difivamas" name="difivamas" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdicamas" name="bdicamas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banicamas" name="banicamas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="dificamas" name="dificamas" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
+                        <input type="text" id="difrte" name="difrte" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
                     </div>
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" id="bdcommas" name="bdcommas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
+                        <input type="text" id="bdiva" name="bdiva" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteiva']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="bancommas" name="bancommas" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
+                        <input type="text" id="baniva" name="baniva" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difcommas" name="difcommas" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset id="difvis" class="group-border">
-            <legend class="group-border">Diferencia Visa</legend>
-            <div class="row text-center">
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bddifvis" name="bddifvis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="bandifvis" name="bandifvis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="difvis" name="difvis" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
+                        <input type="text" id="difiva" name="difiva" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
                     </div>
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" id="bdrtevis" name="bdrtevis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
+                        <input type="text" id="bdica" name="bdica" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteica']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="banrtevis" name="banrtevis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
+                        <input type="text" id="banica" name="banica" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difrtevis" name="difrtevis" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdivavis" name="bdivavis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banivavis" name="banivavis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="difivavis" name="difivavis" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
+                        <input type="text" id="difica" name="difica" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
                     </div>
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" id="bdicavis" name="bdicavis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
+                        <input type="text" id="bdcom" name="bdcom" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['comision']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="banicavis" name="banicavis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
+                        <input type="text" id="bancom" name="bancom" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="dificavis" name="dificavis" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdicavis" name="bdicavis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banicavis" name="banicavis" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="dificavis" name="dificavis" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
+                        <input type="text" id="difcom" name="difcom" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
                     </div>
                 </div>
-            </div>
-        </fieldset>
-        <fieldset id="difdav" class="group-border">
-            <legend class="group-border">Diferencia DAVIVIENDA</legend>
-            <div class="row text-center">
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bddifdav" name="bddifdav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="bandifdav" name="bandifdav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="difdav" name="difdav" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdrtedav" name="bdrtedav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banrtedav" name="banrtedav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="difrtedav" name="difrtedav" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdivadav" name="bdivadav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banivadav" name="banivadav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="difivadav" name="difivadav" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdicadav" name="bdicadav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banicadav" name="banicadav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="dificadav" name="dificadav" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
-                    </div>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="bdicadav" name="bdicadav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Sistema" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="banicadav" name="banicadav" class="form-control text-center input-sm" placeholder="Ingrese Diferencia Banco" >
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" id="dificadav" name="dificadav" class="form-control text-center input-sm" placeholder="Diferencia Registros" >
+                <div class="col-2">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Fecha Registro</label>
+                        <input type="date" class="form-control"  name="fecha" id="fecha" required>
                     </div>
                 </div>
             </div>
@@ -287,11 +191,19 @@
     <div class="row">
         <div class="col-12">
             <div >
-                <button type="submit" class="btn btn-success" >Guardar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
             </div>
         </div>
     </div>
 </form>
+<script>
+    let bddif = document.getElementById("bddif")
+    let dif = document.getElementById("dif")
+    let bandif = document.getElementById("bandif")
+    bandif.addEventListener("change", () => {
+        round(dif.value) = parseFloat(bddif.value) - parseFloat(bandif.value)
+    })
+</script>
 <?php } else {
     echo "No hay Datos que Mostrar"
 ?>

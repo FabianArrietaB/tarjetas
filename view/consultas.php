@@ -18,11 +18,8 @@
                     <div class="title">
                         <h2>RESUMEN DIFERENCIA BANCO</h2>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="input-group ">
-                            <input hidden type="text" id="master" name="master" value="MASTERCARD">
-                            <input hidden type="text" id="visa" name="visa" value="VISA">
-                            <input hidden type="text" id="davivienda" name="davivienda" value="DAVIVIENDA">
                             <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
                             <select name="dategen" id="dategen" class="form-control input-sm" require>
                                 <option value="">Seleccione Fecha</option>
@@ -36,7 +33,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-3">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Operador</span>
                             <select name="sede" id="sede" class="form-control input-sm" require>
@@ -44,6 +41,21 @@
                                 <option value="1">METROPOLIS</option>
                                 <option value="2">FERRECASAS</option>
                                 <option value="4">MAYORISTA</option>
+							</select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group ">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Franquicia</span>
+                            <select name="franquicia" id="franquicia" class="form-control input-sm" require>
+                                <option value="">Seleccione Franquicia</option>
+								<?php
+                                    $sql_registros = "SELECT DISTINCT r.reg_tiptar as tipo FROM registros AS r";
+                                    $resultados = mysqli_query($conexion,$sql_registros);
+									while($fecha = mysqli_fetch_array($resultados)) {
+								?>
+									<option value="<?php echo $fecha['tipo']?>"><?php echo $fecha['tipo'];?></option>
+								<?php }?>
 							</select>
                         </div>
                     </div>
