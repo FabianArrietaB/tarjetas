@@ -45,9 +45,9 @@ insert  into `areas`(`id_area`,`are_nombre`) values
 DROP TABLE IF EXISTS `conciliacion`;
 
 CREATE TABLE `conciliacion` (
-  `id_auditoria` int(11) NOT NULL AUTO_INCREMENT,
+  `id_conciliacion` int(11) NOT NULL AUTO_INCREMENT,
   `id_sede` int(11) DEFAULT NULL,
-  `con_franquisia` float DEFAULT NULL,
+  `con_franquisia` varchar(200) DEFAULT NULL,
   `con_difenuevo` float DEFAULT NULL,
   `con_difebanco` float DEFAULT NULL,
   `con_rteftenew` float DEFAULT NULL,
@@ -60,16 +60,16 @@ CREATE TABLE `conciliacion` (
   `con_comisiban` float DEFAULT NULL,
   `con_fecconcil` date DEFAULT NULL,
   `aud_fecope` date DEFAULT NULL,
-  PRIMARY KEY (`id_auditoria`)
+  PRIMARY KEY (`id_conciliacion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `conciliacion` */
 
-insert  into `conciliacion`(`id_auditoria`,`id_sede`,`con_franquisia`,`con_difenuevo`,`con_difebanco`,`con_rteftenew`,`con_rtefteban`,`con_rteivanew`,`con_rteivaban`,`con_rteicanew`,`con_rteicaban`,`con_comisinew`,`con_comisiban`,`con_fecconcil`,`aud_fecope`) values 
-(1,1,0,6808870,6813460,101036,101248,58537,56420,33678,33751,123836,121082,'2023-07-28','2023-07-29'),
-(2,1,0,291120,291131,3885,3886,7381,7381,1295,1295,4518,4506,'2023-07-28','2023-07-29'),
-(3,1,0,2710400,2712980,36593,0,64298,0,12198,0,44692,0,'2023-07-29','2023-07-31'),
-(4,1,0,3749440,3749800,53966,0,50579,0,17989,0,62965,0,'2023-07-29','2023-07-31');
+insert  into `conciliacion`(`id_conciliacion`,`id_sede`,`con_franquisia`,`con_difenuevo`,`con_difebanco`,`con_rteftenew`,`con_rtefteban`,`con_rteivanew`,`con_rteivaban`,`con_rteicanew`,`con_rteicaban`,`con_comisinew`,`con_comisiban`,`con_fecconcil`,`aud_fecope`) values 
+(1,1,'MASTERCARD',6808870,6813460,101036,101248,58537,56420,33678,33751,123836,121082,'2023-07-28','2023-07-29'),
+(2,1,'VISA',291120,291131,3885,3886,7381,7381,1295,1295,4518,4506,'2023-07-28','2023-07-29'),
+(3,1,'MASTERCARD',2710400,2712980,36593,0,64298,0,12198,0,44692,0,'2023-07-29','2023-07-31'),
+(4,1,'VISA',3749440,3749800,53966,0,50579,0,17989,0,62965,0,'2023-07-29','2023-07-31');
 
 /*Table structure for table `personas` */
 
