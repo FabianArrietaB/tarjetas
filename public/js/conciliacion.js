@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 
 //CONCILIACION
-function generar(){
+function infdetalle(){
     var fecha = $('#fecha').val();
     var mes = $('#mes').val();
     var sede = $('#sede').val();

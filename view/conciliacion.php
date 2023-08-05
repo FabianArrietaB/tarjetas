@@ -24,7 +24,7 @@
                             <select name="fecha" id="fecha" class="form-control input-sm" require>
                                 <option value="">Seleccione Fecha</option>
 								<?php
-                                    $sql_registros = "SELECT DISTINCT c.aud_fecope as fecha FROM conciliacion AS c ORDER BY fecha DESC";
+                                    $sql_registros = "SELECT DISTINCT c.con_fecconcil as fecha FROM conciliacion AS c ORDER BY fecha DESC";
                                     $resultados = mysqli_query($conexion,$sql_registros);
 									while($fecha = mysqli_fetch_array($resultados)) {
 								?>
@@ -75,9 +75,9 @@
                     <div class="col-2 aling-items-center">
                         <div class="input-group input-group-sm">
                             <div class="d-grid gap-1 d-md-block">
-                                <button class="btn btn-info" type="button" value="Reporte Valores Mes"      onclick="infvalores()"><i class="fa-solid fa-clipboard-list"></i></button>
-                                <button class="btn btn-warning" type="button" value="Reporte Detallado Mes" onclick="infdetalle()"><i class="fa-solid fa-clipboard-list"></i></button>
-                                <button class="btn btn-success" type="button" value="Reporte Detallado Mes" onclick="infmes()"><i class="fa-solid fa-clipboard-list"></i></button>
+                                <button class="btn btn-info" type="button"    onclick="infvalores()"><i class="fa-solid fa-clipboard-list"></i></button>
+                                <button class="btn btn-warning" type="button" onclick="infdetalle()"><i class="fa-solid fa-clipboard-list"></i></button>
+                                <button class="btn btn-success" type="button" onclick="infmes()"><i class="fa-solid fa-clipboard-list"></i></button>
                             </div>
                         </div>
                     </div>
