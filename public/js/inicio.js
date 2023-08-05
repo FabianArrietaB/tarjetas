@@ -259,8 +259,3 @@ function infgeneral(){
     //console.log(franquicia)
 }
 
-//CALCULAR DIFERENCIAS
-function carga(val){
-    var bddif = val;
-    alert(bddif);
-}

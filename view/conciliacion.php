@@ -18,10 +18,10 @@
                     <div class="title">
                         <h2>RESUMEN CONCILIACION</h2>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
-                            <select name="dategen" id="dategen" class="form-control input-sm" require>
+                            <select name="fecha" id="fecha" class="form-control input-sm" require>
                                 <option value="">Seleccione Fecha</option>
 								<?php
                                     $sql_registros = "SELECT DISTINCT c.aud_fecope as fecha FROM conciliacion AS c ORDER BY fecha DESC";
@@ -36,7 +36,7 @@
                     <div class="col-3">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">MES</span>
-                            <select name="dategen" id="dategen" class="form-control input-sm" require>
+                            <select name="mes" id="mes" class="form-control input-sm" require>
                                 <option value="">Seleccione Mes</option>
 								<?php
                                     $sql_registros = "SELECT DISTINCT CASE MONTH(c.aud_fecope)
@@ -72,7 +72,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-3 aling-items-center">
+                    <div class="col-2 aling-items-center">
                         <div class="input-group input-group-sm">
                             <div class="d-grid gap-1 d-md-block">
                                 <button class="btn btn-info" type="button" value="Reporte Valores Mes"      onclick="infvalores()"><i class="fa-solid fa-clipboard-list"></i></button>
@@ -85,8 +85,7 @@
             </div>
             <div class="card-body">
                 <div class="row student text-center" style="align-items: center">
-                    <div id="tablaregistrosgeneral"></div>
-                    <div id="tablageneral"></div>
+                    <div id="tablaconciliacion"></div>
                 </div>
             </div>
         </div>
