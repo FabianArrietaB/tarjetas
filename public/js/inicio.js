@@ -247,48 +247,67 @@ function generar(){
 function infgeneral(){
     var dategen = $('#dategen').val();
     var sede = $('#sede').val();
+    var mastercard = $('#master').val();
+    var visa = $('#visa').val();
+    var davivienda = $('#davivienda').val();
     $.ajax({
         method: 'GET',
     }).done(function(info) {
         $('#tablaregistrosgeneral').load('tablas/tablageneral.php?dategen='+dategen+'&sede='+sede);
     })
-    console.log(dategen)
-    console.log(sede)
+    //console.log(dategen)
+    //console.log(sede)
+    console.log(mastercard)
+    console.log(visa)
+    console.log(davivienda)
 }
 
 //CALCULAR VALORES DIFERENCIA
-jQuery('#bandif, #banretfte, #banretiva, #banretica, #bancomisi').on('change',function(){
+jQuery('#bddifmas, #bdrtemas, #bdnivamas, #bdnicamas, #bdcommas').on('change',function(){
     //VALORES BASE DE DATOS
-    var bddif = $('#bddif').val();
-    var bdretfte = $('#bdretfte').val();
-    var bdretiva = $('#bdretiva').val();
-    var bdretica = $('#bdretica').val();
-    var bdcomisi = $('#bdcomisi').val();
+    var bddifmas = $('#bddifmas').val();
+    var bdrtemas = $('#bdrtemas').val();
+    var bdnivamas = $('#bdnivamas').val();
+    var bdnicamas = $('#bdnicamas').val();
+    var bdcommas = $('#bdcommas').val();
     //VALORES A DIGITAR
-    var bandif = $('#bandif').val();
-    var banretfte = $('#banretfte').val();
-    var banretiva = $('#banretiva').val();
-    var banretica = $('#banretica').val();
-    var bancomisi = $('#bancomisi').val();
+    var bandifmas = $('#bandifmas').val();
+    var banrtemas = $('#banrtemas').val();
+    var banivamas = $('#banivamas').val();
+    var banicamas = $('#banicamas').val();
+    var bancommas = $('#bancommas').val();
     //En caso de que alguno de los valores este en blanco, estará en blanco.
-    if(bandif.length==0 || banretfte.length==0 || banretiva.length==0 || banretica.length==0 || bancomisi.length==0){
-        $('#datdif').val("");
-        $('#datretfte').val("");
-        $('#datretiva').val("");
-        $('#datretica').val("");
-        $('#datcomisi').val("");
+    if(bandifmas.length==0 ){
+        $('#difmas').val("");
+        return;
+    }
+    if(banrtemas.length==0 ){
+        $('#difrtemas').val("");
+        return;
+    }
+    if(banivamas.length==0 ){
+        $('#difivamas').val("");
+        return;
+    }
+    if(banicamas.length==0 ){
+        $('#dificamas').val("");
+        return;
+    }
+    if(bancommas.length==0 ){
+        $('#difcommas').val("");
         return;
     }
     //Realizo el cálculo
-    var datdif = bddif - bandif;
-    var datretfte = bdretfte - banretfte;
-    var datretiva = bdretiva - banretiva;
-    var datretica = bdretica - banretica;;
-    var datcomisi = bdcomisi - bancomisi;
+    var difmas = bddifmas - bandifmas;
+    var difrtemas = bdrtemas - banrtemas;
+    var difivamas = bdnivamas - banivamas;
+    var dificamas = bdnicamas - banicamas;;
+    var difcommas = bdcommas - bancommas
+    ;
     //Lo muestro en el div neto
-    $('#datdif').val(datdif);
-    $('#datretfte').val(datretfte);
-    $('#datretiva').val(datretiva);
-    $('#datretica').val(datretica);
-    $('#datcomisi').val(datcomisi);
+    $('#difmas').val(difmas);
+    $('#difrtemas').val(difrtemas);
+    $('#difivamas').val(difivamas);
+    $('#dificamas').val(dificamas);
+    $('#difcommas').val(difcommas);
 });
