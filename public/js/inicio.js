@@ -263,7 +263,7 @@ function infgeneral(){
 }
 
 //CALCULAR VALORES DIFERENCIA
-jQuery('#bddifmas, #bdrtemas, #bdnivamas, #bdnicamas, #bdcommas').on('change',function(){
+jQuery('#bandifmas, #banrtemas, #banivamas, #banicamas, #bancommas').on('change',function(){
     //VALORES BASE DE DATOS
     var bddifmas = $('#bddifmas').val();
     var bdrtemas = $('#bdrtemas').val();
@@ -301,9 +301,8 @@ jQuery('#bddifmas, #bdrtemas, #bdnivamas, #bdnicamas, #bdcommas').on('change',fu
     var difmas = bddifmas - bandifmas;
     var difrtemas = bdrtemas - banrtemas;
     var difivamas = bdnivamas - banivamas;
-    var dificamas = bdnicamas - banicamas;;
-    var difcommas = bdcommas - bancommas
-    ;
+    var dificamas = bdnicamas - banicamas;
+    var difcommas = bdcommas - bancommas;
     //Lo muestro en el div neto
     $('#difmas').val(difmas);
     $('#difrtemas').val(difrtemas);
