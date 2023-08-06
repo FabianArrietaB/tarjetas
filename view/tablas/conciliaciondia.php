@@ -32,6 +32,7 @@
 $query = mysqli_query($conexion, $sqldiferencia);
 ?>
 <!-- inicio Tabla -->
+<?php if($hoy != "" && $sede !="") { ?>
 <legend  class="group-border"><b>CONCILIACION <?php echo $hoy ?></b> </legend>
 <div class="table-responsive">
     <table class="table table-primary text-center">
@@ -107,3 +108,7 @@ $query = mysqli_query($conexion, $sqldiferencia);
         </tbody>
     </table>
 </div>
+<?php } else {
+    echo "No hay Datos que Mostrar Selecione Fecha y Sede"
+?>
+<?php } ?>

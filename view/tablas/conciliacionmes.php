@@ -35,6 +35,7 @@ if ($mes = 7) {
 }
 ?>
 <!-- inicio Tabla -->
+<?php if($mes != "" && $sede !="") { ?>
 <legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
 <div class="table-responsive">
     <table class="table table-primary text-center">
@@ -110,3 +111,7 @@ if ($mes = 7) {
         </tbody>
     </table>
 </div>
+<?php } else {
+    echo "No hay Datos que Mostrar Seleccione Mes y Sede Consulta"
+?>
+<?php } ?>

@@ -33,8 +33,8 @@ function infdetalle(){
     }).done(function(info) {
         $('#tablaconciliaciondia').load('tablas/conciliaciondia.php?fecha='+fecha+'&sede='+sede);
     })
-    console.log(fecha)
-    console.log(sede)
+    //console.log(fecha)
+    //console.log(sede)
 }
 
 function infmes(){
@@ -45,6 +45,6 @@ function infmes(){
     }).done(function(info) {
         $('#tablaconciliacionmes').load('tablas/conciliacionmes.php?mes='+mes+'&sede='+sede);
     })
-    console.log(mes)
-    console.log(sede)
+    //console.log(mes)
+    //console.log(sede)
 }
