@@ -52,11 +52,11 @@
                                     WHEN 10 THEN 'OCTUBRE'
                                     WHEN 11 THEN 'NOVIEMBRE'
                                     WHEN 12 THEN 'DICIEMBRE'
-                                    END mes FROM conciliacion AS c ORDER BY mes ASC";
+                                    END mes, MONTH(c.aud_fecope) AS idmes FROM conciliacion AS c ORDER BY mes ASC";
                                     $resultados = mysqli_query($conexion,$sql_registros);
 									while($mes = mysqli_fetch_array($resultados)) {
 								?>
-									<option value="<?php echo $mes['mes']?>"><?php echo $mes['mes'];?></option>
+									<option value="<?php echo $mes['idmes']?>"><?php echo $mes['mes'];?></option>
 								<?php }?>
 							</select>
                         </div>
@@ -75,9 +75,9 @@
                     <div class="col-2 aling-items-center">
                         <div class="input-group input-group-sm">
                             <div class="d-grid gap-1 d-md-block">
-                                <button class="btn btn-info" type="button"    onclick="infvalores()"><i class="fa-solid fa-clipboard-list"></i></button>
-                                <button class="btn btn-warning" type="button" onclick="infdetalle()"><i class="fa-solid fa-clipboard-list"></i></button>
-                                <button class="btn btn-success" type="button" onclick="infmes()"><i class="fa-solid fa-clipboard-list"></i></button>
+                                <button id="contotal" class="btn btn-info" type="button"    onclick="infvalores()"><i class="fa-solid fa-clipboard-list"></i></button>
+                                <button id="condia" class="btn btn-warning" type="button" onclick="infdetalle()"><i class="fa-solid fa-clipboard-list"></i></button>
+                                <button id="conmes" class="btn btn-success" type="button" onclick="infmes()"><i class="fa-solid fa-clipboard-list"></i></button>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,8 @@
             </div>
             <div class="card-body">
                 <div class="row student text-center" style="align-items: center">
-                    <div id="tablaconciliacion"></div>
+                    <div id="tablaconciliaciondia"></div>
+                    <div id="tablaconciliacionmes"></div>
                 </div>
             </div>
         </div>

@@ -1,12 +1,8 @@
 <?php
     session_start();
     include "../../model/conexion.php";
-    $hoy = "";
     $mes = "";
     $sede = "";
-    if(isset($_GET['fecha'])){
-        $hoy = $_GET['fecha'];
-    }
     if(isset($_GET['mes'])){
         $mes = $_GET['mes'];
     }
@@ -19,26 +15,27 @@
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
     c.con_franquisia as franquisia,
-    c.con_difenuevo  as newdiferen,
-    c.con_rteftenew  as newretfuen,
-    c.con_rteivanew  as newreteiva,
-    c.con_rteicanew  as newreteica,
-    c.con_comisinew  as newcomisio,
-    C.con_difebanco  as bandiferen,
-    c.con_rtefteban  as banrtefte,
-    c.con_rteivaban  as banrteiva,
-    c.con_rteicaban  as banretecia,
-    c.con_comisiban  as bancomisi,
+    SUM(c.con_difenuevo)  as newdiferen,
+    SUM(c.con_rteftenew)  as newretfuen,
+    SUM(c.con_rteivanew)  as newreteiva,
+    SUM(c.con_rteicanew)  as newreteica,
+    SUM(c.con_comisinew)  as newcomisio,
+    SUM(C.con_difebanco)  as bandiferen,
+    SUM(c.con_rtefteban)  as banrtefte,
+    SUM(c.con_rteivaban)  as banrteiva,
+    SUM(c.con_rteicaban)  as banretecia,
+    SUM(c.con_comisiban)  as bancomisi,
     c.con_fecconcil  as fechaconci
     FROM conciliacion AS c
-    WHERE c.con_fecconcil = '$hoy' AND c.id_sede = '$sede'
-    GROUP BY c.con_franquisia, c.id_sede";
+    WHERE  c.id_sede = '$sede'
+    GROUP BY c.con_franquisia";
 $query = mysqli_query($conexion, $sqldiferencia);
+if ($mes = 7) {
+    $nommes = 'JULIO';
+}
 ?>
 <!-- inicio Tabla -->
-
-<?php if ($hoy != '') { ?>
-    <legend  class="group-border"><b>CONCILIACION <?php echo $hoy ?></b> </legend>
+<legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
 <div class="table-responsive">
     <table class="table table-primary text-center">
         <thead>
@@ -113,4 +110,3 @@ $query = mysqli_query($conexion, $sqldiferencia);
         </tbody>
     </table>
 </div>
-<?php } ?>
