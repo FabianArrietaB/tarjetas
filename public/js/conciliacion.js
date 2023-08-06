@@ -1,8 +1,8 @@
 $(document).ready(function(){
     $('#contotal').click(function(){
         ocultarsecciondes();
-        $('#empresa').load('config/empresa.php');
-        $('#empresa').show();
+        $('#tablaconciliaciongeneral').load('tablas/conciliaciongeneral.php');
+        $('#tablaconciliaciongeneral').show();
     });
 
     $('#condia').click(function(){
@@ -25,6 +25,18 @@ function ocultarsecciondes(){
 }
 
 //CONCILIACION
+function infvalores(){
+    var mes = $('#mes').val();
+    var sede = $('#sede').val();
+    $.ajax({
+        method: 'GET',
+    }).done(function(info) {
+        $('#tablaconciliacionmes').load('tablas/conciliacionmes.php?mes='+mes+'&sede='+sede);
+    })
+    //console.log(mes)
+    //console.log(sede)
+}
+
 function infdetalle(){
     var fecha = $('#fecha').val();
     var sede = $('#sede').val();

@@ -85,6 +85,7 @@
             </div>
             <div class="card-body">
                 <div class="row student text-center" style="align-items: center">
+                    <div id="tablaconciliaciongeneral"></div>
                     <div id="tablaconciliaciondia"></div>
                     <div id="tablaconciliacionmes"></div>
                 </div>
