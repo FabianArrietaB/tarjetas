@@ -31,7 +31,7 @@ function infvalores(){
     $.ajax({
         method: 'GET',
     }).done(function(info) {
-        $('#tablaconciliacionmes').load('tablas/conciliacionmes.php?mes='+mes+'&sede='+sede);
+        $('#tablaconciliaciongeneral').load('tablas/conciliaciongeneral.php?mes='+mes+'&sede='+sede);
     })
     //console.log(mes)
     //console.log(sede)

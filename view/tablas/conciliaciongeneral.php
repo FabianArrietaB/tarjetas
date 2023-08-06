@@ -14,21 +14,20 @@
     $idusuario = $_SESSION['usuario']['id'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-    c.con_franquisia as franquisia,
-    SUM(c.con_difenuevo)  as newdiferen,
-    SUM(c.con_rteftenew)  as newretfuen,
-    SUM(c.con_rteivanew)  as newreteiva,
-    SUM(c.con_rteicanew)  as newreteica,
-    SUM(c.con_comisinew)  as newcomisio,
-    SUM(C.con_difebanco)  as bandiferen,
-    SUM(c.con_rtefteban)  as banrtefte,
-    SUM(c.con_rteivaban)  as banrteiva,
-    SUM(c.con_rteicaban)  as banretecia,
-    SUM(c.con_comisiban)  as bancomisi,
-    c.con_fecconcil  as fechaconci
+    c.con_franquisia AS franquisia,
+    c.con_difenuevo  AS newdiferen,
+    c.con_rteftenew  AS newretfuen,
+    c.con_rteivanew  AS newreteiva,
+    c.con_rteicanew  AS newreteica,
+    c.con_comisinew  AS newcomisio,
+    C.con_difebanco  AS bandiferen,
+    c.con_rtefteban  AS banrtefte,
+    c.con_rteivaban  AS banrteiva,
+    c.con_rteicaban  AS banretecia,
+    c.con_comisiban  AS bancomisi,
+    c.con_fecconcil  AS fechaconci
     FROM conciliacion AS c
-    WHERE  c.id_sede = '$sede'
-    GROUP BY c.con_franquisia";
+    WHERE c.id_sede = '$sede'";
 $query = mysqli_query($conexion, $sqldiferencia);
 if ($mes = 7) {
     $nommes = 'JULIO';

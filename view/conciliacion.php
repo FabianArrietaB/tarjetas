@@ -75,7 +75,7 @@
                     <div class="col-2 aling-items-center">
                         <div class="input-group input-group-sm">
                             <div class="d-grid gap-1 d-md-block">
-                                <input value="PDF" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
+                                <input value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
                                 <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()">
                                 <input value="MES" id="conmes" class="btn btn-success" type="button" onclick="infmes()">
                             </div>
