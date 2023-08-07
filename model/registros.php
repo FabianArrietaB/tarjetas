@@ -183,5 +183,44 @@
             );
             return $datos;
         }
+
+        public function addconciliacion($datos){
+            $conexion = Conexion::conectar();
+            $sql = "INSERT INTO conciliacion (id_operador,
+                                        id_sede,
+                                        con_franquisia,
+                                        con_difenuevo,
+                                        con_difebanco,
+                                        con_rteftenew,
+                                        con_rtefteban,
+                                        con_rteivanew,
+                                        con_rteivaban,
+                                        con_rteicanew,
+                                        con_rteicaban,
+                                        con_comisinew,
+                                        con_comisiban,
+                                        con_fecconcil,
+                                        con_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = $conexion->prepare($sql);
+            $fecha = date("Y-m-d");
+            $query->bind_param("iisssssssssssss",
+                                $datos['idoperador'],
+                                $datos['sede'],
+                                $datos['franquicia'],
+                                $datos['newdif'],
+                                $datos['bandif'],
+                                $datos['newrte'],
+                                $datos['banrte'],
+                                $datos['newiva'],
+                                $datos['baniva'],
+                                $datos['newica'],
+                                $datos['banica'],
+                                $datos['newcom'],
+                                $datos['bancom'],
+                                $datos['fecha'],
+                                $fecha);
+            $respuesta = $query->execute();
+            return $respuesta;
+        }
     }
 ?>

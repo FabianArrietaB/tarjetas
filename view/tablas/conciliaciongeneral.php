@@ -83,7 +83,7 @@ if ($mes = 7) {
                             $diferenciacomisi = $valor['bancomisi'] - $valor['newcomisio'];
                         ?>
                         <tr>
-                            <td class="bg--light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquisia'];?></b></td>
+                            <td class="bg-light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquisia'];?></b></td>
                             <td><?php echo '$ ' . number_format(round($valor['newdiferen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newretfuen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newreteiva']));?></td>
