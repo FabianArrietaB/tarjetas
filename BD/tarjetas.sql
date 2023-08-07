@@ -12,7 +12,7 @@ MySQL - 10.4.28-MariaDB : Database - tarjetas
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`tarjetas` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`tarjetas` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 
 USE `tarjetas`;
 
@@ -46,6 +46,7 @@ DROP TABLE IF EXISTS `conciliacion`;
 
 CREATE TABLE `conciliacion` (
   `id_conciliacion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_operador` int(11) DEFAULT NULL,
   `id_sede` int(11) DEFAULT NULL,
   `con_franquisia` varchar(200) DEFAULT NULL,
   `con_difenuevo` float DEFAULT NULL,
@@ -59,17 +60,20 @@ CREATE TABLE `conciliacion` (
   `con_comisinew` float DEFAULT NULL,
   `con_comisiban` float DEFAULT NULL,
   `con_fecconcil` date DEFAULT NULL,
-  `aud_fecope` date DEFAULT NULL,
+  `con_fecope` date DEFAULT NULL,
   PRIMARY KEY (`id_conciliacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `conciliacion` */
 
-insert  into `conciliacion`(`id_conciliacion`,`id_sede`,`con_franquisia`,`con_difenuevo`,`con_difebanco`,`con_rteftenew`,`con_rtefteban`,`con_rteivanew`,`con_rteivaban`,`con_rteicanew`,`con_rteicaban`,`con_comisinew`,`con_comisiban`,`con_fecconcil`,`aud_fecope`) values 
-(1,1,'MASTERCARD',6808870,6813460,101036,101248,58537,56420,33678,33751,123836,121082,'2023-07-28','2023-07-29'),
-(2,1,'VISA',291120,291131,3885,3886,7381,7381,1295,1295,4518,4506,'2023-07-28','2023-07-29'),
-(3,1,'MASTERCARD',2710400,2712980,36593,0,64298,0,12198,0,44692,0,'2023-07-29','2023-07-31'),
-(4,1,'VISA',3749440,3749800,53966,0,50579,0,17989,0,62965,0,'2023-07-29','2023-07-31');
+insert  into `conciliacion`(`id_conciliacion`,`id_operador`,`id_sede`,`con_franquisia`,`con_difenuevo`,`con_difebanco`,`con_rteftenew`,`con_rtefteban`,`con_rteivanew`,`con_rteivaban`,`con_rteicanew`,`con_rteicaban`,`con_comisinew`,`con_comisiban`,`con_fecconcil`,`con_fecope`) values 
+(1,1,1,'MASTERCARD',6808870,6813460,101036,101248,58537,56420,33678,33751,123836,121082,'2023-07-28','2023-07-29'),
+(2,1,1,'VISA',291120,291131,3885,3886,7381,7381,1295,1295,4518,4506,'2023-07-28','2023-07-29'),
+(3,1,1,'MASTERCARD',2710400,2712980,36593,0,64298,0,12198,0,44692,0,'2023-07-29','2023-07-31'),
+(4,1,1,'VISA',3749440,3749800,53966,0,50579,0,17989,0,62965,0,'2023-07-29','2023-07-31'),
+(6,1,NULL,NULL,5297320,5297320,75921,75900,75752,75722,25307,25300,92135,92130,'2023-08-01','2023-08-06'),
+(7,1,NULL,NULL,5297320,5297320,75921,75900,75752,75722,25307,25300,92135,92130,'2023-08-01','2023-08-06'),
+(8,1,1,'MASTERCARD',5297320,5297320,75921,75900,75752,75722,25307,25300,92135,92130,'2023-08-01','2023-08-06');
 
 /*Table structure for table `personas` */
 
@@ -226,7 +230,7 @@ CREATE TABLE `registros` (
   `reg_fecope` date NOT NULL,
   `reg_fecupd` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `registros` */
 
@@ -320,7 +324,9 @@ insert  into `registros`(`id_registro`,`id_sede`,`id_operador`,`reg_numticket`,`
 (92,1,5,'CM01 - 3121',11,'MASTERCARD',672000,107294,8470.5900,16094.1000,2823.5300,10390.5904,37778.8104,661609.4096,634221.1896,'2023-08-03','2023-08-03 15:15:11'),
 (93,1,5,'CM01 - 3122',5,'MASTERCARD',722000,115277,9100.8450,17291.5500,3033.6150,11163.7032,40589.7132,710836.2968,681410.2868,'2023-08-03','2023-08-03 15:15:12'),
 (94,1,5,'CM01 - 3123',11,'MASTERCARD',178200,20452,2366.2200,3067.8000,788.7400,2902.5632,9125.3232,175297.4368,169074.6768,'2023-08-03','2023-08-03 15:15:13'),
-(95,NULL,1,'CFC - 3124',1,'VISA',50000,0,750.0000,0.0000,250.0000,870.0000,1870.0000,49130.0000,48130.0000,'2023-08-04','2023-08-04 08:27:56');
+(95,2,1,'CFC - 3124',1,'VISA',50000,0,750.0000,0.0000,250.0000,870.0000,1870.0000,49130.0000,48130.0000,'2023-08-04','2023-08-06 22:08:16'),
+(96,3,1,'CM01 - 3124',11,'MASTERCARD',52200,8334,657.9900,1250.1000,219.3300,807.1344,2934.5544,51392.8656,49265.4456,'2023-08-06','2023-08-06 22:08:09'),
+(97,3,1,'CM01 - 3125',11,'MASTERCARD',71100,11336,896.4600,1700.4000,298.8200,1099.6576,3995.3376,70000.3424,67104.6624,'2023-08-06','2023-08-06 22:07:56');
 
 /*Table structure for table `roles` */
 
