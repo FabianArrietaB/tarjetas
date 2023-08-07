@@ -19,5 +19,5 @@
 
    include "../../model/registros.php";
    $Registros = new Registros();
-   echo $Registros->addconciliacion($datos);
+   echo $Registros->adddiferencia($datos);
 ?>

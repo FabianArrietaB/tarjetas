@@ -39,7 +39,7 @@
                             <select name="mes" id="mes" class="form-control input-sm" require>
                                 <option value="">Seleccione Mes</option>
 								<?php
-                                    $sql_registros = "SELECT DISTINCT CASE MONTH(c.aud_fecope)
+                                    $sql_registros = "SELECT DISTINCT CASE MONTH(c.con_fecope)
                                     WHEN 1 THEN 'ENERO'
                                     WHEN 2 THEN 'FEBRERO'
                                     WHEN 3 THEN 'MARZO'
@@ -52,7 +52,7 @@
                                     WHEN 10 THEN 'OCTUBRE'
                                     WHEN 11 THEN 'NOVIEMBRE'
                                     WHEN 12 THEN 'DICIEMBRE'
-                                    END mes, MONTH(c.aud_fecope) AS idmes FROM conciliacion AS c ORDER BY mes ASC";
+                                    END mes, MONTH(c.con_fecope) AS idmes FROM conciliacion AS c ORDER BY mes ASC";
                                     $resultados = mysqli_query($conexion,$sql_registros);
 									while($mes = mysqli_fetch_array($resultados)) {
 								?>
@@ -75,9 +75,9 @@
                     <div class="col-2 aling-items-center">
                         <div class="input-group input-group-sm">
                             <div class="d-grid gap-1 d-md-block">
-                                <input value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
                                 <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()">
                                 <input value="MES" id="conmes" class="btn btn-success" type="button" onclick="infmes()">
+                                <input value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
                             </div>
                         </div>
                     </div>

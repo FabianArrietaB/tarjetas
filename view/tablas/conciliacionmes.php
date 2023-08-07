@@ -27,11 +27,13 @@
     SUM(c.con_comisiban)  as bancomisi,
     c.con_fecconcil  as fechaconci
     FROM conciliacion AS c
-    WHERE  c.id_sede = '$sede'
+    WHERE c.id_sede = '$sede' AND MONTH(c.con_fecconcil) = '$mes'
     GROUP BY c.con_franquisia";
 $query = mysqli_query($conexion, $sqldiferencia);
-if ($mes = 7) {
+if ($mes == 7) {
     $nommes = 'JULIO';
+} else if ($mes == 8){
+    $nommes = 'AGOSTO';
 }
 ?>
 <!-- inicio Tabla -->

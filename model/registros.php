@@ -184,7 +184,7 @@
             return $datos;
         }
 
-        public function addconciliacion($datos){
+        public function adddiferencia($datos){
             $conexion = Conexion::conectar();
             $sql = "INSERT INTO conciliacion (id_operador,
                                         id_sede,

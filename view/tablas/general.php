@@ -38,20 +38,16 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
 <form id="frmadddiferencia" method="post" onsubmit="return adddiferencia()">
     <div class="row text-center">
         <fieldset class="group-border">
+            <legend class="group-border text-center"><b>CONCILIACION <?php echo $hoy ?></b> </legend>
             <div class="row student">
                 <div class="col-6">
-                    <legend class="group-border text-center"><b>CONCILIACION <?php echo $hoy ?></b> </legend>
-                </div>
-                <div class="col-3">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">SEDE</span>
-                        <input id="sede" type="text" class="form-control text-center input-sm" value="
-                        <?php if ($sede == 1) {
-                            echo 'METROPOLIS';
-                        } else if ($sede == 2) { echo 'FERRECASAS'; } else if ($sede == 4) { echo 'MAYORISTA'; } ?>" readonly>
+                        <input id="sede" name="sede" type="text" class="form-control text-center input-sm" value="<?php echo $sede ?>" readonly>
+                        <input id="franquicia" name="franquicia" type="text" class="form-control text-center input-sm" value="<?php echo $franquicia ?>" readonly>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">Fecha Conciliar</span>
                         <input type="date" class="form-control"  name="fecha" id="fecha" required>

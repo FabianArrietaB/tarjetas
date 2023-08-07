@@ -301,15 +301,16 @@ function calcular() {
 }
 
 //INSERTAR CONCILIACION
-function addregistro(){
+function adddiferencia(){
     $.ajax({
         type: "POST",
         data: $('#frmadddiferencia').serialize(),
-        url: "../controller/registros/agregarconcilaicion.php",
+        url: "../controller/registros/agregarconciliacion.php",
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
                 console.log(respuesta);
+                $('#tablaregistros').load('tablas/registros.php');
                 $('#frmadddiferencia')[0].reset();
                 Swal.fire({
                     icon: 'success',
