@@ -60,12 +60,12 @@ if ($mes = 7) {
                 if ($tipo_tarjeta != $valor['franquisia']) {
                     if ($tipo_tarjeta != '') { ?>
                             <tr>
-                                <td class="table-info"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
-                                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
-                                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
-                                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
-                                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+                                <td class="bg-success" style="color:#fff"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
+                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
+                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
+                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
+                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
                             </tr>
                         <?php
                             $diferencia = 0;
@@ -82,6 +82,14 @@ if ($mes = 7) {
                             $diferenciarteica = $valor['banretecia'] - $valor['newreteica'];
                             $diferenciacomisi = $valor['bancomisi'] - $valor['newcomisio'];
                         ?>
+                        <tr>
+                            <td class="bg-danger" style="color:#fff"><b>Fecha Proceso</b></td>
+                            <td class="bg-danger" style="color:#fff"></td>
+                            <td class="bg-danger" style="color:#fff"></td>
+                            <td class="bg-danger" style="color:#fff" ><b><?php echo $valor['fechaconci'];?></b></td>
+                            <td class="bg-danger" style="color:#fff"></td>
+                            <td class="bg-danger" style="color:#fff"></td>
+                        </tr>
                         <tr>
                             <td class="bg-light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquisia'];?></b></td>
                             <td><?php echo '$ ' . number_format(round($valor['newdiferen']));?></td>
@@ -100,12 +108,12 @@ if ($mes = 7) {
                         </tr>
             <?php } ?>
             <tr>
-                <td class="table-info"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
-                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
-                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
-                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
-                <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+                <td class="bg-success" style="color:#fff"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
+                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
+                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
+                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
+                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
             </tr>
         </tbody>
     </table>
