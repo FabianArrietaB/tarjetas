@@ -6,7 +6,8 @@
 
         public function addregistro($datos){
             $conexion = Conexion::conectar();
-            $sql = "INSERT INTO registros (id_operador,
+            $sql = "INSERT INTO registros (id_sede,
+                                        id_operador,
                                         reg_numticket,
                                         reg_tipcuenta,
                                         reg_tiptar,
@@ -19,12 +20,13 @@
                                         reg_tardesc,
                                         reg_banco,
                                         reg_diferencia,
-                                        reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                        reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
             $prefijo = $datos['pretik'] .' - '. $datos['ticket'];
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
-            $query->bind_param("isisssssssssss",
+            $query->bind_param("iisisssssssssss",
+                                $datos['idsede'],
                                 $datos['idoperador'],
                                 $prefijo,
                                 $datos['idtiptar'],

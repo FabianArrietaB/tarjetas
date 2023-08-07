@@ -19,6 +19,7 @@
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
     r.id_sede         AS idsede,
+    s.sed_nombre      AS sede,
     r.id_registro     AS idregistro,
     r.id_operador     AS idoperador,
     r.reg_tiptar          AS tiptar,
@@ -29,6 +30,7 @@
     SUM(r.reg_comision)   AS comision
 FROM registros AS r
 INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
+INNER JOIN sedes AS s On r.id_sede = s.id_sede
 WHERE r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
 $querydiferencia = mysqli_query($conexion, $sqldiferencia);
 $rwdiferencia = mysqli_fetch_array($querydiferencia);
@@ -42,8 +44,9 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
             <div class="row student">
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">SEDE</span>
-                        <input id="sede" name="sede" type="text" class="form-control text-center input-sm" value="<?php echo $sede ?>" readonly>
+                        <span class="input-group-text" id="inputGroup-sizing-default">SEDE | FRANQUICIA</span>
+                        <input hidden id="sede" name="sede" type="text" class="form-control text-center input-sm" value="<?php echo $sede ?>" readonly>
+                        <input type="text" class="form-control text-center input-sm" value="<?php echo $rwdiferencia['sede'] ?>" readonly>
                         <input id="franquicia" name="franquicia" type="text" class="form-control text-center input-sm" value="<?php echo $franquicia ?>" readonly>
                     </div>
                 </div>
