@@ -28,7 +28,7 @@
     $idusuario = $_SESSION['usuario']['id'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-        c.con_franquisia as franquisia,
+        c.con_franquicia as franquisia,
         SUM(c.con_difenuevo)  as newdiferen,
         SUM(c.con_rteftenew)  as newretfuen,
         SUM(c.con_rteivanew)  as newreteiva,
@@ -82,16 +82,54 @@
 ?>
 <!-- inicio Tabla -->
 <?php if($mes != "" && $sede !="") { ?>
-<div class="row">
-    <div class="col-9">
-        <legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
-    </div>
-    <div class="col-3">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Total General</span>
-            <input type="text" class="form-control" value="" readonly>
+<div class="row mb-3 text-center">
+    <?php if($master == "" && $visa == "" && $davi == "") { ?>
+        <div class="col-9">
+            <legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
         </div>
-    </div>
+        <div class="col-3">
+            <div class="input-group ">
+                <span class="input-group-text" id="inputGroup-sizing-default">Total General</span>
+                <input type="text" class="form-control" tabindex="2" maxlength="10" size="20" value="
+                <?php
+                    $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta'");
+                    $data = mysqli_fetch_array($sql);
+                    $precio = $data['precio'];
+                    echo $precio;
+                ?>
+                ">
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="col-9">
+            <legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
+        </div>
+        <div class="col-3">
+            <div class="input-group ">
+                <span class="input-group-text" id="inputGroup-sizing-default">Total General</span>
+                <input type="text" class="form-control" tabindex="2" maxlength="10" size="20" value="
+                <?php
+                    if($master !="" && $visa ="" && $davi == "" ){
+                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia = '$master'");
+                        $data = mysqli_fetch_array($sql);
+                        $precio = $data['precio'];
+                        echo $precio;
+                    } else if ($master !="" && $visa !="" && $davi == "" ){
+                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$master', '$visa')");
+                        $data = mysqli_fetch_array($sql);
+                        $precio = $data['precio'];
+                        echo $precio;
+                    } else if ($master !="" && $visa !="" && $davi != "" ){
+                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$master', '$visa', '$davi')");
+                        $data = mysqli_fetch_array($sql);
+                        $precio = $data['precio'];
+                        echo $precio;
+                    }
+                ?>
+                ">
+            </div>
+        </div>
+    <?php } ?>
 </div>
 
 <div class="table-responsive">

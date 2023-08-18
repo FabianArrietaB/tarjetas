@@ -190,7 +190,7 @@
             $conexion = Conexion::conectar();
             $sql = "INSERT INTO conciliacion (id_operador,
                                         id_sede,
-                                        con_franquisia,
+                                        con_franquicia,
                                         con_difenuevo,
                                         con_difebanco,
                                         con_rteftenew,
@@ -232,7 +232,7 @@
             c.id_operador idoperador,
             c.id_sede idsede,
             s.sed_nombre sede,
-            c.con_franquisia franquicia,
+            c.con_franquicia franquicia,
             c.con_difenuevo difnew,
             c.con_difebanco difban,
             c.con_rteftenew rtftnew,

@@ -28,7 +28,7 @@
     $idusuario = $_SESSION['usuario']['id'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-        c.con_franquisia AS franquisia,
+        c.con_franquicia AS franquisia,
         c.con_difenuevo  AS newdiferen,
         c.con_rteftenew  AS newretfuen,
         c.con_rteivanew  AS newreteiva,
