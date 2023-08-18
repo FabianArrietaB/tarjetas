@@ -1,41 +1,64 @@
 <?php
     session_start();
     include "../../model/conexion.php";
-    $mes = "";
+    $desde = "";
+    $hasta = "";
     $sede = "";
-    if(isset($_GET['mes'])){
-        $mes = $_GET['mes'];
+    $master = "";
+    $visa = "";
+    $davi = "";
+    if(isset($_GET['desde']) && ($_GET['hasta'])){
+        $desde = $_GET['desde'];
+        $hasta = $_GET['hasta'];
     }
     if(isset($_GET['sede'])){
         $sede = $_GET['sede'];
+    }
+    if(isset($_GET['master'])){
+        $master = $_GET['master'];
+    }
+    if(isset($_GET['visa'])){
+        $visa = $_GET['visa'];
+    }
+    if(isset($_GET['davi'])){
+        $davi = $_GET['davi'];
     }
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-    c.con_franquisia AS franquisia,
-    c.con_difenuevo  AS newdiferen,
-    c.con_rteftenew  AS newretfuen,
-    c.con_rteivanew  AS newreteiva,
-    c.con_rteicanew  AS newreteica,
-    c.con_comisinew  AS newcomisio,
-    C.con_difebanco  AS bandiferen,
-    c.con_rtefteban  AS banrtefte,
-    c.con_rteivaban  AS banrteiva,
-    c.con_rteicaban  AS banretecia,
-    c.con_comisiban  AS bancomisi,
-    c.con_fecconcil  AS fechaconci
+        c.con_franquisia AS franquisia,
+        c.con_difenuevo  AS newdiferen,
+        c.con_rteftenew  AS newretfuen,
+        c.con_rteivanew  AS newreteiva,
+        c.con_rteicanew  AS newreteica,
+        c.con_comisinew  AS newcomisio,
+        C.con_difebanco  AS bandiferen,
+        c.con_rtefteban  AS banrtefte,
+        c.con_rteivaban  AS banrteiva,
+        c.con_rteicaban  AS banretecia,
+        c.con_comisiban  AS bancomisi,
+        c.con_fecconcil  AS fechaconci
     FROM conciliacion AS c
     WHERE c.id_sede = '$sede'";
+    if($desde != "" && $hasta != ""){
+        $sqldiferencia .=" AND c.con_fecconcil BETWEEN '$desde' AND '$hasta'";
+    }
+    if($master != ""){
+        $sqldiferencia .=" AND c.con_franquisia = '$master'";
+    }
+    if($visa != ""){
+        $sqldiferencia .=" OR c.con_franquisia = '$visa'";
+    }
+    if($davi != ""){
+        $sqldiferencia .=" OR c.con_franquisia = '$davi'";
+    }
 $query = mysqli_query($conexion, $sqldiferencia);
-if ($mes = 7) {
-    $nommes = 'JULIO';
-}
 ?>
 <!-- inicio Tabla -->
-<?php if($mes != "" && $sede !="") { ?>
-<legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
+<?php if($desde != "" && $hasta != "" && $sede !="") { ?>
+<legend  class="group-border"><b>CONCILIACION DESDE <?php echo $desde ?> HASTA <?php echo $hasta ?></b> </legend>
 <div class="table-responsive">
     <table class="table table-primary text-center">
         <thead>
@@ -59,22 +82,6 @@ if ($mes = 7) {
             while ($valor = mysqli_fetch_array($query)){
                 if ($tipo_tarjeta != $valor['franquisia']) {
                     if ($tipo_tarjeta != '') { ?>
-                            <tr>
-                                <td class="bg-success" style="color:#fff"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
-                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
-                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
-                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
-                                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
-                            </tr>
-                            <tr>
-                                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                                <td class="bg-primary" style="color:#fff"></td>
-                                <td class="bg-primary" style="color:#fff"></td>
-                                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
-                                <td class="bg-primary" style="color:#fff"></td>
-                                <td class="bg-primary" style="color:#fff"></td>
-                            </tr>
                         <?php
                             $diferencia = 0;
                             $diferenciafte = 0;
@@ -114,27 +121,19 @@ if ($mes = 7) {
                             <td><?php echo '$ ' . number_format(round($valor['banretecia']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['bancomisi']));?></td>
                         </tr>
+                        <tr>
+                            <td class="bg-success" style="color:#fff"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
+                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
+                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
+                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
+                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+                        </tr>
             <?php } ?>
-            <tr>
-                <td class="bg-success" style="color:#fff"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
-                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
-                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
-                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
-                <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
-            </tr>
-            <tr>
-                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                <td class="bg-primary" style="color:#fff"></td>
-                <td class="bg-primary" style="color:#fff"></td>
-                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
-                <td class="bg-primary" style="color:#fff"></td>
-                <td class="bg-primary" style="color:#fff"></td>
-            </tr>
         </tbody>
     </table>
 </div>
 <?php } else {
-    echo "No hay Datos que Mostrar Seleccione Mes y Sede Consulta"
+    echo "Seleccione Rango Fecha y Sede para Generar una Consulta"
 ?>
 <?php } ?>

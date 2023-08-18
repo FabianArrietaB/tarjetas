@@ -18,67 +18,52 @@
                     <div class="title">
                         <h2>RESUMEN CONCILIACION</h2>
                     </div>
-                    <div class="col-3">
-                        <div class="input-group ">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
-                            <select name="fecha" id="fecha" class="form-control input-sm" require>
-                                <option value="">Seleccione Fecha</option>
-								<?php
-                                    $sql_registros = "SELECT DISTINCT c.con_fecconcil as fecha FROM conciliacion AS c ORDER BY fecha DESC";
-                                    $resultados = mysqli_query($conexion,$sql_registros);
-									while($fecha = mysqli_fetch_array($resultados)) {
-								?>
-									<option value="<?php echo $fecha['fecha']?>"><?php echo $fecha['fecha'];?></option>
-								<?php }?>
-							</select>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Desde</span>
+                                <input type="date" class="form-control" id="desde" name="desde" tabindex="2" maxlength="10" size="20">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="input-group ">
-                            <span class="input-group-text" id="inputGroup-sizing-default">MES</span>
-                            <select name="mes" id="mes" class="form-control input-sm" require>
-                                <option value="">Seleccione Mes</option>
-								<?php
-                                    $sql_registros = "SELECT DISTINCT CASE MONTH(c.con_fecope)
-                                    WHEN 1 THEN 'ENERO'
-                                    WHEN 2 THEN 'FEBRERO'
-                                    WHEN 3 THEN 'MARZO'
-                                    WHEN 4 THEN 'ABRIL'
-                                    WHEN 5 THEN 'MAYO'
-                                    WHEN 6 THEN 'JUNIO'
-                                    WHEN 7 THEN 'JULIO'
-                                    WHEN 8 THEN 'AGOSTO'
-                                    WHEN 9 THEN 'SEPTIEMBRE'
-                                    WHEN 10 THEN 'OCTUBRE'
-                                    WHEN 11 THEN 'NOVIEMBRE'
-                                    WHEN 12 THEN 'DICIEMBRE'
-                                    END mes, MONTH(c.con_fecope) AS idmes FROM conciliacion AS c ORDER BY mes ASC";
-                                    $resultados = mysqli_query($conexion,$sql_registros);
-									while($mes = mysqli_fetch_array($resultados)) {
-								?>
-									<option value="<?php echo $mes['idmes']?>"><?php echo $mes['mes'];?></option>
-								<?php }?>
-							</select>
+                        <div class="col-2">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Hasta</span>
+                                <input type="date" class="form-control" id="hasta" name="hasta" tabindex="2" maxlength="10" size="20">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="input-group ">
-                            <span class="input-group-text" id="inputGroup-sizing-default">SEDE</span>
-                            <select name="sede" id="sede" class="form-control input-sm" require>
-                                <option value="">Seleccione Sede</option>
-                                <option value="2">FERRECASAS</option>
-                                <option value="3">METROPOLIS</option>
-                                <option value="4">MAYORISTA</option>
-							</select>
+                        <div class="col-2">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="inputGroup-sizing-default">SEDE</span>
+                                <select name="sede" id="sede" class="form-control input-sm" require>
+                                    <option value="">Seleccione Sede</option>
+                                    <option value="2">FERRECASAS</option>
+                                    <option value="3">METROPOLIS</option>
+                                    <option value="4">MAYORISTA</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3 aling-items-center">
-                        <div class="input-group input-group-sm">
-                            <div class="d-grid gap-1 d-md-block">
-                                <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()">
-                                <input value="MES" id="conmes" class="btn btn-success" type="button" onclick="infmes()">
-                                <input value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
-                                <input value="LISTA" id="listcon" class="btn btn-primary" type="button">
+                        <div class="col-3">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox1">Mastercard</label>
+                                <input id="master" name="master" class="form-check-input" type="checkbox" value="MASTERCARD">
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox1">Visa</label>
+                                <input id="visa" name="visa" class="form-check-input" type="checkbox" value="VISA">
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox1">Davivienda</label>
+                                <input id="davi" name="davi" class="form-check-input" type="checkbox" value="DAVIVIENDA">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group input-group-sm">
+                                <div class="d-grid gap-1 d-md-block">
+                                    <!-- <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()"> -->
+                                    <input value="MES" id="conmes" class="btn btn-success" type="button" onclick="infmes()">
+                                    <input value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
+                                    <input value="LISTA" id="listcon" class="btn btn-primary" type="button">
+                                </div>
                             </div>
                         </div>
                     </div>

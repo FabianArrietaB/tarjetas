@@ -33,18 +33,6 @@ function ocultarsecciondes(){
 }
 
 //CONCILIACION
-function infvalores(){
-    var mes = $('#mes').val();
-    var sede = $('#sede').val();
-    $.ajax({
-        method: 'GET',
-    }).done(function(info) {
-        $('#tablaconciliaciongeneral').load('tablas/conciliaciongeneral.php?mes='+mes+'&sede='+sede);
-    })
-    //console.log(mes)
-    //console.log(sede)
-}
-
 function infdetalle(){
     var fecha = $('#fecha').val();
     var sede = $('#sede').val();
@@ -57,16 +45,42 @@ function infdetalle(){
     //console.log(sede)
 }
 
-function infmes(){
-    var mes = $('#mes').val();
+function infvalores(){
+    var desde = $('#desde').val();
+    var hasta = $('#hasta').val();
     var sede = $('#sede').val();
+    var master = ($('#master').is(":checked")) ? $('#master').val() : '';
+    var visa = ($('#visa').is(":checked")) ? $('#visa').val() : '';
+    var davi = ($('#davi').is(":checked")) ? $('#davi').val() : '';
     $.ajax({
         method: 'GET',
     }).done(function(info) {
-        $('#tablaconciliacionmes').load('tablas/conciliacionmes.php?mes='+mes+'&sede='+sede);
+        $('#tablaconciliaciongeneral').load('tablas/conciliaciongeneral.php?desde='+desde+'&hasta='+hasta+'&sede='+sede+'&master='+master+'&visa='+visa+'&davi='+davi);
     })
-    //console.log(mes)
+    //console.log(desde)
+    //console.log(hasta)
     //console.log(sede)
+}
+
+function infmes(){
+    var desde = $('#desde').val();
+    var hasta = $('#hasta').val();
+    var sede = $('#sede').val();
+    var master = ($('#master').is(":checked")) ? $('#master').val() : '';
+    var visa = ($('#visa').is(":checked")) ? $('#visa').val() : '';
+    var davi = ($('#davi').is(":checked")) ? $('#davi').val() : '';
+    $.ajax({
+        method: 'GET',
+    }).done(function(info) {
+        $('#tablaconciliacionmes').load('tablas/conciliacionmes.php?desde='+desde+'&hasta='+hasta+'&sede='+sede+'&master='+master+'&visa='+visa+'&davi='+davi);
+    
+    })
+    // console.log(desde)
+    // console.log(hasta)
+    // console.log(sede)
+    console.log(master)
+    console.log(visa)
+    console.log(davi)
 }
 
 function detalleconciliacion(idconciliacion){

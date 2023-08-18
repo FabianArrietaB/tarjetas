@@ -1,40 +1,84 @@
 <?php
     session_start();
     include "../../model/conexion.php";
-    $mes = "";
+    $desde = "";
+    $hasta = "";
     $sede = "";
-    if(isset($_GET['mes'])){
-        $mes = $_GET['mes'];
+    $master = "";
+    $visa = "";
+    $davi = "";
+    if(isset($_GET['desde']) && ($_GET['hasta'])){
+        $desde = $_GET['desde'];
+        $hasta = $_GET['hasta'];
     }
     if(isset($_GET['sede'])){
         $sede = $_GET['sede'];
+    }
+    if(isset($_GET['master'])){
+        $master = $_GET['master'];
+    }
+    if(isset($_GET['visa'])){
+        $visa = $_GET['visa'];
+    }
+    if(isset($_GET['davi'])){
+        $davi = $_GET['davi'];
     }
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-    c.con_franquisia as franquisia,
-    SUM(c.con_difenuevo)  as newdiferen,
-    SUM(c.con_rteftenew)  as newretfuen,
-    SUM(c.con_rteivanew)  as newreteiva,
-    SUM(c.con_rteicanew)  as newreteica,
-    SUM(c.con_comisinew)  as newcomisio,
-    SUM(C.con_difebanco)  as bandiferen,
-    SUM(c.con_rtefteban)  as banrtefte,
-    SUM(c.con_rteivaban)  as banrteiva,
-    SUM(c.con_rteicaban)  as banretecia,
-    SUM(c.con_comisiban)  as bancomisi,
-    c.con_fecconcil  as fechaconci
+        c.con_franquisia as franquisia,
+        SUM(c.con_difenuevo)  as newdiferen,
+        SUM(c.con_rteftenew)  as newretfuen,
+        SUM(c.con_rteivanew)  as newreteiva,
+        SUM(c.con_rteicanew)  as newreteica,
+        SUM(c.con_comisinew)  as newcomisio,
+        SUM(C.con_difebanco)  as bandiferen,
+        SUM(c.con_rtefteban)  as banrtefte,
+        SUM(c.con_rteivaban)  as banrteiva,
+        SUM(c.con_rteicaban)  as banretecia,
+        SUM(c.con_comisiban)  as bancomisi,
+        c.con_fecconcil  as fechaconci
     FROM conciliacion AS c
-    WHERE c.id_sede = '$sede' AND MONTH(c.con_fecconcil) = '$mes'
-    GROUP BY c.con_franquisia";
-$query = mysqli_query($conexion, $sqldiferencia);
-if ($mes == 7) {
-    $nommes = 'JULIO';
-} else if ($mes == 8){
-    $nommes = 'AGOSTO';
-}
+    WHERE c.id_sede = '$sede' AND c.con_fecconcil BETWEEN '$desde' AND '$hasta'";
+    if($master != ""){
+        $sqldiferencia .=" AND c.con_franquisia = '$master'";
+    }
+    if($visa != ""){
+        $sqldiferencia .=" OR c.con_franquisia = '$visa'";
+    }
+    if($davi != ""){
+        $sqldiferencia .=" OR c.con_franquisia = '$davi'";
+    }
+    $sqldiferencia .="GROUP BY c.con_franquisia";
+    $query = mysqli_query($conexion, $sqldiferencia);
+    $mes =  substr($desde,5,2);
+    if ($mes == 1) {
+        $nommes = 'ENERO';
+    } else if ($mes == 2){
+        $nommes = 'FEBRERO';
+    } else if ($mes == 3){
+        $nommes = 'MARZO';
+    } else if ($mes == 4){
+        $nommes = 'ABRIL';
+    } else if ($mes == 5){
+        $nommes = 'MAYO';
+    }else if ($mes == 6){
+        $nommes = 'JUNIO';
+    }else if ($mes == 7){
+        $nommes = 'JULIO';
+    }else if ($mes == 8){
+        $nommes = 'AGOSTO';
+    }else if ($mes == 9){
+        $nommes = 'SEPTIEMBRE';
+    }else if ($mes == 10){
+        $nommes = 'OCTUBRE';
+    }else if ($mes == 11){
+        $nommes = 'NOVIEMBRE';
+    }else if ($mes == 12){
+        $nommes = 'DICIEMBRE';
+    }
 ?>
 <!-- inicio Tabla -->
 <?php if($mes != "" && $sede !="") { ?>
@@ -69,6 +113,14 @@ if ($mes == 7) {
                                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
                                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
                                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+                            </tr>
+                            <tr>
+                                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                                <td class="bg-primary" style="color:#fff"></td>
+                                <td class="bg-primary" style="color:#fff"></td>
+                                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
+                                <td class="bg-primary" style="color:#fff"></td>
+                                <td class="bg-primary" style="color:#fff"></td>
                             </tr>
                         <?php
                             $diferencia = 0;
@@ -109,6 +161,14 @@ if ($mes == 7) {
                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+            </tr>
+            <tr>
+                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                <td class="bg-primary" style="color:#fff"></td>
+                <td class="bg-primary" style="color:#fff"></td>
+                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
+                <td class="bg-primary" style="color:#fff"></td>
+                <td class="bg-primary" style="color:#fff"></td>
             </tr>
         </tbody>
     </table>
