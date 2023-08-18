@@ -224,5 +224,45 @@
             $respuesta = $query->execute();
             return $respuesta;
         }
+
+        public function detalleconciliacion($idconciliacion){
+            $conexion = Conexion::conectar();
+            $sql ="SELECT
+            c.id_conciliacion idconciliacion,
+            c.id_operador idoperador,
+            c.id_sede idsede,
+            c.con_franquisia franquisia,
+            c.con_difenuevo difnew,
+            c.con_difebanco difban,
+            c.con_rteftenew rtftnew,
+            c.con_rtefteban rtftban,
+            c.con_rteivanew rtivanew,
+            c.con_rteivaban rtivaban,
+            c.con_rteicanew rticanew,
+            c.con_rteicaban rticaban,
+            c.con_comisinew connew,
+            c.con_comisiban conban,
+            c.con_fecconcil fecha
+            WHERE c.id_conciliacion = '$idconciliacion'";
+            $respuesta = mysqli_query($conexion,$sql);
+            $registro = mysqli_fetch_array($respuesta);
+            $datos = array(
+                'idconciliacion' => $registro['idconciliacion'],
+                'idoperador' => $registro['idoperador'],
+                'idsede' => $registro['idsede'],
+                'franquisia' => $registro['franquisia'],
+                'difnew' => $registro['difnew'],
+                'difban' => $registro['difban'],
+                'rtftban' => $registro['rtftban'],
+                'rtivanew' => $registro['rtivanew'],
+                'rtivaban' => $registro['rtivaban'],
+                'rticanew' => $registro['rticanew'],
+                'rticaban' => $registro['rticaban'],
+                'connew' => $registro['connew'],
+                'conban' => $registro['conban'],
+                'fecha' => $registro['fecha'],
+            );
+            return $datos;
+        }
     }
 ?>

@@ -1,15 +1,16 @@
-<form id="frmeditdiferencia" method="post" onsubmit="return editarconcilacion()">
+<form id="updfrmeditdiferencia" method="post" onsubmit="return editarconcilacion()">
     <div class="modal fade" id="editconciliacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-xxl-down" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Registro</h5>
+                    <h5 class="modal-title" id="updexampleModalLabel">Editar Registro</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <fieldset class="group-border">
                         <legend class="group-border text-center"><b>CONCILIACION</b> </legend>
                         <div class="row student text-center">
+                            <input hidden type="text" class="form-control" name="idconciliacion" id="idconciliacion" placeholder="">
                             <div class="col-2 text-center">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control text-center input-sm" value="SECCIONES" readonly>
@@ -61,87 +62,87 @@
                             </div>
                             <div class="col-2 text-center">
                                 <div class="input-group mb-3">
-                                    <input type="text" id="bddif" name="bddif" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['diferencia']) ?>" readonly>
+                                    <input type="text" id="updbddif" name="updbddif" class="form-control text-center input-sm" readonly>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="domdif" name="domdif" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                                    <input type="text" id="upddomdif" name="upddomdif" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="newdif" name="newdif" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
+                                    <input type="text" id="updnewdif" name="updnewdif" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="bandif" name="bandif" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                                    <input type="text" id="updbandif" name="updbandif" class="form-control text-center input-sm" placeholder="Valor Banco" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="dif" name="dif" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2 text-center">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="bdrte" name="bdrte" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['retefuente']) ?>" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="domrte" name="domrte" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="newrte" name="newrte" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="banrte" name="banrte" class="form-control text-center input-sm" placeholder="Valor Banco" required>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="difrte" name="difrte" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
+                                    <input type="text" id="upddif" name="upddif" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
                                 </div>
                             </div>
                             <div class="col-2 text-center">
                                 <div class="input-group mb-3">
-                                    <input type="text" id="bdiva" name="bdiva" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteiva']) ?>" readonly>
+                                    <input type="text" id="updbdrte" name="updbdrte" class="form-control text-center input-sm" readonly>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="domiva" name="domiva" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                                    <input type="text" id="upddomrte" name="upddomrte" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="newiva" name="newiva" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
+                                    <input type="text" id="updnewrte" name="updnewrte" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="baniva" name="baniva" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                                    <input type="text" id="updbanrte" name="updbanrte" class="form-control text-center input-sm" placeholder="Valor Banco" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="difiva" name="difiva" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2 text-center">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="bdica" name="bdica" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteica']) ?>" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="domica" name="domica" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="newica" name="newica" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="banica" name="banica" class="form-control text-center input-sm" placeholder="Valor Banco" required>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="difica" name="difica" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
+                                    <input type="text" id="upddifrte" name="upddifrte" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
                                 </div>
                             </div>
                             <div class="col-2 text-center">
                                 <div class="input-group mb-3">
-                                    <input type="text" id="bdcom" name="bdcom" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['comision']) ?>" readonly>
+                                    <input type="text" id="updbdiva" name="updbdiva" class="form-control text-center input-sm" readonly>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="domcom" name="domcom" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                                    <input type="text" id="upddomiva" name="upddomiva" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="newcom" name="newcom" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
+                                    <input type="text" id="updnewiva" name="updnewiva" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="bancom" name="bancom" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                                    <input type="text" id="updbaniva" name="updbaniva" class="form-control text-center input-sm" placeholder="Valor Banco" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" id="difcom" name="difcom" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
+                                    <input type="text" id="upddifiva" name="upddifiva" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="updbdica" name="updbdica" class="form-control text-center input-sm" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="upddomica" name="upddomica" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="updnewica" name="updnewica" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="updbanica" name="updbanica" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="upddifica" name="upddifica" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="updbdcom" name="updbdcom" class="form-control text-center input-sm" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="upddomcom" name="upddomcom" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="updnewcom" name="updnewcom" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="updbancom" name="updbancom" class="form-control text-center input-sm" placeholder="Valor Banco" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" id="upddifcom" name="upddifcom" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
                                 </div>
                             </div>
                         </div>
@@ -153,13 +154,13 @@
                             </div>
                             <div class="col-6 text-center">
                                 <div class="input-group mb-3">
-                                    <input type="text" id="resdif" name="resdif" class="form-control text-center input-sm" placeholder="Total Diferencia" readonly>
+                                    <input type="text" id="updresdif" name="updresdif" class="form-control text-center input-sm" placeholder="Total Diferencia" readonly>
                                 </div>
                             </div>
                         </div>
                     </fieldset>
                     <div class="card-footer text-center">
-                        <button type="button" onclick="calcular()" class="btn btn-primary">Calcular</button>
+                        <button type="button" onclick="uptcalcular()" class="btn btn-primary">Calcular</button>
                         <button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </div>

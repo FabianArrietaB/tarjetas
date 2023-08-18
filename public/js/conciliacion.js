@@ -68,3 +68,29 @@ function infmes(){
     //console.log(mes)
     //console.log(sede)
 }
+
+function detalleconciliacion(idconciliacion){
+    $.ajax({
+        type: "POST",
+        data: "idconciliacion=" + idconciliacion,
+        url: "../controller/registros/detalleconciliacion.php",
+        success: function(respuesta){
+            respuesta = jQuery.parseJSON(respuesta);
+            //console.log(respuesta)
+            $('#idregistro').val(respuesta['idregistro']);
+            $('#tiptaru').val(respuesta['tiptar']);
+            $('#idtiptaru').val(respuesta['idtipcuenta']);
+            $('#portaru').val(respuesta['portar']);
+            $('#ticketu').val(respuesta['ticket']);
+            $('#valoru').val(respuesta['valor']);
+            $('#ivau').val(respuesta['iva']);
+            $('#netou').val(respuesta['neto']);
+            $('#retfueu').val(respuesta['retfte']);
+            $('#retivau').val(respuesta['rteiva']);
+            $('#reticau').val(respuesta['rteica']);
+            $('#comisiu').val(respuesta['comision']);
+            $('#bancou').val(respuesta['banco']);
+            $('#diferenciau').val(respuesta['difer']);
+        }
+    });
+}
