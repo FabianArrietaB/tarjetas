@@ -78,9 +78,10 @@ function detalleconciliacion(idconciliacion){
             respuesta = jQuery.parseJSON(respuesta);
             //console.log(respuesta)
             $('#idconciliacion').val(respuesta['idconciliacion']);
-            $('#tiptaru').val(respuesta['idoperador']);
-            $('#idtiptaru').val(respuesta['idsede']);
-            $('#portaru').val(respuesta['franquisia']);
+            $('#idoperador').val(respuesta['idoperador']);
+            $('#idsede').val(respuesta['idsede']);
+            $('#updsede').val(respuesta['sede']);
+            $('#updfranquicia').val(respuesta['franquicia']);
             $('#updnewdif').val(respuesta['difnew']);
             $('#updbandif').val(respuesta['difban']);
             $('#updnewrte').val(respuesta['rtftnew']);

@@ -8,7 +8,25 @@
                 </div>
                 <div class="modal-body">
                     <fieldset class="group-border">
-                        <legend class="group-border text-center"><b>CONCILIACION</b> </legend>
+                        <legend class="group-border text-center"><b>INFORMACION</b> </legend>
+                        <div class="row student text-center">
+                            <div class="col-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">SEDE | FRANQUICIA</span>
+                                    <input id="updsede" name="updsede" type="text" class="form-control text-center input-sm" readonly>
+                                    <input id="updfranquicia" name="updfranquicia" type="text" class="form-control text-center input-sm" readonly>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="updresdif" name="updresdif" class="form-control text-center input-sm" placeholder="Total Diferencia" readonly>
+                                    <span class="input-group-text" id="inputGroup-sizing-default">RESULTADO DIFERENCIA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="group-border">
+                        <legend class="group-border text-center"><b>VALORES CONCILIACION</b> </legend>
                         <div class="row student text-center">
                             <input hidden type="text" class="form-control" name="idconciliacion" id="idconciliacion" placeholder="">
                             <div class="col-2 text-center">
@@ -110,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row student text-center">
+                        <!-- <div class="row student text-center">
                             <div class="col-6 text-center">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control text-center input-sm" value="RESULTADO DIFERENCIA" readonly>
@@ -121,11 +139,11 @@
                                     <input type="text" id="updresdif" name="updresdif" class="form-control text-center input-sm" placeholder="Total Diferencia" readonly>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </fieldset>
                     <div class="card-footer text-center">
                         <button type="button" onclick="uptcalcular()" class="btn btn-primary">Calcular</button>
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
                     </div>
                 </div>
             </div>

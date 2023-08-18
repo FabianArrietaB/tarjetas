@@ -231,7 +231,8 @@
             c.id_conciliacion idconciliacion,
             c.id_operador idoperador,
             c.id_sede idsede,
-            c.con_franquisia franquisia,
+            s.sed_nombre sede,
+            c.con_franquisia franquicia,
             c.con_difenuevo difnew,
             c.con_difebanco difban,
             c.con_rteftenew rtftnew,
@@ -244,6 +245,7 @@
             c.con_comisiban conban,
             c.con_fecconcil fecha
             FROM conciliacion AS c
+            INNER JOIN sedes AS s ON s.id_sede = c.id_sede
             WHERE c.id_conciliacion = '$idconciliacion'";
             $respuesta = mysqli_query($conexion,$sql);
             $registro = mysqli_fetch_array($respuesta);
@@ -251,7 +253,8 @@
                 'idconciliacion' => $registro['idconciliacion'],
                 'idoperador' => $registro['idoperador'],
                 'idsede' => $registro['idsede'],
-                'franquisia' => $registro['franquisia'],
+                'sede' => $registro['sede'],
+                'franquicia' => $registro['franquicia'],
                 'difnew' => $registro['difnew'],
                 'difban' => $registro['difban'],
                 'rtftnew' => $registro['rtftnew'],
@@ -284,7 +287,7 @@
                                         WHERE id_conciliacion = ?";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
-            $query->bind_param('issssssssssi',
+            $query->bind_param('isssssssssssi',
                                 $datos['idoperador'],
                                 $datos['updnewdif'],
                                 $datos['updbandif'],
