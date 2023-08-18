@@ -28,7 +28,7 @@
     $idusuario = $_SESSION['usuario']['id'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-        c.con_franquicia as franquisia,
+        c.con_franquicia as franquicia,
         SUM(c.con_difenuevo)  as newdiferen,
         SUM(c.con_rteftenew)  as newretfuen,
         SUM(c.con_rteivanew)  as newreteiva,
@@ -43,15 +43,15 @@
     FROM conciliacion AS c
     WHERE c.id_sede = '$sede' AND c.con_fecconcil BETWEEN '$desde' AND '$hasta'";
     if($master != ""){
-        $sqldiferencia .=" AND c.con_franquisia = '$master'";
+        $sqldiferencia .=" AND c.con_franquicia = '$master'";
     }
     if($visa != ""){
-        $sqldiferencia .=" OR c.con_franquisia = '$visa'";
+        $sqldiferencia .=" OR c.con_franquicia = '$visa'";
     }
     if($davi != ""){
-        $sqldiferencia .=" OR c.con_franquisia = '$davi'";
+        $sqldiferencia .=" OR c.con_franquicia = '$davi'";
     }
-    $sqldiferencia .="GROUP BY c.con_franquisia";
+    $sqldiferencia .="GROUP BY c.con_franquicia";
     $query = mysqli_query($conexion, $sqldiferencia);
     $mes =  substr($desde,5,2);
     if ($mes == 1) {
@@ -95,7 +95,7 @@
                     $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['precio'];
-                    echo $precio;
+                    echo '$ ' . number_format($precio);
                 ?>
                 ">
             </div>
@@ -109,21 +109,41 @@
                 <span class="input-group-text" id="inputGroup-sizing-default">Total General</span>
                 <input type="text" class="form-control" tabindex="2" maxlength="10" size="20" value="
                 <?php
-                    if($master !="" && $visa ="" && $davi == "" ){
+                    if($master != "" && $visa == "" && $davi == ""){
                         $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia = '$master'");
                         $data = mysqli_fetch_array($sql);
                         $precio = $data['precio'];
-                        echo $precio;
+                        echo '$ ' . number_format($precio);
+                    } else if ($master == "" && $visa !="" && $davi == "" ){
+                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia = '$visa'");
+                        $data = mysqli_fetch_array($sql);
+                        $precio = $data['precio'];
+                        echo '$ ' . number_format($precio);
+                    } else if ($master == "" && $visa == "" && $davi != "" ){
+                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia = '$davi'");
+                        $data = mysqli_fetch_array($sql);
+                        $precio = $data['precio'];
+                        echo '$ ' . number_format($precio);
                     } else if ($master !="" && $visa !="" && $davi == "" ){
                         $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$master', '$visa')");
                         $data = mysqli_fetch_array($sql);
                         $precio = $data['precio'];
-                        echo $precio;
+                        echo '$ ' . number_format($precio);
+                    } else if ($master !="" && $visa == "" && $davi != "" ){
+                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$master', '$davi')");
+                        $data = mysqli_fetch_array($sql);
+                        $precio = $data['precio'];
+                        echo '$ ' . number_format($precio);
+                    } else if ($master == "" && $visa != "" && $davi != "" ){
+                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$visa', '$davi')");
+                        $data = mysqli_fetch_array($sql);
+                        $precio = $data['precio'];
+                        echo '$ ' . number_format($precio);
                     } else if ($master !="" && $visa !="" && $davi != "" ){
                         $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$master', '$visa', '$davi')");
                         $data = mysqli_fetch_array($sql);
                         $precio = $data['precio'];
-                        echo $precio;
+                        echo '$ ' . number_format($precio);
                     }
                 ?>
                 ">
@@ -154,7 +174,7 @@
             $diferenciarteica = 0;
             $diferenciacomisi = 0;
             while ($valor = mysqli_fetch_array($query)){
-                if ($tipo_tarjeta != $valor['franquisia']) {
+                if ($tipo_tarjeta != $valor['franquicia']) {
                     if ($tipo_tarjeta != '') { ?>
                             <tr>
                                 <td class="table-info"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
@@ -180,7 +200,7 @@
                             $diferenciarteica = 0;
                             $diferenciacomisi = 0;
                     }
-                        $tipo_tarjeta = $valor['franquisia'];
+                        $tipo_tarjeta = $valor['franquicia'];
                 }
                             $diferencia = $valor['bandiferen'] - $valor['newdiferen'];
                             $diferenciafte = $valor['banrtefte'] - $valor['newretfuen'];
@@ -190,7 +210,7 @@
                             $total = $valor['newdiferen'];
                         ?>
                         <tr>
-                            <td class="bg--light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquisia'];?></b></td>
+                            <td class="bg--light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquicia'];?></b></td>
                             <td><?php echo '$ ' . number_format(round($valor['newdiferen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newretfuen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newreteiva']));?></td>
@@ -198,7 +218,7 @@
                             <td><?php echo '$ ' . number_format(round($valor['newcomisio']));?></td>
                         </tr>
                         <tr>
-                            <td class="bg--light" ><b><?php echo 'VALOR BANCO ' . $valor['franquisia'];?></b></td>
+                            <td class="bg--light" ><b><?php echo 'VALOR BANCO ' . $valor['franquicia'];?></b></td>
                             <td><?php echo '$ ' . number_format(round($valor['bandiferen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['banrtefte']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['banrteiva']));?></td>
