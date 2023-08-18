@@ -78,9 +78,9 @@ function infmes(){
     // console.log(desde)
     // console.log(hasta)
     // console.log(sede)
-    console.log(master)
-    console.log(visa)
-    console.log(davi)
+    //console.log(master)
+    //console.log(visa)
+    //console.log(davi)
 }
 
 function detalleconciliacion(idconciliacion){

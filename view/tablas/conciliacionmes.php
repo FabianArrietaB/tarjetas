@@ -82,7 +82,18 @@
 ?>
 <!-- inicio Tabla -->
 <?php if($mes != "" && $sede !="") { ?>
-<legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
+<div class="row">
+    <div class="col-9">
+        <legend  class="group-border"><b>CONCILIACION MES <?php echo $nommes ?></b> </legend>
+    </div>
+    <div class="col-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Total General</span>
+            <input type="text" class="form-control" value="" readonly>
+        </div>
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table table-primary text-center">
         <thead>
@@ -98,6 +109,7 @@
         <tbody class="table-light">
         <?php
             $tipo_tarjeta = '';
+            $total = 0;
             $diferencia = 0;
             $diferenciafte = 0;
             $diferenciarteiva = 0;
@@ -123,6 +135,7 @@
                                 <td class="bg-primary" style="color:#fff"></td>
                             </tr>
                         <?php
+                            $total = 0;
                             $diferencia = 0;
                             $diferenciafte = 0;
                             $diferenciarteiva = 0;
@@ -136,6 +149,7 @@
                             $diferenciarteiva = $valor['banrteiva'] - $valor['newreteiva'];
                             $diferenciarteica = $valor['banretecia'] - $valor['newreteica'];
                             $diferenciacomisi = $valor['bancomisi'] - $valor['newcomisio'];
+                            $total = $valor['newdiferen'];
                         ?>
                         <tr>
                             <td class="bg--light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquisia'];?></b></td>
