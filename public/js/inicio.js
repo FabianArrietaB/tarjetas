@@ -287,6 +287,7 @@ function calcular() {
         var difica = newica - banica;
         var newcom = bdcom + domcom;
         var difcom = newcom - bancom;
+        var resdif = difrte + difiva + difica + difcom - dif
         document.getElementById("newdif").value = newdif;
         document.getElementById("dif").value = dif;
         document.getElementById("newrte").value = newrte;
@@ -297,6 +298,15 @@ function calcular() {
         document.getElementById("difica").value = difica;
         document.getElementById("newcom").value = newcom;
         document.getElementById("difcom").value = difcom;
+        document.getElementById("resdif").value = resdif;
+
+        if (resdif < 0 ){
+            $("#resdif").css("background","red")
+         } else if (resdif >0) {
+            $("#resdif").css("background","yellow")
+         } else {
+            $("#resdif").css("background","green")
+         }
     }
 }
 

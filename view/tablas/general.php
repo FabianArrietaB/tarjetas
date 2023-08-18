@@ -60,6 +60,38 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
             <div class="row student text-center">
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="SECCIONES" readonly>
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="SUMA DIFERENCIA" readonly>
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA RETEFUENTE" readonly>
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA RETEIVA" readonly>
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA RETEICA" readonly>
+                    </div>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA COMISION" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row student text-center">
+                <div class="col-2 text-center">
+                    <div class="input-group mb-3">
                         <input type="text" class="form-control text-center input-sm" value="DATO REGISTRADO" readonly>
                     </div>
                     <div class="input-group mb-3">
@@ -100,13 +132,13 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="domrte" name="domrte" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="newrte" name="newrte" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                        <input type="text" id="newrte" name="newrte" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="banrte" name="banrte" class="form-control text-center input-sm" placeholder="Valor Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difrte" name="difrte" class="form-control text-center input-sm" placeholder="Diferencia" >
+                        <input type="text" id="difrte" name="difrte" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
                     </div>
                 </div>
                 <div class="col-2 text-center">
@@ -117,13 +149,13 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="domiva" name="domiva" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="newiva" name="newiva" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                        <input type="text" id="newiva" name="newiva" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="baniva" name="baniva" class="form-control text-center input-sm" placeholder="Valor Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difiva" name="difiva" class="form-control text-center input-sm" placeholder="Diferencia" >
+                        <input type="text" id="difiva" name="difiva" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
                     </div>
                 </div>
                 <div class="col-2 text-center">
@@ -134,13 +166,13 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="domica" name="domica" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="newica" name="newica" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                        <input type="text" id="newica" name="newica" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="banica" name="banica" class="form-control text-center input-sm" placeholder="Valor Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difica" name="difica" class="form-control text-center input-sm" placeholder="Diferencia" >
+                        <input type="text" id="difica" name="difica" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
                     </div>
                 </div>
                 <div class="col-2 text-center">
@@ -151,13 +183,25 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="domcom" name="domcom" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="newcom" name="newcom" class="form-control text-center input-sm" placeholder="Nuevo Valor" >
+                        <input type="text" id="newcom" name="newcom" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="bancom" name="bancom" class="form-control text-center input-sm" placeholder="Valor Banco" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="difcom" name="difcom" class="form-control text-center input-sm" placeholder="Diferencia" >
+                        <input type="text" id="difcom" name="difcom" class="form-control text-center input-sm" placeholder="Diferencia" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row student text-center">
+                <div class="col-6 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-center input-sm" value="RESULTADO DIFERENCIA" readonly>
+                    </div>
+                </div>
+                <div class="col-6 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" id="resdif" name="resdif" class="form-control text-center input-sm" placeholder="Total Diferencia" readonly>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if ($_SESSION['usuario']['rol'] == 4) {
+    if ($_SESSION['usuario']['rol'] == 4 || $_SESSION['usuario']['rol'] == 2) {
     include "../../model/conexion.php";
     $hoy = date("Y-m-d");
     if(isset($_GET['date'])){

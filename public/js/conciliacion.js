@@ -21,6 +21,7 @@ $(document).ready(function(){
 function ocultarsecciondes(){
     $('#tablaconciliaciondia').hide();
     $('#tablaconciliacionmes').hide();
+    $('#tablaconciliaciongeneral').hide();
     return false;
 }
 

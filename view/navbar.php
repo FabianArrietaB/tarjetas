@@ -17,12 +17,18 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="registros.php">REGISTROS</a>
                     </li>
+					 <li class="nav-item">
+                        <a class="nav-link active" href="conciliacion.php">CONCILIACION</a>
+                    </li>
                     <?php } else if ($_SESSION['usuario']['rol'] == 2) { ?>
                     <li class="nav-item">
                         <a class="nav-link active" href="inicio.php">INICIO</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="consultas.php">GENERAL</a>
+                    </li>
+					 <li class="nav-item">
+                        <a class="nav-link active" href="conciliacion.php">CONCILIACION</a>
                     </li>
                     <?php } else if ($_SESSION['usuario']['rol'] == 4) { ?>
                     <li class="nav-item">

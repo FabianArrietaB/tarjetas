@@ -38,8 +38,8 @@
                             <span class="input-group-text" id="inputGroup-sizing-default">Operador</span>
                             <select name="sede" id="sede" class="form-control input-sm" require>
                                 <option value="">Seleccione Sede</option>
-                                <option value="1">METROPOLIS</option>
                                 <option value="2">FERRECASAS</option>
+                                <option value="3">METROPOLIS</option>
                                 <option value="4">MAYORISTA</option>
 							</select>
                         </div>
