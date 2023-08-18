@@ -1,6 +1,6 @@
 <form id="updfrmeditdiferencia" method="post" onsubmit="return editarconcilacion()">
     <div class="modal fade" id="editconciliacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-xxl-down" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="updexampleModalLabel">Editar Registro</h5>
@@ -45,12 +45,6 @@
                         <div class="row student text-center">
                             <div class="col-2 text-center">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control text-center input-sm" value="DATO REGISTRADO" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control text-center input-sm" value="VALOR DOMICILIO" readonly>
-                                </div>
-                                <div class="input-group mb-3">
                                     <input type="text" class="form-control text-center input-sm" value="NUEVO VALOR" readonly>
                                 </div>
                                 <div class="input-group mb-3">
@@ -61,12 +55,6 @@
                                 </div>
                             </div>
                             <div class="col-2 text-center">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="updbddif" name="updbddif" class="form-control text-center input-sm" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="upddomdif" name="upddomdif" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
-                                </div>
                                 <div class="input-group mb-3">
                                     <input type="text" id="updnewdif" name="updnewdif" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
@@ -79,12 +67,6 @@
                             </div>
                             <div class="col-2 text-center">
                                 <div class="input-group mb-3">
-                                    <input type="text" id="updbdrte" name="updbdrte" class="form-control text-center input-sm" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="upddomrte" name="upddomrte" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
-                                </div>
-                                <div class="input-group mb-3">
                                     <input type="text" id="updnewrte" name="updnewrte" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
                                 <div class="input-group mb-3">
@@ -95,12 +77,6 @@
                                 </div>
                             </div>
                             <div class="col-2 text-center">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="updbdiva" name="updbdiva" class="form-control text-center input-sm" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="upddomiva" name="upddomiva" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
-                                </div>
                                 <div class="input-group mb-3">
                                     <input type="text" id="updnewiva" name="updnewiva" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
@@ -113,12 +89,6 @@
                             </div>
                             <div class="col-2 text-center">
                                 <div class="input-group mb-3">
-                                    <input type="text" id="updbdica" name="updbdica" class="form-control text-center input-sm" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="upddomica" name="upddomica" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
-                                </div>
-                                <div class="input-group mb-3">
                                     <input type="text" id="updnewica" name="updnewica" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
                                 <div class="input-group mb-3">
@@ -129,12 +99,6 @@
                                 </div>
                             </div>
                             <div class="col-2 text-center">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="updbdcom" name="updbdcom" class="form-control text-center input-sm" readonly>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input type="text" id="upddomcom" name="upddomcom" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
-                                </div>
                                 <div class="input-group mb-3">
                                     <input type="text" id="updnewcom" name="updnewcom" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
                                 </div>
