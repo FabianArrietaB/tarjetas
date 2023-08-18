@@ -96,6 +96,36 @@ function detalleconciliacion(idconciliacion){
     });
 }
 
+function editarconcilacion(){
+    $.ajax({
+        type: "POST",
+        data: $('#updfrmeditdiferencia').serialize(),
+        url: "../controller/registros/editarconciliacion.php",
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                $('#editconciliacion').modal('hide');
+                $('#tablalistaconciliaciones').load('tablas/listaconciliacion.php');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro Actualizado Exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al Editar!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    });
+    return false;
+}
+
 //CALCULAR DIFERENCIAS VS BANCOS
 function uptcalcular() {
     var updnewdif = parseInt(document.getElementById("updnewdif").value);
@@ -114,7 +144,7 @@ function uptcalcular() {
         var upddifiva = updnewiva - updbaniva;
         var upddifica = updnewica - updbanica;
         var upddifcom = updnewcom - updbancom;
-        var updresdif = upddifrte + upddifiva + upddifica + upddifcom - upddif
+        var updresdif = upddif - upddifrte + upddifiva + upddifica + upddifcom
         document.getElementById("upddif").value = upddif;
         document.getElementById("upddifrte").value = upddifrte;
         document.getElementById("upddifiva").value = upddifiva;

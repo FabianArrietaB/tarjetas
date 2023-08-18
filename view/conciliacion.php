@@ -18,7 +18,7 @@
                     <div class="title">
                         <h2>RESUMEN CONCILIACION</h2>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
                             <select name="fecha" id="fecha" class="form-control input-sm" require>
@@ -72,7 +72,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-2 aling-items-center">
+                    <div class="col-3 aling-items-center">
                         <div class="input-group input-group-sm">
                             <div class="d-grid gap-1 d-md-block">
                                 <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()">

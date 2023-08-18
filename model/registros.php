@@ -243,6 +243,7 @@
             c.con_comisinew connew,
             c.con_comisiban conban,
             c.con_fecconcil fecha
+            FROM conciliacion AS c
             WHERE c.id_conciliacion = '$idconciliacion'";
             $respuesta = mysqli_query($conexion,$sql);
             $registro = mysqli_fetch_array($respuesta);
@@ -253,6 +254,7 @@
                 'franquisia' => $registro['franquisia'],
                 'difnew' => $registro['difnew'],
                 'difban' => $registro['difban'],
+                'rtftnew' => $registro['rtftnew'],
                 'rtftban' => $registro['rtftban'],
                 'rtivanew' => $registro['rtivanew'],
                 'rtivaban' => $registro['rtivaban'],
@@ -263,6 +265,42 @@
                 'fecha' => $registro['fecha'],
             );
             return $datos;
+        }
+
+        public function editarconcilacion($datos){
+            $conexion = Conexion::conectar();
+            $sql = "UPDATE conciliacion SET id_operador = ?,
+                                        con_difenuevo = ?,
+                                        con_difebanco = ?,
+                                        con_rteftenew = ?,
+                                        con_rtefteban = ?,
+                                        con_rteivanew = ?,
+                                        con_rteivaban = ?,
+                                        con_rteicanew = ?,
+                                        con_rteicaban = ?,
+                                        con_comisinew = ?,
+                                        con_comisiban = ?,
+                                        con_fecupt = ?
+                                        WHERE id_conciliacion = ?";
+            $query = $conexion->prepare($sql);
+            $fecha = date("Y-m-d");
+            $query->bind_param('issssssssssi',
+                                $datos['idoperador'],
+                                $datos['updnewdif'],
+                                $datos['updbandif'],
+                                $datos['updnewrte'],
+                                $datos['updbanrte'],
+                                $datos['updnewiva'],
+                                $datos['updbaniva'],
+                                $datos['updnewica'],
+                                $datos['updbanica'],
+                                $datos['updnewcom'],
+                                $datos['updbancom'],
+                                $fecha,
+                                $datos['idconciliacion']);
+            $respuesta = $query->execute();
+            $query->close();
+            return $respuesta;
         }
     }
 ?>

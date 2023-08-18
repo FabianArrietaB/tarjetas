@@ -287,7 +287,7 @@ function calcular() {
         var difica = newica - banica;
         var newcom = bdcom + domcom;
         var difcom = newcom - bancom;
-        var resdif = difrte + difiva + difica + difcom - dif
+        var resdif = dif - difrte + difiva + difica + difcom
         document.getElementById("newdif").value = newdif;
         document.getElementById("dif").value = dif;
         document.getElementById("newrte").value = newrte;

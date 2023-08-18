@@ -7,12 +7,14 @@
     //CONSULTA RESUMEN
     $sqlunico = "SELECT
         c.id_conciliacion AS idconciliacion,
+        s.sed_nombre AS sede,
         c.id_operador    AS idoperador,
         u.user_nombre    AS nombre,
         c.con_franquisia AS franquisia,
         c.con_fecconcil  AS fechaconci
     FROM conciliacion AS c
-    INNER JOIN usuarios AS u ON u.id_usuario = c.id_operador";
+    INNER JOIN usuarios AS u ON u.id_usuario = c.id_operador
+    INNER JOIN sedes AS s ON s.id_sede = c.id_sede";
     $rwunico = mysqli_query($conexion, $sqlunico);
 ?>
 <!-- inicio Tabla -->
@@ -23,6 +25,7 @@
             <tr>
                 <th scope="col" >FECHA CONCILIACION</th>
                 <th scope="col" >FRANQUISIA</th>
+                <th scope="col" >SEDE</th>
                 <th scope="col" >OPERADOR</th>
                 <th>
 
@@ -35,6 +38,7 @@
                         <tr>
                             <td><?php echo $valor['fechaconci'];?></td>
                             <td><?php echo $valor['franquisia'];?></td>
+                            <td><?php echo $valor['sede'];?></td>
                             <td><?php echo $valor['nombre'];?></td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconciliacion" onclick="detalleconciliacion('<?php echo $valor['idconciliacion']?>')"><i class="fa-solid fa-pen-to-square fa-beat fa-xl"></i></button>
