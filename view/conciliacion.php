@@ -78,6 +78,7 @@
                                 <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()">
                                 <input value="MES" id="conmes" class="btn btn-success" type="button" onclick="infmes()">
                                 <input value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
+                                <input value="LISTA" id="listcon" class="btn btn-primary" type="button">
                             </div>
                         </div>
                     </div>
@@ -88,6 +89,7 @@
                     <div id="tablaconciliaciongeneral"></div>
                     <div id="tablaconciliaciondia"></div>
                     <div id="tablaconciliacionmes"></div>
+                    <div id="tablalistaconciliaciones"></div>
                 </div>
             </div>
         </div>
@@ -96,7 +98,9 @@
 <!-- fin del contenido principal -->
 <!-- por ultimo se carga el footer -->
 <?php
+    include "tablas/editconciliacion.php";
     include "footer.php";
+
 ?>
 <!-- carga ficheros javascript -->
 <script src="../public/js/conciliacion.js"></script>

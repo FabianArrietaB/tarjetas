@@ -67,6 +67,14 @@ if ($mes = 7) {
                                 <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
                                 <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
                             </tr>
+                            <tr>
+                                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                                <td class="bg-primary" style="color:#fff"></td>
+                                <td class="bg-primary" style="color:#fff"></td>
+                                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
+                                <td class="bg-primary" style="color:#fff"></td>
+                                <td class="bg-primary" style="color:#fff"></td>
+                            </tr>
                         <?php
                             $diferencia = 0;
                             $diferenciafte = 0;
@@ -114,6 +122,14 @@ if ($mes = 7) {
                 <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
                 <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
                 <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+            </tr>
+            <tr>
+                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                <td class="bg-primary" style="color:#fff"></td>
+                <td class="bg-primary" style="color:#fff"></td>
+                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
+                <td class="bg-primary" style="color:#fff"></td>
+                <td class="bg-primary" style="color:#fff"></td>
             </tr>
         </tbody>
     </table>

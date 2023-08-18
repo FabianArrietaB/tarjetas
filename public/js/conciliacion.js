@@ -16,12 +16,19 @@ $(document).ready(function(){
         $('#tablaconciliacionmes').load('tablas/conciliacionmes.php');
         $('#tablaconciliacionmes').show();
     });
+
+    $('#listcon').click(function(){
+        ocultarsecciondes();
+        $('#tablalistaconciliaciones').load('tablas/listaconciliacion.php');
+        $('#tablalistaconciliaciones').show();
+    });
 });
 
 function ocultarsecciondes(){
     $('#tablaconciliaciondia').hide();
     $('#tablaconciliacionmes').hide();
     $('#tablaconciliaciongeneral').hide();
+    $('#tablalistaconciliaciones').hide();
     return false;
 }
 

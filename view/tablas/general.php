@@ -70,22 +70,22 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA RETEFUENTE" readonly>
+                        <input type="text" class="form-control text-center input-sm" value="SUMA RETEFUENTE" readonly>
                     </div>
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA RETEIVA" readonly>
+                        <input type="text" class="form-control text-center input-sm" value="SUMA RETEIVA" readonly>
                     </div>
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA RETEICA" readonly>
+                        <input type="text" class="form-control text-center input-sm" value="SUMA RETEICA" readonly>
                     </div>
                 </div>
                 <div class="col-2 text-center">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control text-center input-sm" placeholder="SUMA COMISION" readonly>
+                        <input type="text" class="form-control text-center input-sm" value="SUMA COMISION" readonly>
                     </div>
                 </div>
             </div>
