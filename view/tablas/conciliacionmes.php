@@ -42,14 +42,18 @@
         c.con_fecconcil  as fechaconci
     FROM conciliacion AS c
     WHERE c.id_sede = '$sede' AND c.con_fecconcil BETWEEN '$desde' AND '$hasta'";
-    if($master != ""){
+    if($master != "" && $visa == "" && $davi == ""){
         $sqldiferencia .=" AND c.con_franquicia = '$master'";
-    }
-    if($visa != ""){
-        $sqldiferencia .=" OR c.con_franquicia = '$visa'";
-    }
-    if($davi != ""){
-        $sqldiferencia .=" OR c.con_franquicia = '$davi'";
+    } else if ($master == "" && $visa !="" && $davi == "" ){
+        $sqldiferencia .=" AND c.con_franquicia = '$visa'";
+    } else if ($master == "" && $visa == "" && $davi != "" ){
+        $sqldiferencia .=" AND c.con_franquicia = '$davi'";
+    } else if ($master !="" && $visa !="" && $davi == "" ){
+        $sqldiferencia .=" AND c.con_franquicia IN ('$master', '$visa')";
+    } else if ($master !="" && $visa == "" && $davi != "" ){
+        $sqldiferencia .=" AND c.con_franquicia IN ('$master', '$davi')";
+    } else if ($master == "" && $visa != "" && $davi != "" ){
+        $sqldiferencia .=" AND c.con_franquicia IN ('$davi', '$visa')";
     }
     $sqldiferencia .="GROUP BY c.con_franquicia";
     $query = mysqli_query($conexion, $sqldiferencia);
@@ -136,11 +140,6 @@
                         echo '$ ' . number_format($precio);
                     } else if ($master == "" && $visa != "" && $davi != "" ){
                         $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$visa', '$davi')");
-                        $data = mysqli_fetch_array($sql);
-                        $precio = $data['precio'];
-                        echo '$ ' . number_format($precio);
-                    } else if ($master !="" && $visa !="" && $davi != "" ){
-                        $sql=$conexion->query("SELECT ROUND(SUM(con_difenuevo)) AS 'precio' FROM conciliacion WHERE id_sede = '$sede' AND con_fecconcil BETWEEN '$desde' AND '$hasta' AND con_franquicia IN('$master', '$visa', '$davi')");
                         $data = mysqli_fetch_array($sql);
                         $precio = $data['precio'];
                         echo '$ ' . number_format($precio);

@@ -28,7 +28,7 @@
     $idusuario = $_SESSION['usuario']['id'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-        c.con_franquicia AS franquisia,
+        c.con_franquicia AS franquicia,
         c.con_difenuevo  AS newdiferen,
         c.con_rteftenew  AS newretfuen,
         c.con_rteivanew  AS newreteiva,
@@ -42,17 +42,18 @@
         c.con_fecconcil  AS fechaconci
     FROM conciliacion AS c
     WHERE c.id_sede = '$sede'";
-    if($desde != "" && $hasta != ""){
-        $sqldiferencia .=" AND c.con_fecconcil BETWEEN '$desde' AND '$hasta'";
-    }
-    if($master != ""){
-        $sqldiferencia .=" AND c.con_franquisia = '$master'";
-    }
-    if($visa != ""){
-        $sqldiferencia .=" OR c.con_franquisia = '$visa'";
-    }
-    if($davi != ""){
-        $sqldiferencia .=" OR c.con_franquisia = '$davi'";
+    if($master != "" && $visa == "" && $davi == ""){
+    $sqldiferencia .=" AND c.con_franquicia = '$master'";
+    } else if ($master == "" && $visa !="" && $davi == "" ){
+        $sqldiferencia .=" AND c.con_franquicia = '$visa'";
+    } else if ($master == "" && $visa == "" && $davi != "" ){
+        $sqldiferencia .=" AND c.con_franquicia = '$davi'";
+    } else if ($master !="" && $visa !="" && $davi == "" ){
+        $sqldiferencia .=" AND c.con_franquicia IN ('$master', '$visa')";
+    } else if ($master !="" && $visa == "" && $davi != "" ){
+        $sqldiferencia .=" AND c.con_franquicia IN ('$master', '$davi')";
+    } else if ($master == "" && $visa != "" && $davi != "" ){
+        $sqldiferencia .=" AND c.con_franquicia IN ('$davi', '$visa')";
     }
 $query = mysqli_query($conexion, $sqldiferencia);
 ?>
@@ -63,7 +64,7 @@ $query = mysqli_query($conexion, $sqldiferencia);
     <table class="table table-primary text-center">
         <thead>
             <tr>
-                <th scope="col" >FRANQUISIA</th>
+                <th scope="col" >FRANQUICIA</th>
                 <th scope="col" >Total Diferencia</th>
                 <th scope="col" >Total ReteFuente</th>
                 <th scope="col" >Total ReteIva</th>
@@ -80,7 +81,7 @@ $query = mysqli_query($conexion, $sqldiferencia);
             $diferenciarteica = 0;
             $diferenciacomisi = 0;
             while ($valor = mysqli_fetch_array($query)){
-                if ($tipo_tarjeta != $valor['franquisia']) {
+                if ($tipo_tarjeta != $valor['franquicia']) {
                     if ($tipo_tarjeta != '') { ?>
                         <?php
                             $diferencia = 0;
@@ -89,7 +90,7 @@ $query = mysqli_query($conexion, $sqldiferencia);
                             $diferenciarteica = 0;
                             $diferenciacomisi = 0;
                     }
-                        $tipo_tarjeta = $valor['franquisia'];
+                        $tipo_tarjeta = $valor['franquicia'];
                 }
                             $diferencia = $valor['bandiferen'] - $valor['newdiferen'];
                             $diferenciafte = $valor['banrtefte'] - $valor['newretfuen'];
@@ -106,7 +107,7 @@ $query = mysqli_query($conexion, $sqldiferencia);
                             <td class="bg-danger" style="color:#fff"></td>
                         </tr>
                         <tr>
-                            <td class="bg-light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquisia'];?></b></td>
+                            <td class="bg-light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquicia'];?></b></td>
                             <td><?php echo '$ ' . number_format(round($valor['newdiferen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newretfuen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newreteiva']));?></td>
@@ -114,7 +115,7 @@ $query = mysqli_query($conexion, $sqldiferencia);
                             <td><?php echo '$ ' . number_format(round($valor['newcomisio']));?></td>
                         </tr>
                         <tr>
-                            <td class="bg--light" ><b><?php echo 'VALOR BANCO ' . $valor['franquisia'];?></b></td>
+                            <td class="bg--light" ><b><?php echo 'VALOR BANCO ' . $valor['franquicia'];?></b></td>
                             <td><?php echo '$ ' . number_format(round($valor['bandiferen']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['banrtefte']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['banrteiva']));?></td>
