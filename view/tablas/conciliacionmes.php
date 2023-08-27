@@ -184,12 +184,12 @@
                                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
                             </tr>
                             <tr>
-                                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                                <td class="bg-primary" style="color:#fff"></td>
-                                <td class="bg-primary" style="color:#fff"></td>
-                                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
-                                <td class="bg-primary" style="color:#fff"></td>
-                                <td class="bg-primary" style="color:#fff"></td>
+                                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi + $diferencia)) ?></b></td>
+                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                             </tr>
                         <?php
                             $total = 0;
@@ -234,12 +234,12 @@
                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
             </tr>
             <tr>
-                <td class="bg-primary" style="color:#fff"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                <td class="bg-primary" style="color:#fff"></td>
-                <td class="bg-primary" style="color:#fff"></td>
-                <td class="bg-primary" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi - $diferencia)) ?></b></td>
-                <td class="bg-primary" style="color:#fff"></td>
-                <td class="bg-primary" style="color:#fff"></td>
+                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi + $diferencia)) ?></b></td>
+                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
             </tr>
         </tbody>
     </table>

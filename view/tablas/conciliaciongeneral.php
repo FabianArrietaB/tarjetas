@@ -41,7 +41,7 @@
         c.con_comisiban  AS bancomisi,
         c.con_fecconcil  AS fechaconci
     FROM conciliacion AS c
-    WHERE c.id_sede = '$sede'";
+    WHERE c.id_sede = '$sede' AND c.con_fecconcil BETWEEN '$desde' AND '$hasta'";
     if($master != "" && $visa == "" && $davi == ""){
     $sqldiferencia .=" AND c.con_franquicia = '$master'";
     } else if ($master == "" && $visa !="" && $davi == "" ){
@@ -99,12 +99,12 @@ $query = mysqli_query($conexion, $sqldiferencia);
                             $diferenciacomisi = $valor['bancomisi'] - $valor['newcomisio'];
                         ?>
                         <tr>
-                            <td class="bg-danger" style="color:#fff"><b>Fecha Proceso</b></td>
-                            <td class="bg-danger" style="color:#fff"></td>
-                            <td class="bg-danger" style="color:#fff"></td>
-                            <td class="bg-danger" style="color:#fff" ><b><?php echo $valor['fechaconci'];?></b></td>
-                            <td class="bg-danger" style="color:#fff"></td>
-                            <td class="bg-danger" style="color:#fff"></td>
+                            <td class="bg-danger" style="--bs-bg-opacity: .5;"><b>FECHA PROCESO</b></td>
+                            <td class="bg-danger" style="--bs-bg-opacity: .5;"></td>
+                            <td class="bg-danger" style="--bs-bg-opacity: .5;"></td>
+                            <td class="bg-danger" style="--bs-bg-opacity: .5;" ><b><?php echo $valor['fechaconci'];?></b></td>
+                            <td class="bg-danger" style="--bs-bg-opacity: .5;"></td>
+                            <td class="bg-danger" style="--bs-bg-opacity: .5;"></td>
                         </tr>
                         <tr>
                             <td class="bg-light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquicia'];?></b></td>
@@ -123,12 +123,20 @@ $query = mysqli_query($conexion, $sqldiferencia);
                             <td><?php echo '$ ' . number_format(round($valor['bancomisi']));?></td>
                         </tr>
                         <tr>
-                            <td class="bg-success" style="color:#fff"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
-                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
-                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
-                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
-                            <td class="bg-success" style="color:#fff"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+                            <td class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo 'DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                            <td class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferencia));?></b></td>
+                            <td class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciafte));?></b></td>
+                            <td class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
+                            <td class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
+                            <td class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
+                            <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                            <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                            <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi + $diferencia)) ?></b></td>
+                            <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
+                            <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                         </tr>
             <?php } ?>
         </tbody>

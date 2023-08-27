@@ -58,16 +58,11 @@
             <tr>
                 <th scope="col" >Fecha</th>
                 <th scope="col" >Ticket</th>
+				<th scope="col" >Tipo</th>
+				<th scope="col" >Franquicia</th>
                 <th scope="col" >Valor</th>
                 <th scope="col" >Iva</th>
                 <th scope="col" >Neto</th>
-                <th scope="col" >Rte Fte</th>
-                <th scope="col" >Comision</th>
-                <th scope="col" >Rte IVA</th>
-                <th scope="col" >Rte ICA</th>
-                <th scope="col" >Descuento</th>
-                <th scope="col" >Banco</th>
-                <th scope="col" >Diferencia</th>
                 <th></th>
             </tr>
         </thead>
@@ -78,16 +73,11 @@
             <tr>
                 <td><?php echo $registros['fecha'];?></td>
                 <td><?php echo $registros['ticket']; ?></td>
+				<td><?php echo $registros['idtipcuenta']; ?></td>
+				<td><?php echo $registros['tiptar']; ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['iva']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor'] - $registros['iva']); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['retfte'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['comision'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['rteiva'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['rteica'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['descu'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['banco'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['difer'])); ?></td>
                 <td>
                     <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
                 </td>

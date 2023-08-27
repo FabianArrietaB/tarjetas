@@ -305,5 +305,22 @@
             $query->close();
             return $respuesta;
         }
+
+        public function detallefecha($mes){
+            $conexion = Conexion::conectar();
+            $sql ="SELECT DISTINCT
+                r.reg_fecope as fecha
+                FROM registros AS r
+                WHERE MONTH(r.reg_fecope) = '$mes'
+                ORDER BY fecha DESC";
+                $respuesta = mysqli_query($conexion,$sql);
+                if($respuesta >= 0){
+                    while($fecha = mysqli_fetch_array($respuesta)){
+                        echo '<option value="'.$fecha['fecha'].'">'.$fecha['fecha'].'</option>';
+                    }
+                }else{
+                        echo '<option value="0">No hay Fechas</option>';
+                }
+            }
     }
 ?>

@@ -341,3 +341,24 @@ function adddiferencia(){
     });
     return false;
 }
+
+//CARGAR MESES
+jQuery('#mes').on('change', function(){
+    var mes = $('#mes').val();
+    cargarfechas();
+    //console.log(mes)
+})
+
+//Función para cargar las provincias al campo "select".
+function cargarfechas(){
+    var fecha = $('#dategen');
+    $.ajax({
+        type: "GET",
+        url: "../controller/registros/detallefecha.php",
+        data: "mes=" + $('#mes').val(),
+        success:function(data){
+            fecha.html(data);
+        }
+    });
+    //console.log(fecha)
+}

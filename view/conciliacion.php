@@ -62,7 +62,7 @@
                                     <!-- <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()"> -->
                                     <input value="MES" id="conmes" class="btn btn-success" type="button" onclick="infmes()">
                                     <input value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">
-                                    <input value="LISTA" id="listcon" class="btn btn-primary" type="button">
+                                    <input value="LISTA" id="listcon" class="btn btn-primary" type="button" onclick="lista()">
                                 </div>
                             </div>
                         </div>

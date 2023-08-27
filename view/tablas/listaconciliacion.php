@@ -1,6 +1,28 @@
 <?php
     session_start();
     include "../../model/conexion.php";
+    $desde = "";
+    $hasta = "";
+    $sede = "";
+    $master = "";
+    $visa = "";
+    $davi = "";
+    if(isset($_GET['desde']) && ($_GET['hasta'])){
+        $desde = $_GET['desde'];
+        $hasta = $_GET['hasta'];
+    }
+    if(isset($_GET['sede'])){
+        $sede = $_GET['sede'];
+    }
+    if(isset($_GET['master'])){
+        $master = $_GET['master'];
+    }
+    if(isset($_GET['visa'])){
+        $visa = $_GET['visa'];
+    }
+    if(isset($_GET['davi'])){
+        $davi = $_GET['davi'];
+    }
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['id'];
@@ -10,11 +32,28 @@
         s.sed_nombre AS sede,
         c.id_operador    AS idoperador,
         u.user_nombre    AS nombre,
-        c.con_franquisia AS franquisia,
+        c.con_franquicia AS franquicia,
         c.con_fecconcil  AS fechaconci
     FROM conciliacion AS c
     INNER JOIN usuarios AS u ON u.id_usuario = c.id_operador
-    INNER JOIN sedes AS s ON s.id_sede = c.id_sede";
+    INNER JOIN sedes AS s ON s.id_sede = c.id_sede
+    WHERE c.con_fecconcil BETWEEN '$desde' AND '$hasta'";
+    if ($sede != ""){
+        $sqlunico .="AND c.id_sede = '$sede'";
+    }
+    if($master != "" && $visa == "" && $davi == ""){
+    $sqlunico .=" AND c.con_franquicia = '$master'";
+    } else if ($master == "" && $visa !="" && $davi == "" ){
+        $sqlunico .=" AND c.con_franquicia = '$visa'";
+    } else if ($master == "" && $visa == "" && $davi != "" ){
+        $sqlunico .=" AND c.con_franquicia = '$davi'";
+    } else if ($master !="" && $visa !="" && $davi == "" ){
+        $sqlunico .=" AND c.con_franquicia IN ('$master', '$visa')";
+    } else if ($master !="" && $visa == "" && $davi != "" ){
+        $sqlunico .=" AND c.con_franquicia IN ('$master', '$davi')";
+    } else if ($master == "" && $visa != "" && $davi != "" ){
+        $sqlunico .=" AND c.con_franquicia IN ('$davi', '$visa')";
+    }
     $rwunico = mysqli_query($conexion, $sqlunico);
 ?>
 <!-- inicio Tabla -->
@@ -37,7 +76,7 @@
             while ($valor = mysqli_fetch_array($rwunico)) { ?>
                         <tr>
                             <td><?php echo $valor['fechaconci'];?></td>
-                            <td><?php echo $valor['franquisia'];?></td>
+                            <td><?php echo $valor['franquicia'];?></td>
                             <td><?php echo $valor['sede'];?></td>
                             <td><?php echo $valor['nombre'];?></td>
                             <td>

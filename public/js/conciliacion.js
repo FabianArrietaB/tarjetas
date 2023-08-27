@@ -83,6 +83,27 @@ function infmes(){
     //console.log(davi)
 }
 
+function lista(){
+    var desde = $('#desde').val();
+    var hasta = $('#hasta').val();
+    var sede = $('#sede').val();
+    var master = ($('#master').is(":checked")) ? $('#master').val() : '';
+    var visa = ($('#visa').is(":checked")) ? $('#visa').val() : '';
+    var davi = ($('#davi').is(":checked")) ? $('#davi').val() : '';
+    $.ajax({
+        method: 'GET',
+    }).done(function(info) {
+        $('#tablalistaconciliaciones').load('tablas/listaconciliacion.php?desde='+desde+'&hasta='+hasta+'&sede='+sede+'&master='+master+'&visa='+visa+'&davi='+davi);
+    
+    })
+    // console.log(desde)
+    // console.log(hasta)
+    // console.log(sede)
+    //console.log(master)
+    //console.log(visa)
+    //console.log(davi)
+}
+
 function detalleconciliacion(idconciliacion){
     $.ajax({
         type: "POST",
