@@ -70,6 +70,7 @@
             $conexion = Conexion::conectar();
             $sql ="SELECT
             r.id_registro     as idregistro,
+            r.id_sede         as idsede,
             r.reg_numticket   as ticket,
             r.reg_tipcuenta   as idtipcuenta,
             r.reg_tiptar      as tiptar,
@@ -81,6 +82,7 @@
             r.reg_comision    as comision,
             r.reg_tardesc     as descu,
             r.reg_banco       as banco,
+            r.reg_estado      as estado,
             r.reg_diferencia  as difer,
             (p.por_mes * 100) as portar
             FROM registros    AS r
@@ -90,6 +92,7 @@
             $registro = mysqli_fetch_array($respuesta);
             $datos = array(
                 'idregistro' => $registro['idregistro'],
+                'idsede' => $registro['idsede'],
                 'ticket' => $registro['ticket'],
                 'idtipcuenta' => $registro['idtipcuenta'],
                 'tiptar' => $registro['tiptar'],
@@ -103,6 +106,7 @@
                 'descu' => $registro['descu'],
                 'portar' => number_format($registro['portar'],2),
                 'banco' => $registro['banco'],
+                'estado' => $registro['estado'],
                 'difer' => $registro['difer'],
             );
             return $datos;
@@ -363,16 +367,38 @@
             }
         }
 
-        public function eliminarregistro($idregistro, $estado){
+        public function eliminarregistro($datos){
+            $conexion = Conexion::conectar();
+            $fecha = date("Y-m.d");
+            if($datos['estado'] == 1){
+                $estado = 0;
+            }else{
+                $estado = 1;
+            }
+            $modulo = 'EL REGISTRO';
+            $sql = "UPDATE registros SET reg_estado = ? WHERE id_registro = ?";
+            $query = $conexion->prepare($sql);
+            $query->bind_param('ii', $estado, $datos['idregistro']);
+            $respuesta = $query->execute();
+            if($respuesta > 0){
+                $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?)";
+                $query = $conexion->prepare($historial);
+                $query->bind_param('isssss', $datos['idoperador'], $datos['idsede'], $datos['idregistro'], $datos['detalle'], $modulo, $fecha);
+                $respuesta = $query->execute();
+            }
+            return $respuesta;
+        }
+
+        public function eliminarconciliacion($idconciliacion, $estado){
             $conexion = Conexion::conectar();
             if($estado == 1){
                 $estado = 0;
             }else{
                 $estado = 1;
             }
-            $sql = "UPDATE registros SET reg_estado = ? WHERE id_registro = ?";
+            $sql = "UPDATE conciliacion SET con_estado = ? WHERE id_conciliacion = ?";
             $query = $conexion->prepare($sql);
-            $query->bind_param('ii', $estado, $idregistro);
+            $query->bind_param('ii', $estado, $idconciliacion);
             $respuesta = $query->execute();
             $query->close();
             return $respuesta;

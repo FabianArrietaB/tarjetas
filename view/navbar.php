@@ -41,6 +41,9 @@
                         <a class="nav-link active" href="conciliacion.php">CONCILIACION</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" href="historial.php">Historial</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="usuarios.php">USUARIOS</a>
                     </li>
                     <?php } ?>

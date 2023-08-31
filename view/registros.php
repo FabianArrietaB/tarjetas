@@ -149,6 +149,7 @@
 <!-- fin del contenido principal -->
 <!-- por ultimo se carga el footer -->
 <?php
+    include "tablas/detaelireg.php";
     include "tablas/editar.php";
     include "footer.php";
 ?>

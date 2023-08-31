@@ -411,35 +411,51 @@ function cargarfechas(){
     //console.log(fecha)
 }
 
-function eliminarregistro(idregistro, estado){
-
+function detalleeliminacionregistro(idregistro){
     $.ajax({
-    type: "POST",
-    data:"idregistro=" + idregistro +"&estado=" + estado,
-    url:"../controller/registros/eliminarreg.php",
+        type: "POST",
+        data: "idregistro=" + idregistro,
+        url: "../controller/registros/detelireg.php",
+        success: function(respuesta){
+            respuesta = jQuery.parseJSON(respuesta);
+            console.log(respuesta)
+            $('#idregistro').val(respuesta['idregistro']);
+            $('#eliticket').val(respuesta['ticket']);
+            $('#eliestado').val(respuesta['estado']);
+            $('#eliidsede').val(respuesta['idsede']);
+        }
+    });
+}
+
+function eliminarregistro(){
+    $.ajax({
+        type: "POST",
+        data: $('#frmeliminarregistro').serialize(),
+        url:"../controller/registros/eliminarreg.php",
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-            //console.log(respuesta)
-            $('#tablaregistros').load('tablas/registros.php');
-                const { value: detalle } =
-                swal.fire({
+                console.log(respuesta);
+                $('#tablaregistros').load('tablas/registros.php');
+                $('#frmeliminarregistro')[0].reset();
+                Swal.fire({
                     icon: 'success',
                     title: 'Registro Eliminado Exitosamente',
                     showConfirmButton: false,
                     timer: 1500
                 });
             }else{
-                swal.fire({
+                Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Error al Eliminar!',
+                    text: 'Error al crear!',
                     showConfirmButton: false,
                     timer: 1500
                 });
             }
         }
     });
+    return false;
 }
 
 

@@ -82,16 +82,16 @@
                 <td><?php echo '$ ' . number_format($registros['iva']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor'] - $registros['iva']); ?></td>
                 <td>
-                    <button type="button" class="btn btn-warning" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
+                    <button data-bs-toggle="modal" data-bs-target="#editar"  type="button" class="btn btn-warning" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
                 
                 <?php
                     if ($registros['estado'] == 1) {
                     ?>
-                        <button class="btn btn-danger" onclick="eliminarregistro(<?php echo $registros['idregistro'] ?>, <?php echo $registros['estado'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                        <button data-bs-toggle="modal" data-bs-target="#elireg" class="btn btn-danger" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
                     <?php
                     } else if ($registros['estado'] == 0) {
                         ?>
-                        <button class="btn btn-success" onclick="eliminarregistro(<?php echo $registros['idregistro'] ?>, <?php echo $registros['estado'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                        <button data-bs-toggle="modal" data-bs-target="#elireg"  class="btn btn-success" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
                     <?php
                     }
                 ?>
