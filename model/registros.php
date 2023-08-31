@@ -362,5 +362,20 @@
                 return 0;
             }
         }
+
+        public function eliminarregistro($idregistro, $estado){
+            $conexion = Conexion::conectar();
+            if($estado == 1){
+                $estado = 0;
+            }else{
+                $estado = 1;
+            }
+            $sql = "UPDATE registros SET reg_estado = ? WHERE id_registro = ?";
+            $query = $conexion->prepare($sql);
+            $query->bind_param('ii', $estado, $idregistro);
+            $respuesta = $query->execute();
+            $query->close();
+            return $respuesta;
+        }
     }
 ?>

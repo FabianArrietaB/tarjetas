@@ -197,3 +197,32 @@ function uptcalcular() {
          }
     }
 }
+
+function eliminarconciliacion(idusuario){
+    $.ajax({
+        type: "POST",
+        data:"idusuario=" + idusuario +"&estado=" + estado,
+        url:"../controller/registros/eliminarcon.php",
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                //console.log(respuesta)
+                $('#tablalistausuarios').load('usuarios/listausuarios.php');
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Usuario Eliminado Exitosamente',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+            }else{
+                swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al Eliminar!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    });
+}

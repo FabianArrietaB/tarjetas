@@ -80,7 +80,7 @@ function detalleregistro(idregistro){
         url: "../controller/registros/detalleregistro.php",
         success: function(respuesta){
             respuesta = jQuery.parseJSON(respuesta);
-            //console.log(respuesta)
+            console.log(respuesta)
             $('#idregistro').val(respuesta['idregistro']);
             $('#tiptaru').val(respuesta['tiptar']);
             $('#idtiptaru').val(respuesta['idtipcuenta']);
@@ -410,4 +410,37 @@ function cargarfechas(){
     });
     //console.log(fecha)
 }
+
+function eliminarregistro(idregistro, estado){
+
+    $.ajax({
+    type: "POST",
+    data:"idregistro=" + idregistro +"&estado=" + estado,
+    url:"../controller/registros/eliminarreg.php",
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+            //console.log(respuesta)
+            $('#tablaregistros').load('tablas/registros.php');
+                const { value: detalle } =
+                swal.fire({
+                    icon: 'success',
+                    title: 'Registro Eliminado Exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }else{
+                swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al Eliminar!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    });
+}
+
+
 

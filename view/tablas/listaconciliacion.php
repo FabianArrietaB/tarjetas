@@ -33,6 +33,7 @@
         c.id_operador    AS idoperador,
         u.user_nombre    AS nombre,
         c.con_franquicia AS franquicia,
+        c.con_estado     AS estado,
         c.con_fecconcil  AS fechaconci
     FROM conciliacion AS c
     INNER JOIN usuarios AS u ON u.id_usuario = c.id_operador
@@ -82,6 +83,17 @@
                             <td><?php echo $valor['nombre'];?></td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconciliacion" onclick="detalleconciliacion('<?php echo $valor['idconciliacion']?>')"><i class="fa-solid fa-pen-to-square fa-beat fa-xl"></i></button>
+                                <?php
+                                if ($valor['estado'] == 1) {
+                                ?>
+                                <button type="button" class="btn btn-danger" onclick="eliminarconciliacion('<?php echo $valor['idconciliacion']?>')"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                                <?php
+                                } else if ($valor['estado'] == 0) {
+                                ?>
+                                <button type="button" class="btn btn-success" onclick="eliminarconciliacion('<?php echo $valor['idconciliacion']?>')"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                                 <?php
+                                }
+                                ?>
                             </td>
                         </tr>
             <?php } ?>

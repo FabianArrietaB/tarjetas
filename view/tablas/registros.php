@@ -20,6 +20,7 @@
         r.reg_tardesc     as descu,
         r.reg_banco       as banco,
         r.reg_diferencia  as difer,
+        r.reg_estado      as estado,
         r.reg_fecope      as fecha
         FROM registros    AS r
         ORDER BY r.id_registro DESC";
@@ -44,6 +45,7 @@
         r.reg_tardesc     as descu,
         r.reg_banco       as banco,
         r.reg_diferencia  as difer,
+        r.reg_estado      as estado,
         r.reg_fecope      as fecha
         FROM registros    AS r
         WHERE r.id_operador = '$idusuario'
@@ -64,6 +66,7 @@
                 <th scope="col" >Iva</th>
                 <th scope="col" >Neto</th>
                 <th></th>
+                
             </tr>
         </thead>
         <tbody>
@@ -79,7 +82,19 @@
                 <td><?php echo '$ ' . number_format($registros['iva']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor'] - $registros['iva']); ?></td>
                 <td>
-                    <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
+                    <button type="button" class="btn btn-warning" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
+                
+                <?php
+                    if ($registros['estado'] == 1) {
+                    ?>
+                        <button class="btn btn-danger" onclick="eliminarregistro(<?php echo $registros['idregistro'] ?>, <?php echo $registros['estado'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                    <?php
+                    } else if ($registros['estado'] == 0) {
+                        ?>
+                        <button class="btn btn-success" onclick="eliminarregistro(<?php echo $registros['idregistro'] ?>, <?php echo $registros['estado'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                    <?php
+                    }
+                ?>
                 </td>
             </tr>
         <?php } ?>
