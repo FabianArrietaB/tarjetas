@@ -383,7 +383,7 @@
             if($respuesta > 0){
                 $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?)";
                 $query = $conexion->prepare($historial);
-                $query->bind_param('isssss', $datos['idoperador'], $datos['idsede'], $datos['idregistro'], $datos['detalle'], $modulo, $fecha);
+                $query->bind_param('isssss', $datos['idoperador'], $datos['idsede'], $datos['ticket'], $datos['detalle'], $modulo, $fecha);
                 $respuesta = $query->execute();
             }
             return $respuesta;

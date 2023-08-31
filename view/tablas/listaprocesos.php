@@ -18,12 +18,14 @@
     $idusuario = $_SESSION['usuario']['id'];
     $sql = "SELECT
         h.id_operador idoperador,
+        u.user_nombre nombre,
         h.id_sede idsede,
         h.his_numdoc numdoc,
         h.his_detall detall,
         h.his_modulo modulo,
         h.his_fecope fecha
     FROM historial h
+    INNER JOIN usuarios u ON u.id_usuario = h.id_operador
     ORDER BY h.his_fecope DESC";
     $query = mysqli_query($conexion, $sql);
 ?>
@@ -41,7 +43,7 @@
         ?>
             <tr>
                 <td>
-                    <?php echo 'EL <strong>' . $bitacora['fecha'] . '</strong> POR EL USUARIO <strong>' . $bitacora['idoperador'] . ' SE ELIMINO ' .$bitacora['modulo'] . ' ' . $bitacora['numdoc'] . ' POR ' . $bitacora['detall'] . '</strong>'; ?>
+                    <?php echo 'EL <strong>' . $bitacora['fecha'] . '</strong> POR EL USUARIO <strong>' . $bitacora['nombre'] . '</strong>  SE ELIMINO <strong>' .$bitacora['modulo'] . ' ' . $bitacora['numdoc'] . '</strong>  POR <strong>' . $bitacora['detall'] . '</strong>'; ?>
                 </td>
             </tr>
         <?php } ?>
