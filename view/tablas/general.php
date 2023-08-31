@@ -37,7 +37,7 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
 ?>
 <!-- inicio Tabla -->
 <?php if($sede != "") { ?>
-<form id="frmadddiferencia" method="post" onsubmit="return adddiferencia()">
+<form id="frmadddiferencia" method="post" onsubmit="return validardiferencia()">
     <div class="row text-center">
         <fieldset class="group-border">
             <legend class="group-border text-center"><b>CONCILIACION <?php echo $hoy ?></b> </legend>

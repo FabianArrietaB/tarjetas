@@ -18,6 +18,30 @@ $(document).ready(function(){
     $('#tablaregistrosgeneral').load('tablas/tablageneral.php');
 });
 
+function validar(){
+    $.ajax({
+        url:"../controller/registros/consultaticket.php",
+        type:"POST",
+        data:$('#frmaddregistro').serialize(),
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            console.log(respuesta)
+            if(respuesta == 1){
+                swal.fire({
+                    icon: 'error',
+                    title: 'Registro Ya existe',
+                    text: '',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }else{
+                addregistro();
+            }
+        }
+    });
+    return false;
+}
+
 function addregistro(){
     $.ajax({
         type: "POST",
@@ -310,6 +334,30 @@ function calcular() {
     }
 }
 
+function validardiferencia(){
+    $.ajax({
+        url:"../controller/registros/consultadiferencia.php",
+        type:"POST",
+        data:$('#frmadddiferencia').serialize(),
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            console.log(respuesta)
+            if(respuesta == 1){
+                swal.fire({
+                    icon: 'error',
+                    title: 'Registro ya existe',
+                    text: 'Ya se encuentra un Registro para esta Fecha, Sede y Franquicia',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }else{
+                adddiferencia();
+            }
+        }
+    });
+    return false;
+}
+
 //INSERTAR CONCILIACION
 function adddiferencia(){
     $.ajax({
@@ -362,3 +410,4 @@ function cargarfechas(){
     });
     //console.log(fecha)
 }
+

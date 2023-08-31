@@ -6,41 +6,42 @@
 
         public function addregistro($datos){
             $conexion = Conexion::conectar();
-            $sql = "INSERT INTO registros (id_sede,
-                                        id_operador,
-                                        reg_numticket,
-                                        reg_tipcuenta,
-                                        reg_tiptar,
-                                        reg_valor,
-                                        reg_iva,
-                                        reg_rtefte,
-                                        reg_rteiva,
-                                        reg_rteica,
-                                        reg_comision,
-                                        reg_tardesc,
-                                        reg_banco,
-                                        reg_diferencia,
-                                        reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $prefijo = $datos['pretik'] .' - '. $datos['ticket'];
+            $sql = "INSERT INTO registros (
+                id_sede,
+                id_operador,
+                reg_numticket,
+                reg_tipcuenta,
+                reg_tiptar,
+                reg_valor,
+                reg_iva,
+                reg_rtefte,
+                reg_rteiva,
+                reg_rteica,
+                reg_comision,
+                reg_tardesc,
+                reg_banco,
+                reg_diferencia,
+                reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
-            $prefijo = $datos['pretik'] .' - '. $datos['ticket'];
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
             $query->bind_param("iisisssssssssss",
-                                $datos['idsede'],
-                                $datos['idoperador'],
-                                $prefijo,
-                                $datos['idtiptar'],
-                                $datos['tiptar'],
-                                $datos['valor'],
-                                $datos['iva'],
-                                $datos['retfue'],
-                                $datos['retiva'],
-                                $datos['retica'],
-                                $datos['comisi'],
-                                $descuento,
-                                $datos['banco'],
-                                $datos['diferencia'],
-                                $fecha);
+                    $datos['idsede'],
+                    $datos['idoperador'],
+                    $prefijo,
+                    $datos['idtiptar'],
+                    $datos['tiptar'],
+                    $datos['valor'],
+                    $datos['iva'],
+                    $datos['retfue'],
+                    $datos['retiva'],
+                    $datos['retica'],
+                    $datos['comisi'],
+                    $descuento,
+                    $datos['banco'],
+                    $datos['diferencia'],
+                    $fecha);
             $respuesta = $query->execute();
             return $respuesta;
         }
@@ -313,15 +314,53 @@
                 FROM registros AS r
                 WHERE MONTH(r.reg_fecope) = '$mes'
                 ORDER BY fecha DESC";
-                $respuesta = mysqli_query($conexion,$sql);
-                $null = "No Hay Fechas";
-                if($respuesta >= 0){
-                    while($fecha = mysqli_fetch_array($respuesta)){
-                        echo '<option value="'.$fecha['fecha'].'">'.$fecha['fecha'].'</option>';
-                    }
-                }else{
-                        echo '<option value="'.$null.'">'.$null.'</option>';
+            $respuesta = mysqli_query($conexion,$sql);
+            $null = "No Hay Fechas";
+            if($respuesta >= 0){
+                while($fecha = mysqli_fetch_array($respuesta)){
+                    echo '<option value="'.$fecha['fecha'].'">'.$fecha['fecha'].'</option>';
                 }
+            }else{
+                    echo '<option value="'.$null.'">'.$null.'</option>';
             }
+        }
+
+        public function ConsultaFactura($pretik, $ticket){
+            $conexion = Conexion::conectar();
+            $numtik = $pretik . ' - ' . $ticket;
+            $sql = "SELECT * FROM registros r INNER JOIN usuarios u ON u.id_usuario = r.id_operador WHERE r.reg_numticket = '$numtik'";
+            $respuesta = mysqli_query($conexion,$sql);
+            if(mysqli_num_rows($respuesta) > 0){
+                $datosFactura = mysqli_fetch_array($respuesta);
+                if($datosFactura['reg_estado'] == 1){
+                    $factura = $datosFactura['reg_numticket'];
+                    $fecha = $datosFactura['reg_fecope'];
+                    $usuario = $datosFactura['user_nombre'];
+                    return 1;
+                }else{
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        }
+
+        public function ConsultaDiferencia($franquicia, $fecha, $sede){
+            $conexion = Conexion::conectar();
+            $sql = "SELECT * FROM conciliacion c INNER JOIN usuarios u ON u.id_usuario = c.id_operador WHERE c.con_fecconcil = '$fecha' AND c.id_sede = '$sede' AND c.con_franquicia = '$franquicia'";
+            $respuesta = mysqli_query($conexion,$sql);
+            if(mysqli_num_rows($respuesta) > 0){
+                $datosConciliacion = mysqli_fetch_array($respuesta);
+                if($datosConciliacion['con_estado'] == 1){
+                    $fechacon = $datosConciliacion['con_fecconcil'];
+                    $usuario = $datosConciliacion['user_nombre'];
+                    return 1;
+                }else{
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        }
     }
 ?>

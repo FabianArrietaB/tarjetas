@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="card-body text-center">
-                    <form id="frmaddregistro" method="post" onsubmit="return addregistro()">
+                    <form id="frmaddregistro" method="post" onsubmit="return validar()">
                         <div class="row text-center">
                             <input hidden type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
                             <div class="col-3">

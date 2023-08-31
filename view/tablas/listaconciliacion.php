@@ -54,6 +54,7 @@
     } else if ($master == "" && $visa != "" && $davi != "" ){
         $sqlunico .=" AND c.con_franquicia IN ('$davi', '$visa')";
     }
+    $sqlunico .="ORDER BY c.con_fecconcil DESC";
     $rwunico = mysqli_query($conexion, $sqlunico);
 ?>
 <!-- inicio Tabla -->
