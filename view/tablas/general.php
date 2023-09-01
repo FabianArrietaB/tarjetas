@@ -23,6 +23,7 @@
     r.id_registro     AS idregistro,
     r.id_operador     AS idoperador,
     r.reg_tiptar          AS tiptar,
+    r.reg_estado          AS estado,
     SUM(r.reg_diferencia) AS diferencia,
     SUM(r.reg_rtefte)     AS retefuente,
     SUM(r.reg_rteiva)     AS reteiva,
@@ -31,7 +32,7 @@
 FROM registros AS r
 INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
 INNER JOIN sedes AS s On r.id_sede = s.id_sede
-WHERE r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
+WHERE r.reg_estado = 1 AND r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
 $querydiferencia = mysqli_query($conexion, $sqldiferencia);
 $rwdiferencia = mysqli_fetch_array($querydiferencia);
 ?>

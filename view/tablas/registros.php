@@ -23,6 +23,7 @@
         r.reg_estado      as estado,
         r.reg_fecope      as fecha
         FROM registros    AS r
+        WHERE r.reg_estado = 1
         ORDER BY r.id_registro DESC";
     $query = mysqli_query($conexion, $sql);
 } else {
@@ -76,7 +77,7 @@
         ?>
             <tr>
                 <td><?php echo $registros['fecha'];?></td>
-                <td><?php echo $registros['ticket']; ?></td>
+                <td data-bs-toggle="modal" data-bs-target="#elireg" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>)"><?php echo $registros['ticket']; ?></td>
 				<td><?php echo $registros['idtipcuenta']; ?></td>
 				<td><?php echo $registros['tiptar']; ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor']); ?></td>
@@ -84,18 +85,6 @@
                 <td><?php echo '$ ' . number_format($registros['valor'] - $registros['iva']); ?></td>
                 <td>
                     <button data-bs-toggle="modal" data-bs-target="#editar"  type="button" class="btn btn-warning" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
-                
-                <?php
-                    if ($registros['estado'] == 1) {
-                    ?>
-                        <button data-bs-toggle="modal" data-bs-target="#elireg" class="btn btn-danger" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
-                    <?php
-                    } else if ($registros['estado'] == 0) {
-                        ?>
-                        <button data-bs-toggle="modal" data-bs-target="#elireg"  class="btn btn-success" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
-                    <?php
-                    }
-                ?>
                 </td>
             </tr>
         <?php } ?>

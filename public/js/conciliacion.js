@@ -205,7 +205,7 @@ function detalleeliminarconciliacion(idconciliacion){
         url: "../controller/registros/detelicon.php",
         success: function(respuesta){
             respuesta = jQuery.parseJSON(respuesta);
-            console.log(respuesta)
+            //console.log(respuesta)
             $('#idconciliacion').val(respuesta['idconciliacion']);
             $('#eliestadocon').val(respuesta['estado']);
             $('#eliidsedecom').val(respuesta['idsede']);
@@ -223,7 +223,7 @@ function eliminarconcili(){
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                console.log(respuesta);
+                //console.log(respuesta);
                 $('#tablalistaconciliaciones').load('tablas/listaconciliacion.php');
                 $('#frmeliminarconcili')[0].reset();
                 Swal.fire({

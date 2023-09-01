@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form method="get">
+                        <!-- <form method="get">
                             <div class="row">
                                 <div class="col-4">
                                     <div class="input-group mb-3">
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                     <div class="card-body">
                         <div id="tablaprocesos"></div>

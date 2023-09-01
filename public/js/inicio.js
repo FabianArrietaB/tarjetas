@@ -18,6 +18,7 @@ $(document).ready(function(){
     $('#tablaregistrosgeneral').load('tablas/tablageneral.php');
 });
 
+
 function validar(){
     $.ajax({
         url:"../controller/registros/consultaticket.php",
@@ -25,7 +26,7 @@ function validar(){
         data:$('#frmaddregistro').serialize(),
         success:function(respuesta){
             respuesta = respuesta.trim();
-            console.log(respuesta)
+            //console.log(respuesta)
             if(respuesta == 1){
                 swal.fire({
                     icon: 'error',
@@ -50,7 +51,7 @@ function addregistro(){
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                console.log(respuesta);
+                //console.log(respuesta);
                 $('#tablaregistros').load('tablas/registros.php');
                 $('#frmaddregistro')[0].reset();
                 Swal.fire({
@@ -80,7 +81,7 @@ function detalleregistro(idregistro){
         url: "../controller/registros/detalleregistro.php",
         success: function(respuesta){
             respuesta = jQuery.parseJSON(respuesta);
-            console.log(respuesta)
+            //console.log(respuesta)
             $('#idregistro').val(respuesta['idregistro']);
             $('#tiptaru').val(respuesta['tiptar']);
             $('#idtiptaru').val(respuesta['idtipcuenta']);
@@ -106,6 +107,7 @@ function editarregistro(){
         url: "../controller/registros/editar.php",
         success:function(respuesta){
             respuesta = respuesta.trim();
+            //console.log(respuesta)
             if(respuesta == 1){
                 $('#editar').modal('hide');
                 $('#tablaregistros').load('tablas/registros.php');
@@ -252,6 +254,7 @@ function obtenerfecha(){
     }).done(function(info) {
         $('#tablaresumen').load('tablas/resumen.php?date='+fecha);
     })
+    //console.log(fecha)
 }
 
 //CONSULTA ADMINISTRADOR Y SUPERVISOR
@@ -341,7 +344,7 @@ function validardiferencia(){
         data:$('#frmadddiferencia').serialize(),
         success:function(respuesta){
             respuesta = respuesta.trim();
-            console.log(respuesta)
+            //console.log(respuesta)
             if(respuesta == 1){
                 swal.fire({
                     icon: 'error',
@@ -367,7 +370,7 @@ function adddiferencia(){
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                console.log(respuesta);
+                //console.log(respuesta);
                 $('#tablaregistros').load('tablas/registros.php');
                 $('#frmadddiferencia')[0].reset();
                 Swal.fire({
@@ -435,7 +438,7 @@ function eliminarregistro(){
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                console.log(respuesta);
+                //console.log(respuesta);
                 $('#tablaregistros').load('tablas/registros.php');
                 $('#frmeliminarregistro')[0].reset();
                 Swal.fire({
@@ -457,14 +460,3 @@ function eliminarregistro(){
     });
     return false;
 }
-
-$(document).ready(function() {
-    $('#developers').pageMe({
-    pagerSelector: '#developer_page',
-    showPrevNext: true,
-    hidePageNumbers: false,
-    perPage: 3
-    });
-    });
-
-

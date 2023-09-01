@@ -22,6 +22,7 @@
         h.id_sede idsede,
         h.his_numdoc numdoc,
         h.his_detall detall,
+        h.his_tipope tipope,
         h.his_modulo modulo,
         h.his_fecope fecha
     FROM historial h
@@ -43,7 +44,7 @@
         ?>
             <tr>
                 <td>
-                    <?php echo 'EL <strong>' . $bitacora['fecha'] . '</strong> POR EL USUARIO <strong>' . $bitacora['nombre'] . '</strong>  SE ELIMINO <strong>' .$bitacora['modulo'] . ' ' . $bitacora['numdoc'] . '</strong>  POR <strong>' . $bitacora['detall'] . '</strong>'; ?>
+                    <?php echo 'EL <strong>' . $bitacora['fecha'] . '</strong> POR EL USUARIO <strong>' . $bitacora['nombre'] . '</strong> ' . $bitacora['tipope'] . ' <strong>' .$bitacora['modulo'] . ' ' . $bitacora['numdoc'] . '</strong>  POR <strong>' . $bitacora['detall'] . '</strong>'; ?>
                 </td>
             </tr>
         <?php } ?>

@@ -374,20 +374,52 @@
             $fecha = date("Y-m.d");
             if($datos['estado'] == 1){
                 $estado = 0;
+                $proceso = 'SE ELIMINO';
             }else{
                 $estado = 1;
+                $proceso = 'SE RESTAURO';
             }
-            $modulo = 'EL REGISTRO';
+            $modulo = 'CONCILIACION';
             $sql = "UPDATE registros SET reg_estado = ? WHERE id_registro = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('ii', $estado, $datos['idregistro']);
             $respuesta = $query->execute();
             if($respuesta > 0){
-                $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?)";
+                $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_tipope, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $query = $conexion->prepare($historial);
-                $query->bind_param('isssss', $datos['idoperador'], $datos['idsede'], $datos['ticket'], $datos['detalle'], $modulo, $fecha);
+                $query->bind_param('issssss', $datos['idoperador'], $datos['idsede'], $datos['ticket'], $datos['detalle'], $proceso, $modulo, $fecha);
                 $respuesta = $query->execute();
             }
+            return $respuesta;
+        }
+
+        public function activarregistro($idregistro, $estado){
+            $conexion = Conexion::conectar();
+            if($estado == 1){
+                $estado = 0;
+            }else{
+                $estado = 1;
+            }
+            $sql = "UPDATE registros SET reg_estado = ? WHERE id_registro = ?";
+            $query = $conexion->prepare($sql);
+            $query->bind_param('ii', $estado, $idregistro);
+            $respuesta = $query->execute();
+            $query->close();
+            return $respuesta;
+        }
+
+        public function activarconciliacion($idconciliacion, $estado){
+            $conexion = Conexion::conectar();
+            if($estado == 1){
+                $estado = 0;
+            }else{
+                $estado = 1;
+            }
+            $sql = "UPDATE conciliacion SET con_estado = ? WHERE id_conciliacion = ?";
+            $query = $conexion->prepare($sql);
+            $query->bind_param('ii', $estado, $idconciliacion);
+            $respuesta = $query->execute();
+            $query->close();
             return $respuesta;
         }
 
@@ -397,8 +429,10 @@
             $modulo = 'EL CONCILIACION';
             if($datos['estado'] == 1){
                 $estado = 0;
+                $proceso = 'SE ELIMINO';
             }else{
                 $estado = 1;
+                $proceso = 'SE RESTAURO';
             }
             $modulo = 'EL REGISTRO';
             $sql = "UPDATE conciliacion SET con_estado = ? WHERE id_conciliacion = ?";
@@ -406,10 +440,9 @@
             $query->bind_param('ii', $estado, $datos['idconciliacion']);
             $respuesta = $query->execute();
             if($respuesta > 0){
-                $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?)";
+                $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_tipope, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $query = $conexion->prepare($historial);
-                $ticket = str_pad($datos['idconciliacion'], 2, "0", STR_PAD_LEFT);
-                $query->bind_param('isssss', $datos['idoperador'], $datos['idsede'], $ticket, $datos['detalle'], $modulo, $fecha);
+                $query->bind_param('issssss', $datos['idoperador'], $datos['idsede'], $datos['idconciliacion'], $datos['detalle'], $proceso, $modulo, $fecha);
                 $respuesta = $query->execute();
             }
             return $respuesta;

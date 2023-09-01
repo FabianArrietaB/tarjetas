@@ -25,7 +25,7 @@
         SUM(r.reg_comision)   AS comision
     FROM registros AS r
     INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
-    WHERE r.reg_fecope = '$hoy'";
+    WHERE r.reg_estado = 1 AND r.reg_fecope = '$hoy'";
     if($sede != ""){
         $sqlunico .=" AND r.id_sede = '$sede'";
     }
