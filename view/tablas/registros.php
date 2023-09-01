@@ -70,7 +70,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
         <?php
             while ($registros = mysqli_fetch_array($query)){
         ?>
