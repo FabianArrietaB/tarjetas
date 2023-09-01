@@ -49,6 +49,7 @@
         r.reg_fecope      as fecha
         FROM registros    AS r
         WHERE r.id_operador = '$idusuario'
+        AND r.reg_estado = 1
         ORDER BY r.id_registro DESC";
     $query = mysqli_query($conexion, $sql);
 }

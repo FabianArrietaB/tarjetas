@@ -10,5 +10,5 @@
      );
      include "../../model/registros.php";
      $Registros = new Registros();
-     echo $Registros->eliminarregistro($datos);
+     echo $Registros->eliminarconciliacion($datos);
 ?>

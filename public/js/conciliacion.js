@@ -215,7 +215,7 @@ function detalleeliminarconciliacion(idconciliacion){
     });
 }
 
-function eliminarregistro(){
+function eliminarconcili(){
     $.ajax({
         type: "POST",
         data: $('#frmeliminarconcili').serialize(),
