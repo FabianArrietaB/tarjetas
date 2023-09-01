@@ -30,7 +30,7 @@ function validar(){
                 swal.fire({
                     icon: 'error',
                     title: 'Registro Ya existe',
-                    text: '',
+                    text: 'Ya se encuentra un Registro con este ticket',
                     showConfirmButton: false,
                     timer: 2000
                 });
