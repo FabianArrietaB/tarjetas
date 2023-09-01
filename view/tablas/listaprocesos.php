@@ -44,7 +44,7 @@
         ?>
             <tr>
                 <td>
-                    <?php echo 'EL <strong>' . $bitacora['fecha'] . '</strong> POR EL USUARIO <strong>' . $bitacora['nombre'] . '</strong> ' . $bitacora['tipope'] . ' <strong>' .$bitacora['modulo'] . ' ' . $bitacora['numdoc'] . '</strong>  POR <strong>' . $bitacora['detall'] . '</strong>'; ?>
+                    <?php echo 'EL <strong>' . $bitacora['fecha'] . '</strong> POR EL USUARIO <strong>' . $bitacora['nombre'] . '</strong> ' . $bitacora['tipope'] . '</strong> EL REGISTRO # <strong>' . $bitacora['numdoc'] . '</strong>  POR <strong>' . $bitacora['detall'] . '</strong>  POR EL MODULO <strong>' . $bitacora['modulo'] ; ?>
                 </td>
             </tr>
         <?php } ?>

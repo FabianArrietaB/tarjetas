@@ -379,7 +379,7 @@
                 $estado = 1;
                 $proceso = 'SE RESTAURO';
             }
-            $modulo = 'CONCILIACION';
+            $modulo = 'REGISTRO';
             $sql = "UPDATE registros SET reg_estado = ? WHERE id_registro = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('ii', $estado, $datos['idregistro']);
@@ -426,7 +426,6 @@
         public function eliminarconciliacion($datos){
             $conexion = Conexion::conectar();
             $fecha = date("Y-m.d");
-            $modulo = 'EL CONCILIACION';
             if($datos['estado'] == 1){
                 $estado = 0;
                 $proceso = 'SE ELIMINO';
@@ -434,7 +433,7 @@
                 $estado = 1;
                 $proceso = 'SE RESTAURO';
             }
-            $modulo = 'EL REGISTRO';
+            $modulo = 'CONCILIACION';
             $sql = "UPDATE conciliacion SET con_estado = ? WHERE id_conciliacion = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('ii', $estado, $datos['idconciliacion']);

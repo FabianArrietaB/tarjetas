@@ -78,7 +78,7 @@
             <?php
             while ($valor = mysqli_fetch_array($rwunico)) { ?>
                 <tr>
-                    <td data-bs-toggle="modal" data-bs-target="#elicon" onclick="activar('<?php echo $valor['idconciliacion']?>')" ><?php echo str_pad($valor['idconciliacion'], 2, "0", STR_PAD_LEFT;?></td>
+                    <td data-bs-toggle="modal" data-bs-target="#elicon" onclick="detalleeliminarconciliacion('<?php echo $valor['idconciliacion']?>')" ><?php echo str_pad($valor['idconciliacion'], 3, "0", STR_PAD_LEFT);?></td>
                     <td><?php echo $valor['fechaconci'];?></td>
                     <td><?php echo $valor['franquicia'];?></td>
                     <td><?php echo $valor['sede'];?></td>
