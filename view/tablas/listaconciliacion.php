@@ -86,11 +86,11 @@
                                 <?php
                                 if ($valor['estado'] == 1) {
                                 ?>
-                                <button type="button" class="btn btn-danger" onclick="eliminarconciliacion(<?php echo $valor['idconciliacion']?>, <?php echo $valor['estado'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                                <button data-bs-toggle="modal" data-bs-target="#elicon" type="button" class="btn btn-danger" onclick="detalleeliminarconciliacion('<?php echo $valor['idconciliacion']?>')"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
                                 <?php
                                 } else if ($valor['estado'] == 0) {
                                 ?>
-                                <button type="button" class="btn btn-success" onclick="eliminarconciliacion(<?php echo $valor['idconciliacion']?>, <?php echo $valor['estado'] ?>)"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
+                                <button data-bs-toggle="modal" data-bs-target="#elicon" type="button" class="btn btn-success" onclick="detalleeliminarconciliacion('<?php echo $valor['idconciliacion']?>')"><i class="fa-regular fa-trash-can fa-beat fa-xl"></i></button>
                                  <?php
                                 }
                                 ?>

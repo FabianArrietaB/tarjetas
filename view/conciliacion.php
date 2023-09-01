@@ -83,6 +83,7 @@
 <!-- fin del contenido principal -->
 <!-- por ultimo se carga el footer -->
 <?php
+    include "tablas/detaelicon.php";
     include "tablas/editconciliacion.php";
     include "footer.php";
 

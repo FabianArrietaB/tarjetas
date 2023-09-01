@@ -248,6 +248,7 @@
             c.con_rteicaban rticaban,
             c.con_comisinew connew,
             c.con_comisiban conban,
+            c.con_estado    estado,
             c.con_fecconcil fecha
             FROM conciliacion AS c
             INNER JOIN sedes AS s ON s.id_sede = c.id_sede
@@ -270,6 +271,7 @@
                 'rticaban' => $registro['rticaban'],
                 'connew' => $registro['connew'],
                 'conban' => $registro['conban'],
+                'estado' => $registro['estado'],
                 'fecha' => $registro['fecha'],
             );
             return $datos;
@@ -389,18 +391,27 @@
             return $respuesta;
         }
 
-        public function eliminarconciliacion($idconciliacion, $estado){
+        public function eliminarconciliacion($datos){
             $conexion = Conexion::conectar();
-            if($estado == 1){
+            $fecha = date("Y-m.d");
+            $modulo = 'EL CONCILIACION';
+            if($datos['estado'] == 1){
                 $estado = 0;
             }else{
                 $estado = 1;
             }
+            $modulo = 'EL REGISTRO';
             $sql = "UPDATE conciliacion SET con_estado = ? WHERE id_conciliacion = ?";
             $query = $conexion->prepare($sql);
-            $query->bind_param('ii', $estado, $idconciliacion);
+            $query->bind_param('ii', $estado, $datos['idconciliacion']);
             $respuesta = $query->execute();
-            $query->close();
+            if($respuesta > 0){
+                $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?)";
+                $query = $conexion->prepare($historial);
+                $ticket = str_pad($datos['idconciliacion'], 2, "0", STR_PAD_LEFT);
+                $query->bind_param('isssss', $datos['idoperador'], $datos['idsede'], $ticket, $datos['detalle'], $modulo, $fecha);
+                $respuesta = $query->execute();
+            }
             return $respuesta;
         }
     }

@@ -198,31 +198,50 @@ function uptcalcular() {
     }
 }
 
-function eliminarconciliacion(idconciliacion, estado){
+function detalleeliminarconciliacion(idconciliacion){
     $.ajax({
         type: "POST",
-        data:"idconciliacion=" + idconciliacion +"&estado=" + estado,
+        data: "idconciliacion=" + idconciliacion,
+        url: "../controller/registros/detelicon.php",
+        success: function(respuesta){
+            respuesta = jQuery.parseJSON(respuesta);
+            console.log(respuesta)
+            $('#idconciliacion').val(respuesta['idconciliacion']);
+            $('#eliestadocon').val(respuesta['estado']);
+            $('#eliidsedecom').val(respuesta['idsede']);
+            $('#elifranquiciacom').val(respuesta['franquicia']);
+            $('#elifechacom').val(respuesta['fecha']);
+        }
+    });
+}
+
+function eliminarregistro(){
+    $.ajax({
+        type: "POST",
+        data: $('#frmeliminarconcili').serialize(),
         url:"../controller/registros/eliminarcon.php",
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                //console.log(respuesta)
+                console.log(respuesta);
                 $('#tablalistaconciliaciones').load('tablas/listaconciliacion.php');
-                    swal.fire({
-                        icon: 'success',
-                        title: 'Registro Eliminado Exitosamente',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                $('#frmeliminarconcili')[0].reset();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Conciliacion Eliminada Exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }else{
-                swal.fire({
+                Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Error al Eliminar!',
+                    text: 'Error al crear!',
                     showConfirmButton: false,
                     timer: 1500
                 });
             }
         }
     });
+    return false;
 }

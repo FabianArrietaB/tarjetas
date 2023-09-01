@@ -12,10 +12,10 @@
                     <fieldset class="group-border">
                         <legend class="group-border"></legend>
                         <div class="row text-center">
-                            <input  type="text" class="form-control" name="idregistro" id="idregistro" placeholder="">
-                            <input  type="text" class="form-control" name="eliestado" id="eliestado" placeholder="">
-                            <input  type="text" class="form-control" name="eliticket" id="eliticket" placeholder="">
-                            <input  type="text" class="form-control" name="eliidsede" id="eliidsede" placeholder="">
+                            <input hidden type="text" class="form-control" name="idregistro" id="idregistro" placeholder="">
+                            <input hidden type="text" class="form-control" name="eliestado" id="eliestado" placeholder="">
+                            <input hidden type="text" class="form-control" name="eliticket" id="eliticket" placeholder="">
+                            <input hidden type="text" class="form-control" name="eliidsede" id="eliidsede" placeholder="">
                             <div class="col">
                                 <div class="mb-3">
                                     <input type="text" class="form-control"  name="detalle" id="detalle" placeholder="Ingrese el Motivo">
