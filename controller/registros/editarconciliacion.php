@@ -1,7 +1,7 @@
 <?php
    session_start();
    $datos = array(
-    'idoperador'      => $_SESSION['usuario']['id'],
+    'idoperador'      => $_SESSION['usuario']['tarid'],
     "idconciliacion"  => $_POST['idconciliacion'],
     "updnewdif"       => $_POST['updnewdif'],
     "updbandif"       => $_POST['updbandif'],

@@ -11,7 +11,7 @@
     }
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     //CONSULTA RESUMEN
     $sqlunico = "SELECT
         r.id_registro     AS idregistro,

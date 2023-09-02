@@ -3,8 +3,8 @@
     include "header.php";
     include "navbar.php";
     if(isset($_SESSION['usuario']) &&
-    $_SESSION['usuario']['rol'] == 4 ||
-    $_SESSION['usuario']['rol'] == 2){
+    $_SESSION['usuario']['tarrol'] == 4 ||
+    $_SESSION['usuario']['tarrol'] == 2){
     include "../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();

@@ -25,7 +25,7 @@
     }
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
         c.con_franquicia as franquicia,

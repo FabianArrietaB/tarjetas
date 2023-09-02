@@ -1,10 +1,10 @@
 <?php
     session_start();
-    if ($_SESSION['usuario']['rol'] == 4) {
+    if ($_SESSION['usuario']['tarrol'] == 4) {
     include "../../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
@@ -30,7 +30,7 @@
      include "../../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,

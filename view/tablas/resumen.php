@@ -1,6 +1,7 @@
 <?php
     session_start();
-    if ($_SESSION['usuario']['rol'] == 4 || $_SESSION['usuario']['rol'] == 2) {
+    if ($_SESSION['usuario']['tarrol'] == 4 ||
+        $_SESSION['usuario']['tarrol'] == 2) {
     include "../../model/conexion.php";
     $hoy = date("Y-m-d");
     if(isset($_GET['date'])){
@@ -8,7 +9,7 @@
     }
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     $sql = "SELECT
         r.id_registro    as idregistro,
         r.reg_tipcuenta  as idtipcuenta,
@@ -33,8 +34,8 @@
     }
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
-    $sede = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
+    $sede = $_SESSION['usuario']['tarsede'];
     $sql = "SELECT
         r.id_registro    as idregistro,
         r.reg_tipcuenta  as idtipcuenta,
@@ -97,7 +98,7 @@
             <td class="bg-grays-active color-palette"><b>Total </b></td>
             <td>
                 <?php
-                if ($_SESSION['usuario']['rol'] == 4) {
+                if ($_SESSION['usuario']['tarrol'] == 4) {
                     $sql=$conexion->query("SELECT round(SUM(reg_diferencia)) as 'precio' from registros where reg_estado = 1 AND reg_fecope = '$hoy'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['precio'];
@@ -112,7 +113,7 @@
             </td>
             <td>
                 <?php
-                    if ($_SESSION['usuario']['rol'] == 4) {
+                    if ($_SESSION['usuario']['tarrol'] == 4) {
                     $sql=$conexion->query("SELECT round(SUM(reg_rtefte)) as 'rtefte' from registros where reg_estado = 1 AND reg_fecope = '$hoy'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['rtefte'];
@@ -127,7 +128,7 @@
             </td>
             <td>
                 <?php
-                    if ($_SESSION['usuario']['rol'] == 4) {
+                    if ($_SESSION['usuario']['tarrol'] == 4) {
                     $sql=$conexion->query("SELECT round(SUM(reg_rteiva)) as 'rteiva' from registros where reg_estado = 1 AND reg_fecope = '$hoy'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['rteiva'];
@@ -142,7 +143,7 @@
             </td>
             <td>
                 <?php
-                if ($_SESSION['usuario']['rol'] == 4) {
+                if ($_SESSION['usuario']['tarrol'] == 4) {
                     $sql=$conexion->query("SELECT round(SUM(reg_rteica)) as 'rteica' from registros where reg_estado = 1 AND reg_fecope = '$hoy'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['rteica'];
@@ -157,7 +158,7 @@
             </td>
             <td>
                 <?php
-                if ($_SESSION['usuario']['rol'] == 4) {
+                if ($_SESSION['usuario']['tarrol'] == 4) {
                     $sql=$conexion->query("SELECT round(SUM(reg_comision)) as 'comision' from registros where reg_estado = 1 AND reg_fecope = '$hoy'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['comision'];
@@ -172,7 +173,7 @@
             </td>
             <td class="bg-danger" style="color:#fff">
                 <?php
-                if ($_SESSION['usuario']['rol'] == 4) {
+                if ($_SESSION['usuario']['tarrol'] == 4) {
                     $sql=$conexion->query("SELECT round(SUM(reg_tardesc)) as 'total' from registros where reg_estado = 1 AND reg_fecope = '$hoy'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['total'];
@@ -187,7 +188,7 @@
             </td>
             <td class="bg-success" style="color:#fff">
                 <?php
-                if ($_SESSION['usuario']['rol'] == 4) {
+                if ($_SESSION['usuario']['tarrol'] == 4) {
                     $sql=$conexion->query("SELECT round(SUM(reg_diferencia) + SUM(reg_rtefte) + SUM(reg_rteiva) + SUM(reg_rteica) + SUM(reg_comision))  as 'total' from registros where reg_estado = 1 AND reg_fecope = '$hoy'");
                     $data = mysqli_fetch_array($sql);
                     $precio = $data['total'];
