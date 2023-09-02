@@ -9,7 +9,7 @@
             $respuesta = mysqli_query($conexion, $sql);
             if(mysqli_num_rows($respuesta) > 0){
                 $datosUsuario = mysqli_fetch_array($respuesta);
-                if($datosUsuario['user_estado'] == 1){
+                if($datosUsuario['user_estado'] == 1 ){
                     $_SESSION['usuario']['tarusuario'] = $datosUsuario['user_nombre'];
                     $_SESSION['usuario']['tarid'] = $datosUsuario['id_usuario'];
                     $_SESSION['usuario']['tarrol'] = $datosUsuario['id_rol'];
