@@ -111,7 +111,7 @@ function detalleconciliacion(idconciliacion){
         url: "../controller/registros/detalleconciliacion.php",
         success: function(respuesta){
             respuesta = jQuery.parseJSON(respuesta);
-            //console.log(respuesta)
+            console.log(respuesta)
             $('#idconciliacion').val(respuesta['idconciliacion']);
             $('#idoperador').val(respuesta['idoperador']);
             $('#idsede').val(respuesta['idsede']);
@@ -140,6 +140,7 @@ function editarconcilacion(){
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
+		console.log(respuesta)
                 $('#editconciliacion').modal('hide');
                 $('#tablalistaconciliaciones').load('tablas/listaconciliacion.php');
                 Swal.fire({
@@ -206,7 +207,7 @@ function detalleeliminarconciliacion(idconciliacion){
         success: function(respuesta){
             respuesta = jQuery.parseJSON(respuesta);
             //console.log(respuesta)
-            $('#idconciliacion').val(respuesta['idconciliacion']);
+            $('#eliidconciliacion').val(respuesta['idconciliacion']);
             $('#eliestadocon').val(respuesta['estado']);
             $('#eliidsedecom').val(respuesta['idsede']);
             $('#elifranquiciacom').val(respuesta['franquicia']);
@@ -223,7 +224,7 @@ function eliminarconcili(){
         success:function(respuesta){
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                //console.log(respuesta);
+                console.log(respuesta);
                 $('#tablalistaconciliaciones').load('tablas/listaconciliacion.php');
                 $('#frmeliminarconcili')[0].reset();
                 Swal.fire({

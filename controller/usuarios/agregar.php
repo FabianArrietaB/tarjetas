@@ -1,7 +1,7 @@
 <?php
    session_start();
    $datos = array(
-   'idoperador' => $_SESSION['usuario']['id'],
+   'idoperador' => $_SESSION['usuario']['tarid'],
    "idpersona"  => $_POST['idpersona'],
    "usuario"    => $_POST['usuario'],
    "password"   => md5($_POST['password']),

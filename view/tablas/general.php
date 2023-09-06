@@ -15,7 +15,7 @@
     }
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
     r.id_sede         AS idsede,

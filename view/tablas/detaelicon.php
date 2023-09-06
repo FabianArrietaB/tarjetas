@@ -12,13 +12,13 @@
                     <fieldset class="group-border">
                         <legend class="group-border"></legend>
                         <div class="row text-center">
-                            <input hidden type="text" class="form-control" name="idconciliacion" id="idconciliacion" placeholder="">
+                            <input type="text" class="form-control" name="eliidconciliacion" id="eliidconciliacion" placeholder="">
                             <input hidden type="text" class="form-control" name="eliestadocon" id="eliestadocon" placeholder="">
                             <input hidden type="text" class="form-control" name="eliidsedecom" id="eliidsedecom" placeholder="">
                             <input hidden type="text" class="form-control" name="elifranquiciacom" id="elifranquiciacom" placeholder="">
                             <input hidden type="text" class="form-control" name="elifechacom" id="elifechacom" placeholder="">
                             <div class="col">
-                                <div class="mb-3">
+                                <div class="">
                                     <input type="text" class="form-control"  name="detallecon" id="detallecom" placeholder="Ingrese el Motivo">
                                 </div>
                             </div>

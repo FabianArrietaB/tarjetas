@@ -3,7 +3,7 @@
     include "../../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     $sql = "SELECT
         p.id_porcentaje as idporcentaje,
         p.por_tipo      as tipo,

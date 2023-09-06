@@ -25,7 +25,7 @@
     }
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
         c.con_franquicia as franquicia,
@@ -172,6 +172,8 @@
             $diferenciarteiva = 0;
             $diferenciarteica = 0;
             $diferenciacomisi = 0;
+			$totaldiferencia = 0;
+			$sumadiferencias = 0;
             while ($valor = mysqli_fetch_array($query)){
                 if ($tipo_tarjeta != $valor['franquicia']) {
                     if ($tipo_tarjeta != '') { ?>
@@ -187,7 +189,7 @@
                                 <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
                                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
-                                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi + $diferencia)) ?></b></td>
+                                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($totaldiferencia)) ?></b></td>
                                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                             </tr>
@@ -198,6 +200,8 @@
                             $diferenciarteiva = 0;
                             $diferenciarteica = 0;
                             $diferenciacomisi = 0;
+							$totaldiferencia = 0;
+							$sumadiferencias = 0;
                     }
                         $tipo_tarjeta = $valor['franquicia'];
                 }
@@ -206,7 +210,8 @@
                             $diferenciarteiva = $valor['banrteiva'] - $valor['newreteiva'];
                             $diferenciarteica = $valor['banretecia'] - $valor['newreteica'];
                             $diferenciacomisi = $valor['bancomisi'] - $valor['newcomisio'];
-                            $total = $valor['newdiferen'];
+                            $totaldiferencia =  $diferencia - $diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi;
+							$sumadiferencias +=$totaldiferencia
                         ?>
                         <tr>
                             <td class="bg--light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquicia'];?></b></td>
@@ -237,11 +242,23 @@
                 <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
-                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi + $diferencia)) ?></b></td>
+                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($totaldiferencia)) ?></b></td>
                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                 <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
             </tr>
         </tbody>
+		<?php if($master != "" && $visa == !"" && $davi == "") {?>
+		<tfoot>
+			<tr>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"><b>Suma Total Diferencias</b></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferencias)) ?></b></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
+			</tr>
+		</tfoot>
+		<?php } ?>
     </table>
 </div>
 <?php } else {

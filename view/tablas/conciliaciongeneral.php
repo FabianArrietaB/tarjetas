@@ -25,7 +25,7 @@
     }
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
         c.con_franquicia AS franquicia,
@@ -134,7 +134,7 @@ $query = mysqli_query($conexion, $sqldiferencia);
                             <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
                             <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                             <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
-                            <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi + $diferencia)) ?></b></td>
+                            <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($diferencia - $diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi)) ?></b></td>
                             <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                             <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                         </tr>

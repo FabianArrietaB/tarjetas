@@ -422,7 +422,7 @@ function detalleeliminacionregistro(idregistro){
         success: function(respuesta){
             respuesta = jQuery.parseJSON(respuesta);
             console.log(respuesta)
-            $('#idregistro').val(respuesta['idregistro']);
+            $('#eliidregistro').val(respuesta['idregistro']);
             $('#eliticket').val(respuesta['ticket']);
             $('#eliestado').val(respuesta['estado']);
             $('#eliidsede').val(respuesta['idsede']);

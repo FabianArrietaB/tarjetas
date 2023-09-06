@@ -290,7 +290,7 @@
                                         con_rteicaban = ?,
                                         con_comisinew = ?,
                                         con_comisiban = ?,
-                                        con_fecupt = ?
+                                        con_fecupd = ?
                                         WHERE id_conciliacion = ?";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
