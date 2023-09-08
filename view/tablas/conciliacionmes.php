@@ -174,6 +174,10 @@
             $diferenciacomisi = 0;
 			$totaldiferencia = 0;
 			$sumadiferencias = 0;
+            $sumadiferenciasrtefte = 0;
+            $sumadiferenciasrteiva = 0;
+            $sumadiferenciasrteica = 0;
+            $sumadiferenciacomisi = 0;
             while ($valor = mysqli_fetch_array($query)){
                 if ($tipo_tarjeta != $valor['franquicia']) {
                     if ($tipo_tarjeta != '') { ?>
@@ -201,7 +205,6 @@
                             $diferenciarteica = 0;
                             $diferenciacomisi = 0;
 							$totaldiferencia = 0;
-							$sumadiferencias = 0;
                     }
                         $tipo_tarjeta = $valor['franquicia'];
                 }
@@ -211,7 +214,11 @@
                             $diferenciarteica = $valor['banretecia'] - $valor['newreteica'];
                             $diferenciacomisi = $valor['bancomisi'] - $valor['newcomisio'];
                             $totaldiferencia =  $diferencia - $diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi;
-							$sumadiferencias +=$totaldiferencia
+							$sumadiferencias +=$diferencia;
+                            $sumadiferenciasrtefte +=$diferenciafte;
+                            $sumadiferenciasrteiva +=$diferenciarteiva;
+                            $sumadiferenciasrteica +=$diferenciarteica;
+                            $sumadiferenciacomisi +=$diferenciacomisi
                         ?>
                         <tr>
                             <td class="bg--light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquicia'];?></b></td>
@@ -251,11 +258,11 @@
 		<tfoot>
 			<tr>
 				<th class="bg-success" style="--bs-bg-opacity: .5;"><b>SUMA TOTAL DIFERENCIAS</b></th>
-				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
-				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
 				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferencias)) ?></b></th>
-				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
-				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferenciasrtefte)) ?></b></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferenciasrteiva)) ?></b></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferenciasrteica)) ?></b></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferenciacomisi)) ?></b></th>
 			</tr>
 		</tfoot>
 		<?php } ?>
