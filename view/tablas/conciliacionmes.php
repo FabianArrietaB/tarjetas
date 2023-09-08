@@ -250,7 +250,7 @@
 		<?php if($master != "" && $visa == !"" && $davi == "") {?>
 		<tfoot>
 			<tr>
-				<th class="bg-success" style="--bs-bg-opacity: .5;"><b>Suma Total Diferencias</b></th>
+				<th class="bg-success" style="--bs-bg-opacity: .5;"><b>SUMA TOTAL DIFERENCIAS</b></th>
 				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
 				<th class="bg-success" style="--bs-bg-opacity: .5;"></th>
 				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferencias)) ?></b></th>
