@@ -161,6 +161,7 @@
                 <th scope="col" >Total ReteIva</th>
                 <th scope="col" >Total ReteIca</th>
                 <th scope="col" >Total Comision</th>
+                <th scope="col" >Suma de Diferecias</th>
             </tr>
         </thead>
         <tbody class="table-light">
@@ -178,6 +179,7 @@
             $sumadiferenciasrteiva = 0;
             $sumadiferenciasrteica = 0;
             $sumadiferenciacomisi = 0;
+            $sumatotaldiferencias = 0;
             while ($valor = mysqli_fetch_array($query)){
                 if ($tipo_tarjeta != $valor['franquicia']) {
                     if ($tipo_tarjeta != '') { ?>
@@ -188,14 +190,7 @@
                                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
                                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
                                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
-                            </tr>
-                            <tr>
-                                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
-                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                                 <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($totaldiferencia)) ?></b></td>
-                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
-                                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                             </tr>
                         <?php
                             $total = 0;
@@ -213,12 +208,13 @@
                             $diferenciarteiva = $valor['banrteiva'] - $valor['newreteiva'];
                             $diferenciarteica = $valor['banretecia'] - $valor['newreteica'];
                             $diferenciacomisi = $valor['bancomisi'] - $valor['newcomisio'];
-                            $totaldiferencia =  $diferencia - $diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi;
+                            $totaldiferencia =  $diferencia + $diferenciafte + $diferenciarteiva + $diferenciarteica + $diferenciacomisi;
 							$sumadiferencias +=$diferencia;
                             $sumadiferenciasrtefte +=$diferenciafte;
                             $sumadiferenciasrteiva +=$diferenciarteiva;
                             $sumadiferenciasrteica +=$diferenciarteica;
-                            $sumadiferenciacomisi +=$diferenciacomisi
+                            $sumadiferenciacomisi +=$diferenciacomisi;
+                            $sumatotaldiferencias +=$totaldiferencia;
                         ?>
                         <tr>
                             <td class="bg--light" ><b><?php echo 'VALOR REGISTRO ' . $valor['franquicia'];?></b></td>
@@ -227,6 +223,7 @@
                             <td><?php echo '$ ' . number_format(round($valor['newreteiva']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newreteica']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['newcomisio']));?></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td class="bg--light" ><b><?php echo 'VALOR BANCO ' . $valor['franquicia'];?></b></td>
@@ -235,6 +232,7 @@
                             <td><?php echo '$ ' . number_format(round($valor['banrteiva']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['banretecia']));?></td>
                             <td><?php echo '$ ' . number_format(round($valor['bancomisi']));?></td>
+                            <td></td>
                         </tr>
             <?php } ?>
             <tr>
@@ -244,14 +242,7 @@
                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteiva));?></b></td>
                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciarteica));?></b></td>
                 <td class="table-info"><b><?php echo '$ ' . number_format(round($diferenciacomisi));?></b></td>
-            </tr>
-            <tr>
-                <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo 'TOTAL DIFERENCIA ' . $tipo_tarjeta?></b></td>
-                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
-                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
                 <td class="bg-warning" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($totaldiferencia)) ?></b></td>
-                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
-                <td class="bg-warning" style="--bs-bg-opacity: .5;"></td>
             </tr>
         </tbody>
 		<?php if($master != "" && $visa == !"" && $davi == "") {?>
@@ -263,6 +254,7 @@
 				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferenciasrteiva)) ?></b></th>
 				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferenciasrteica)) ?></b></th>
 				<th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumadiferenciacomisi)) ?></b></th>
+                <th class="bg-success" style="--bs-bg-opacity: .5;"><b><?php echo '$ ' . number_format(round($sumatotaldiferencias)) ?></b></th>
 			</tr>
 		</tfoot>
 		<?php } ?>
