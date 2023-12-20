@@ -237,7 +237,7 @@ function eliminarconcili(){
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Error al crear!',
+                    text: 'Error al Eliminar!',
                     showConfirmButton: false,
                     timer: 1500
                 });
