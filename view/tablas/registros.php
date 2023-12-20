@@ -1,10 +1,10 @@
 <?php
     session_start();
-    if ($_SESSION['usuario']['rol'] == 4) {
+    if ($_SESSION['usuario']['tarrol'] == 4) {
     include "../../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
@@ -20,15 +20,17 @@
         r.reg_tardesc     as descu,
         r.reg_banco       as banco,
         r.reg_diferencia  as difer,
+        r.reg_estado      as estado,
         r.reg_fecope      as fecha
         FROM registros    AS r
+        WHERE r.reg_estado = 1
         ORDER BY r.id_registro DESC";
     $query = mysqli_query($conexion, $sql);
 } else {
      include "../../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();
-    $idusuario = $_SESSION['usuario']['id'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
@@ -44,9 +46,11 @@
         r.reg_tardesc     as descu,
         r.reg_banco       as banco,
         r.reg_diferencia  as difer,
+        r.reg_estado      as estado,
         r.reg_fecope      as fecha
         FROM registros    AS r
         WHERE r.id_operador = '$idusuario'
+        AND r.reg_estado = 1
         ORDER BY r.id_registro DESC";
     $query = mysqli_query($conexion, $sql);
 }
@@ -58,38 +62,28 @@
             <tr>
                 <th scope="col" >Fecha</th>
                 <th scope="col" >Ticket</th>
+				<th scope="col" >Tipo</th>
+				<th scope="col" >Franquicia</th>
                 <th scope="col" >Valor</th>
                 <th scope="col" >Iva</th>
                 <th scope="col" >Neto</th>
-                <th scope="col" >Rte Fte</th>
-                <th scope="col" >Comision</th>
-                <th scope="col" >Rte IVA</th>
-                <th scope="col" >Rte ICA</th>
-                <th scope="col" >Descuento</th>
-                <th scope="col" >Banco</th>
-                <th scope="col" >Diferencia</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
         <?php
             while ($registros = mysqli_fetch_array($query)){
         ?>
             <tr>
                 <td><?php echo $registros['fecha'];?></td>
-                <td><?php echo $registros['ticket']; ?></td>
+                <td data-bs-toggle="modal" data-bs-target="#elireg" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>)"><?php echo $registros['ticket']; ?></td>
+				<td><?php echo $registros['idtipcuenta']; ?></td>
+				<td><?php echo $registros['tiptar']; ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['iva']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor'] - $registros['iva']); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['retfte'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['comision'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['rteiva'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['rteica'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['descu'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['banco'])); ?></td>
-                <td><?php echo '$ ' . number_format(round($registros['difer'])); ?></td>
                 <td>
-                    <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#editar" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
+                    <button data-bs-toggle="modal" data-bs-target="#editar"  type="button" class="btn btn-warning" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
                 </td>
             </tr>
         <?php } ?>

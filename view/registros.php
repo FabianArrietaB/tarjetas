@@ -3,8 +3,8 @@
     include "header.php";
     include "navbar.php";
     if(isset($_SESSION['usuario']) &&
-    $_SESSION['usuario']['rol'] == 4 ||
-    $_SESSION['usuario']['rol'] == 1){
+    $_SESSION['usuario']['tarrol'] == 4 ||
+    $_SESSION['usuario']['tarrol'] == 1){
     include "../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();
@@ -26,13 +26,13 @@
                     </div>
                 </div>
                 <div class="card-body text-center">
-                    <form id="frmaddregistro" method="post" onsubmit="return addregistro()">
+                    <form id="frmaddregistro" method="post" onsubmit="return validar()">
                         <div class="row text-center">
                             <input hidden type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
-                                    <select id="idtiptar" name="idtiptar" class="form-select" aria-label="Default select example">
+                                    <select id="idtiptar" name="idtiptar" class="form-select" aria-label="Default select example" required>
                                         <option selected>Seleccione</option>
                                         <?php
                                             while($tiptar = mysqli_fetch_array($respuesta)) {
@@ -45,33 +45,33 @@
                             <div class="col-1">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">%</label>
-                                    <input type="text" class="form-control"  name="portar" id="portar" placeholder="000">
+                                    <input type="text" class="form-control"  name="portar" id="portar" placeholder="000" required>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
                                     <div class="input-group">
-                                        <select id="pretik" name="pretik" class="form-select" aria-label="Default select example">
+                                        <select id="pretik" name="pretik" class="form-select" aria-label="Default select example" required>
                                             <option value="CM01">CM01</option>
                                             <option value="CM02">CM02</option>
                                             <option value="CBM">CBM</option>
                                             <option value="CFC">CFC</option>
                                         </select>
-                                        <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000">
+                                        <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Valor</label>
-                                    <input type="text" class="form-control" name="valor" id="valor" placeholder="000000">
+                                    <input type="text" class="form-control" name="valor" id="valor" placeholder="000000" required>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Iva</label>
-                                    <input type="text" class="form-control" name="iva" id="iva" placeholder="000000">
+                                    <input type="text" class="form-control" name="iva" id="iva" placeholder="000000" required>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -149,6 +149,7 @@
 <!-- fin del contenido principal -->
 <!-- por ultimo se carga el footer -->
 <?php
+    include "tablas/detaelireg.php";
     include "tablas/editar.php";
     include "footer.php";
 ?>

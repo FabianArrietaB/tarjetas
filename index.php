@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="public/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="public/fontawesome/css/fontawesome.min.css">
-        <link href="https://tresplazas.com/web/img/big_punto_de_venta.png" rel="shortcut icon">
+        <link href="public/images/icono.jpg" rel="shortcut icon">
         <script src="public/sweetalert2/sweetalert2.all.min.js"></script>
         <title>Inicio de sesión</title>
     </head>
