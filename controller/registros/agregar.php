@@ -3,6 +3,7 @@
    $datos = array(
     'idoperador'     => $_SESSION['usuario']['tarid'],
     'idsede'         => $_SESSION['usuario']['tarsede'],
+    "iddatafo"       => $_POST['iddatafo'],
     "pretik"         => $_POST['pretik'],
     "ticket"         => $_POST['ticket'],
     "idtiptar"       => $_POST['idtiptar'],

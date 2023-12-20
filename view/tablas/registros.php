@@ -8,6 +8,7 @@
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
+        r.id_datafono     as iddatafono,
         r.reg_numticket   as ticket,
         r.reg_tipcuenta   as idtipcuenta,
         r.reg_tiptar      as tiptar,
@@ -34,6 +35,7 @@
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
+        r.id_datafono     as iddatafono,
         r.reg_numticket   as ticket,
         r.reg_tipcuenta   as idtipcuenta,
         r.reg_tiptar      as tiptar,
@@ -76,7 +78,7 @@
         ?>
             <tr>
                 <td><?php echo $registros['fecha'];?></td>
-                <td data-bs-toggle="modal" data-bs-target="#elireg" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>)"><?php echo $registros['ticket']; ?></td>
+                <td data-bs-toggle="modal" data-bs-target="#elireg" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>)"><?php echo str_pad($registros['iddatafono'],2,"0",STR_PAD_LEFT). ' - ' . $registros['ticket']; ?></td>
 				<td><?php echo $registros['idtipcuenta']; ?></td>
 				<td><?php echo $registros['tiptar']; ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor']); ?></td>

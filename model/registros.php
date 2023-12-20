@@ -10,6 +10,7 @@
             $sql = "INSERT INTO registros (
                 id_sede,
                 id_operador,
+                id_datafono,
                 reg_numticket,
                 reg_tipcuenta,
                 reg_tiptar,
@@ -22,13 +23,14 @@
                 reg_tardesc,
                 reg_banco,
                 reg_diferencia,
-                reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
-            $query->bind_param("iisisssssssssss",
+            $query->bind_param("iiisisssssssssss",
                     $datos['idsede'],
                     $datos['idoperador'],
+                    $datos['iddatafo'],
                     $prefijo,
                     $datos['idtiptar'],
                     $datos['tiptar'],
@@ -329,10 +331,10 @@
             }
         }
 
-        public function ConsultaFactura($pretik, $ticket){
+        public function ConsultaFactura($pretik, $iddatafo, $ticket){
             $conexion = Conexion::conectar();
             $numtik = $pretik . ' - ' . $ticket;
-            $sql = "SELECT * FROM registros r INNER JOIN usuarios u ON u.id_usuario = r.id_operador WHERE r.reg_numticket = '$numtik'";
+            $sql = "SELECT * FROM registros r INNER JOIN usuarios u ON u.id_usuario = r.id_operador WHERE r.reg_numticket = '$numtik' AND r.id_datafono = $iddatafo";
             $respuesta = mysqli_query($conexion,$sql);
             if(mysqli_num_rows($respuesta) > 0){
                 $datosFactura = mysqli_fetch_array($respuesta);

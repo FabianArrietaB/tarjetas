@@ -53,7 +53,6 @@
                 </ul>
             </div>
         </div>
-        
         <span class="navbar-brand" href="#">Usuario:</span>
         <a class="mr-sm-2 btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#contraseña" onclick="detallepass('<?php echo $idusuario?>')"><?php echo $_SESSION['usuario']['tarusuario'] ?></a>
         <a href="../controller/usuarios/salir.php" class="btn btn-danger" type="submit">
