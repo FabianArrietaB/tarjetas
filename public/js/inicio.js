@@ -96,6 +96,7 @@ function detalleregistro(idregistro){
             $('#comisiu').val(respuesta['comision']);
             $('#bancou').val(respuesta['banco']);
             $('#diferenciau').val(respuesta['difer']);
+            $('#fechau').val(respuesta['fecope']);
         }
     });
 }

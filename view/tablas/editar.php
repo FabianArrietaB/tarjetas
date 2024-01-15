@@ -97,6 +97,16 @@
                                     <input type="text" class="form-control" name="diferenciau" id="diferenciau" placeholder="000000" readonly>
                                 </div>
                             </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Fecha Registro</label>
+                                    <input type="date" class="form-control"  name="fechau" id="fechau" required>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                            </div>
                         </div>
                     </fieldset>
                     <div class="card-footer text-center">

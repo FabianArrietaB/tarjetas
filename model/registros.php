@@ -86,6 +86,7 @@
             r.reg_banco       as banco,
             r.reg_estado      as estado,
             r.reg_diferencia  as difer,
+            r.reg_fecope      as fecope,
             (p.por_mes * 100) as portar
             FROM registros    AS r
             INNER JOIN porcentajes AS p ON p.id_porcentaje = r.reg_tipcuenta
@@ -110,6 +111,7 @@
                 'banco' => $registro['banco'],
                 'estado' => $registro['estado'],
                 'difer' => $registro['difer'],
+                'fecope' => $registro['fecope'],
             );
             return $datos;
         }
@@ -128,11 +130,12 @@
                                         reg_comision = ?,
                                         reg_tardesc = ?,
                                         reg_banco = ?,
-                                        reg_diferencia = ?
+                                        reg_diferencia = ?,
+                                        reg_fecope = ?
                                         WHERE id_registro = ?";
             $query = $conexion->prepare($sql);
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
-            $query->bind_param('ssssssssssssi',
+            $query->bind_param('sssssssssssssi',
                                 $datos['ticket'],
                                 $datos['idtiptar'],
                                 $datos['tiptar'],
@@ -145,6 +148,7 @@
                                 $descuento,
                                 $datos['banco'],
                                 $datos['diferencia'],
+                                $datos['fecha'],
                                 $datos['idregistro']);
             $respuesta = $query->execute();
             $query->close();

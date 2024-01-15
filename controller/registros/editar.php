@@ -14,6 +14,7 @@
     "comisi"         => $_POST['comisiu'],
     "banco"          => $_POST['bancou'],
     "diferencia"     => $_POST['diferenciau'],
+    "fecha"          => $_POST['fechau'],
    );
 
    include "../../model/registros.php";
