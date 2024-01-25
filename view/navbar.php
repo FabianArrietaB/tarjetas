@@ -24,7 +24,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="consultas.php">GENERAL</a>
                     </li>
-					 <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link active" href="conciliacion.php">CONCILIACION</a>
                     </li>
                     <?php } else if ($_SESSION['usuario']['tarrol'] == 4) { ?>
