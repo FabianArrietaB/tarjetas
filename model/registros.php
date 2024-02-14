@@ -11,6 +11,7 @@
                 id_sede,
                 id_operador,
                 id_datafono,
+                id_tipregistro,
                 reg_numticket,
                 reg_tipcuenta,
                 reg_tiptar,
@@ -23,14 +24,20 @@
                 reg_tardesc,
                 reg_banco,
                 reg_diferencia,
-                reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
-            $query->bind_param("iiisisssssssssss",
+            if ($datos['area'] = 3) {
+                $idtipregistro = 2;
+            }else{
+                $idtipregistro = 1;
+            }
+            $query->bind_param("iiiisisssssssssss",
                     $datos['idsede'],
                     $datos['idoperador'],
                     $datos['iddatafo'],
+                    $idtipregistro,
                     $prefijo,
                     $datos['idtiptar'],
                     $datos['tiptar'],

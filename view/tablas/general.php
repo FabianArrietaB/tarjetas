@@ -18,23 +18,44 @@
     $idusuario = $_SESSION['usuario']['tarid'];
     //CONSULTA DIFERENCIA
     $sqldiferencia = "SELECT
-    r.id_sede         AS idsede,
-    s.sed_nombre      AS sede,
-    r.id_registro     AS idregistro,
-    r.id_operador     AS idoperador,
-    r.reg_tiptar          AS tiptar,
-    r.reg_estado          AS estado,
-    SUM(r.reg_diferencia) AS diferencia,
-    SUM(r.reg_rtefte)     AS retefuente,
-    SUM(r.reg_rteiva)     AS reteiva,
-    SUM(r.reg_rteica)     AS reteica,
-    SUM(r.reg_comision)   AS comision
-FROM registros AS r
-INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
-INNER JOIN sedes AS s On r.id_sede = s.id_sede
-WHERE r.reg_estado = 1 AND r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
-$querydiferencia = mysqli_query($conexion, $sqldiferencia);
-$rwdiferencia = mysqli_fetch_array($querydiferencia);
+        r.id_sede         AS idsede,
+        s.sed_nombre      AS sede,
+        r.id_registro     AS idregistro,
+        r.id_tipregistro     AS idtipregistro,
+        r.id_operador     AS idoperador,
+        r.reg_tiptar          AS tiptar,
+        r.reg_estado          AS estado,
+        SUM(r.reg_diferencia) AS diferencia,
+        SUM(r.reg_rtefte)     AS retefuente,
+        SUM(r.reg_rteiva)     AS reteiva,
+        SUM(r.reg_rteica)     AS reteica,
+        SUM(r.reg_comision)   AS comision
+    FROM registros AS r
+    INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
+    INNER JOIN sedes AS s On r.id_sede = s.id_sede
+    WHERE r.reg_estado = 1 AND r.id_tipregistro = 1 AND r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
+    $querydiferencia = mysqli_query($conexion, $sqldiferencia);
+    $rwdiferencia = mysqli_fetch_array($querydiferencia);
+    //CONSULTA DOMICILIOS
+    $sqldomicilio = "SELECT
+        r.id_sede         AS idsede,
+        s.sed_nombre      AS sede,
+        r.id_registro     AS idregistro,
+        r.id_tipregistro     AS idtipregistro,
+        r.id_operador     AS idoperador,
+        r.reg_tiptar          AS tiptar,
+        r.reg_estado          AS estado,
+        SUM(r.reg_diferencia) AS diferencia,
+        SUM(r.reg_rtefte)     AS retefuente,
+        SUM(r.reg_rteiva)     AS reteiva,
+        SUM(r.reg_rteica)     AS reteica,
+        SUM(r.reg_comision)   AS comision
+    FROM registros AS r
+    INNER JOIN usuarios AS u ON u.id_usuario = r.id_operador
+    INNER JOIN sedes AS s On r.id_sede = s.id_sede
+    WHERE r.reg_estado = 1 AND r.id_tipregistro = 2 AND r.reg_fecope = '$hoy' AND r.reg_tiptar = '$franquicia' AND r.id_sede = '$sede'";
+    $querydomicilio = mysqli_query($conexion, $sqldomicilio);
+    $rwdomicilio = mysqli_fetch_array($querydomicilio);
 ?>
 <!-- inicio Tabla -->
 <?php if($sede != "") { ?>
@@ -113,7 +134,7 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="bddif" name="bddif" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['diferencia']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="domdif" name="domdif" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                        <input type="text" id="domdif" name="domdif" class="form-control text-center input-sm" value="<?php echo round($rwdomicilio['diferencia']) ?>" placeholder="Valor Domicilio" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="newdif" name="newdif" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
@@ -130,7 +151,7 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="bdrte" name="bdrte" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['retefuente']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="domrte" name="domrte" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                        <input type="text" id="domrte" name="domrte" class="form-control text-center input-sm" value="<?php echo round($rwdomicilio['retefuente']) ?>" placeholder="Valor Domicilio" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="newrte" name="newrte" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
@@ -147,7 +168,7 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="bdiva" name="bdiva" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteiva']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="domiva" name="domiva" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                        <input type="text" id="domiva" name="domiva" class="form-control text-center input-sm" value="<?php echo round($rwdomicilio['reteiva']) ?>" placeholder="Valor Domicilio" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="newiva" name="newiva" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
@@ -164,7 +185,7 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="bdica" name="bdica" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['reteica']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="domica" name="domica" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                        <input type="text" id="domica" name="domica" class="form-control text-center input-sm" value="<?php echo round($rwdomicilio['reteica']) ?>" placeholder="Valor Domicilio" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="newica" name="newica" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>
@@ -181,7 +202,7 @@ $rwdiferencia = mysqli_fetch_array($querydiferencia);
                         <input type="text" id="bdcom" name="bdcom" class="form-control text-center input-sm" value="<?php echo round($rwdiferencia['comision']) ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" id="domcom" name="domcom" class="form-control text-center input-sm" placeholder="Valor Domicilio" required>
+                        <input type="text" id="domcom" name="domcom" class="form-control text-center input-sm" value="<?php echo round($rwdomicilio['comision']) ?>" placeholder="Valor Domicilio" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="newcom" name="newcom" class="form-control text-center input-sm" placeholder="Nuevo Valor" readonly>

@@ -12,6 +12,5 @@ class Conexion{
       $conexion = mysqli_connect($servidor, $usuario, $password, $db);
       return $conexion;
    }
-
 }
 ?>
