@@ -14,19 +14,19 @@
             <div class="card border-primary">
                 <div class="card-header bg-success text-center text-white">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <h4>DOCUMENTOS INACTIVOS</h4>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-6 text-center"">
+                        <div class="col-xs-12 col-sm-6 col-md-6 text-center">
                             <a class="acard" type="button" id="registros">
                                 <div class="card border-danger text-white bg-primary mb-3">
                                     <div class="card-header">
                                         <div class="row">
-                                            <div class="col-sm-12">
+                                            <div class="col-xs-12 col-sm-12 col-md-12">
                                                 <i class="fa-solid fa-list-ol fa-3x"></i>
                                             </div>
                                         </div>
@@ -37,13 +37,13 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-6 text-center"">
+                        <div class="col-xs-12 col-sm-6 col-md-6 text-center">
                             <a class="acard" type="button" id="conciliacion">
                                 <div class="card border-danger text-white bg-primary mb-3">
                                     <div class="card-header">
                                         <div class="row">
-                                            <div class="col-sm-12">
-                                            <i class="fa-solid fa-list-check fa-3x"></i>
+                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                <i class="fa-solid fa-list-check fa-3x"></i>
                                             </div>
                                         </div>
                                     </div>

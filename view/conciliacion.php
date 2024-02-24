@@ -19,19 +19,19 @@
                         <h2>RESUMEN CONCILIACION</h2>
                     </div>
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-xs-12 col-sm-4 col-md-2">
                             <div class="input-group ">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Desde</span>
                                 <input type="date" class="form-control" id="desde" name="desde" tabindex="2" maxlength="10" size="20">
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-xs-12 col-sm-4 col-md-2">
                             <div class="input-group ">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Hasta</span>
                                 <input type="date" class="form-control" id="hasta" name="hasta" tabindex="2" maxlength="10" size="20">
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-xs-12 col-sm-4 col-md-2">
                             <div class="input-group ">
                                 <span class="input-group-text" id="inputGroup-sizing-default">SEDE</span>
                                 <select name="sede" id="sede" class="form-control input-sm" require>
@@ -41,7 +41,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="inlineCheckbox1">Mastercard</label>
                                 <input id="master" name="master" class="form-check-input" type="checkbox" value="MASTERCARD">
@@ -55,7 +55,7 @@
                                 <input id="davi" name="davi" class="form-check-input" type="checkbox" value="DAVIVIENDA">
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                             <div class="input-group input-group-sm">
                                 <div class="d-grid gap-1 d-md-block">
                                     <!-- <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()"> -->

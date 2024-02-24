@@ -21,12 +21,12 @@
         <div class="card border-primary">
             <div class="card-header text-center">
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-xs-12 col-sm-6 col-md-10">
                         <div class="title">
                             <h2>RESUMEN CAJA</h2>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-xs-12 col-sm-6 col-md-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
                             <select name="date" id="date" onchange="obtenerfecha()" class="form-control input-sm">

@@ -11,7 +11,7 @@
 <!-- inicio del contenido principal -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="card border-primary">
                 <div class="card-header text-center">
                     <div class="title">

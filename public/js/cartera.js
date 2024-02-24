@@ -60,7 +60,7 @@ function clientes(docume){
             data.forEach((item) => {
             total += Number(item.saldo);
             tbl += `
-                <tr ondblclick="facturas('${item.nit}')" class="bg-white border-b">
+                <tr ondblclick="facturas('${item.nit}', '${item.cliente}')" class="bg-white border-b">
                     <td class="text-center">${item.nit} - ${item.cliente}</td>
                     <td class="text-center">${item.vendedor}</td>
                     <td class="text-center ${(item.por_vencer < 0) ? 'text-danger':''}">${formatterPeso.format(Number(item.por_vencer))}</td>
@@ -75,7 +75,7 @@ function clientes(docume){
             tbl += `
                 <tr class="table-secondary">
                     <th colspan="7">TOTAL</th>
-                    <th colspan="1" class="text-right">${formatterPeso.format(Number(total))}</th>
+                    <td class="text-center ${(total < 0) ? 'text-danger':''}">${ formatterPeso.format(Number(total))}</td>
                 </tr>
             `
             document.getElementById(`tblclientes`).innerHTML = tbl
@@ -84,7 +84,7 @@ function clientes(docume){
     //console.log(fecha)
 }
 
-function facturas(nit){
+function facturas(nit, cliente){
     $.ajax({
         url : "../controller/cartera/facturas.php",
         data: "nit="+ nit,
@@ -99,6 +99,9 @@ function facturas(nit){
             totalvalor += Number(item.valor);
             totalabono += Number(item.abono);
             totalsaldo += Number(item.saldo);
+            direcc =  item.direccion;
+            telefono = item.telefono;
+            email = item.correo;
             tbl += `
                 <tr class="bg-white border-b">
                     <td class="text-center">${item.factura}</td>
@@ -114,12 +117,39 @@ function facturas(nit){
             tbl += `
                 <tr class="table-secondary">
                     <th colspan="4">TOTAL</th>
-                    <th colspan="1" class="text-right">${totalvalor}</th>
-                    <th colspan="1" class="text-right">${totalabono}</th>
-                    <th colspan="1" class="text-right">${totalsaldo}</th>
+                    <td class="text-center ${(totalvalor < 0) ? 'text-danger':''}">${ formatterPeso.format(Number(totalvalor))}</td>
+                    <td class="text-center ${(totalabono < 0) ? 'text-danger':''}">${ formatterPeso.format(Number(totalabono))}</td>
+                    <td class="text-center ${(totalsaldo < 0) ? 'text-danger':''}">${ formatterPeso.format(Number(totalsaldo))}</td>
                 </tr>
             `
+            var title = `
+                <h5 class="modal-title" role="title" id="exampleModalLabel">Documentos de ${cliente}</h5>
+            `
+            var bodi = `
+                <div class="row">
+                    <div class="col-4 text-left">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><strong>Dirección</strong></span>
+                            <input disable value="${direcc}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><strong>Telefono</strong></span>
+                            <input disable value="${telefono}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div class="col-4 text-right">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><strong>Correo</strong></span>
+                            <input disable value="${email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                </div>
+            `
             document.getElementById(`tblfacturas`).innerHTML = tbl
+            document.getElementById(`title`).innerHTML = title
+            document.getElementById(`body`).innerHTML = bodi
             modal.modal('show')
         }
     });
