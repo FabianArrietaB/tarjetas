@@ -18,7 +18,7 @@
                     <div class="title">
                         <h2>RESUMEN DIFERENCIA BANCO</h2>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2">
+                    <div class="col-xs-12 col-sm-6 col-md-2 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">MEs</span>
                             <select name="mes" id="mes" class="form-control input-sm" require>
@@ -38,7 +38,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
                             <select name="dategen" id="dategen" class="form-control input-sm" require>
@@ -46,7 +46,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Operador</span>
                             <select name="sede" id="sede" class="form-control input-sm" require>
@@ -56,7 +56,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Franquicia</span>
                             <select name="franquicia" id="franquicia" class="form-control input-sm" require>
