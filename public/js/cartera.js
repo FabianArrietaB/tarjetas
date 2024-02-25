@@ -135,14 +135,19 @@ function facturas(nit, cliente){
                     </div>
                     <div class="col-4 text-center">
                         <div class="input-group input-group-sm">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><strong>Correo</strong></span>
+                            <input disable value="${email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="input-group input-group-sm">
                             <span class="input-group-text" id="inputGroup-sizing-default"><strong>Telefono</strong></span>
                             <input disable value="${telefono}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
-                    <div class="col-4 text-right">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text" id="inputGroup-sizing-default"><strong>Correo</strong></span>
-                            <input disable value="${email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <div class="col-1 text-right">
+                        <div class="d-grid gap-2">
+                            <button onClick="observacion('${nit}', '${cliente}')" class="btn btn-outline-warning btn-sm" type="button"><i class="fa-solid fa-circle-info"></i></button>
                         </div>
                     </div>
                 </div>
@@ -155,6 +160,61 @@ function facturas(nit, cliente){
     });
     //console.log(fecha)
 }
+
+function observacion(nit, cliente){
+    var input = `<form id="frmaddobservacion" method="post" onsubmit="return addobservacion()">
+                    <div class="row">
+                        <div class="col-10 text-left">
+                            <input id="nit" name="nit" value="${nit}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input id="nombre" name="nombre" value="${cliente}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <div class="input-group">
+                                <span class="input-group-text" id="inputGroup-sizing-default"><strong>Observacion</strong></span>
+                                <input id="detalle" name="detalle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </div>
+                        <div class="col-2 text-center">
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary"><i class=  "fa fa-save"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                `
+
+    document.getElementById(`observacion`).innerHTML = input
+}
+
+function addobservacion(){
+    $.ajax({
+        type: "POST",
+        data: $('#frmaddobservacion').serialize(),
+        url: "../controller/cartera/addobservacion.php",
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                //console.log(respuesta);
+                $('#observacion').empty();
+                $('#frmaddobservacion')[0].reset();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Observacion Agregada Exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al crear!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    });
+    return false;
+}
+
 
 window.onload=function(){
     tblclientes();

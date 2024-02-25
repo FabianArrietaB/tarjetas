@@ -96,6 +96,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="row">
+                    <div id="observacion"></div>
+                </div>
             </div>
         </div>
     </div>
