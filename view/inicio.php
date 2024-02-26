@@ -3,9 +3,7 @@
     include "header.php";
     include "navbar.php";
     if(isset($_SESSION['usuario']) &&
-    $_SESSION['usuario']['tarrol'] == 4 ||
-    $_SESSION['usuario']['tarrol'] == 2 ||
-    $_SESSION['usuario']['tarrol'] == 1){
+    include "permisos.php"){
     include "../model/conexion.php";
     $con = new Conexion();
     $conexion = $con->conectar();

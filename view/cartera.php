@@ -3,7 +3,8 @@
     include "header.php";
     include "navbar.php";
     if(isset($_SESSION['usuario']) &&
-    $_SESSION['usuario']['tarrol'] == 4 ){
+    $_SESSION['usuario']['tarrol'] == 4 ||
+    $_SESSION['usuario']['tarrol'] == 5){
     include "../model/conexion.php";
 ?>
 <!-- inicio del contenido principal -->
@@ -12,9 +13,14 @@
         <div class="card border-primary">
             <div class="card-header text-center">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-12 col-sm-8 col-md-10">
                         <div class="title">
                             <h2>INFORMACION CLIENTES</h2>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-2">
+                    <div class="d-grid gap-2">
+                            <a  href="observaciones.php" class="btn btn-outline-primary" type="button">Observaciones</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +77,7 @@
         <div class="modal-content">
             <div class="modal-header">
             <div id="title"></div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button onclick="clear()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -98,6 +104,32 @@
                 </div>
                 <div class="row">
                     <div id="observacion"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalobservaciones" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <div id="title2"></div>
+                <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <table class="table table-sm font-small">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblobservaciones">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

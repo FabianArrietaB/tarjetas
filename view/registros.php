@@ -3,7 +3,8 @@
     include "header.php";
     include "navbar.php";
     if(isset($_SESSION['usuario']) &&
-    $_SESSION['usuario']['tarrol'] == 1){
+    $_SESSION['usuario']['tarrol'] == 1 ||
+    $_SESSION['usuario']['tarrol'] == 5){
     include "../model/conexion.php";
     $idusuario = $_SESSION['usuario']['tarid'];
     $con = new Conexion();

@@ -1,4 +1,5 @@
 let modal = $('#modalfacturas');
+let modaldetalles = $('#modalobservaciones');
 
 const formatterPeso = new Intl.NumberFormat('es-CO', {
     style: 'currency',
@@ -165,8 +166,8 @@ function observacion(nit, cliente){
     var input = `<form id="frmaddobservacion" method="post" onsubmit="return addobservacion()">
                     <div class="row">
                         <div class="col-10 text-left">
-                            <input id="nit" name="nit" value="${nit}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                            <input id="nombre" name="nombre" value="${cliente}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input hidden id="nit" name="nit" value="${nit}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input hidden id="nombre" name="nombre" value="${cliente}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             <div class="input-group">
                                 <span class="input-group-text" id="inputGroup-sizing-default"><strong>Observacion</strong></span>
                                 <input id="detalle" name="detalle" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -215,6 +216,77 @@ function addobservacion(){
     return false;
 }
 
+$('#obsnit').keyup(function (event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+        if($("#obsnit").val() == ""){
+            Swal.fire({
+                title: "Respuesta",
+                text: 'Nombre o Documento es Requerido',
+                icon: 'warning'
+            });
+        }else{
+            datoscliente()
+        }
+    }
+});
+
+function datoscliente(){
+    nit = $("#obsnit").val();
+    $.ajax({
+        url : "../controller/cartera/buscarcliente.php",
+        data: {'documento': nombre},
+        type : 'GET',
+        dataType: 'json',
+        success: function (data) {
+            if(!data){
+                Swal.fire({
+                    title: "Respuesta",
+                    text: 'No hay Registros con esa identificacion',
+                    icon: 'warning'
+                });
+            }else{
+                $("#obsnit").val(data[0].id);
+                $("#nombre").val(data[0].nombre);
+            }
+            Swal.fire({
+                title: "Datos Cargados",
+                text: 'Datos de ' +data[0].nombre+' cargados',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    });
+    generarobservaciones();
+}
+
+function generarobservaciones(){
+    nombre = $("#nombre").val();
+    $.ajax({
+        url : "../controller/cartera/observaciones.php",
+        data: {'documento': nombre},
+        type : 'GET',
+        dataType: 'json',
+        success: function (data) {
+            let tbl = '';
+            data.forEach((item) => {
+            tbl += `
+                <tr class="bg-white border-b">
+                    <td class="py-3 px-6 text-center">${item.fecha}</td>
+                    <td class="py-3 px-6 text-center">${item.obser}</td>
+                </tr>
+            `
+            });
+            document.getElementById(`tblobservaciones`).innerHTML = tbl
+        }
+    });
+}
+
+function clear(){
+    $('#observacion').empty();
+    $('#frmaddobservacion')[0].reset();
+}
 
 window.onload=function(){
     tblclientes();
