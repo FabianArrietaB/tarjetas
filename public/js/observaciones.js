@@ -7,6 +7,6 @@ $(document).ready(function(){
         function(){
             const filtro = $('#filtro').val()
             $('#observaciones').load('cartera/tblobservaciones.php?filtro='+filtro);
-        },1000
+        },3000
     );
 });
