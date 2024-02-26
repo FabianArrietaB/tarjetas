@@ -195,13 +195,7 @@ function addobservacion(){
             if(respuesta == 1){
                 //console.log(respuesta);
                 $('#observacion').empty();
-                $('#frmaddobservacion')[0].reset();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Observacion Agregada Exitosamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                toastr.success('Observacion Agregada!', 'Agregada')
             }else{
                 Swal.fire({
                     icon: 'error',
@@ -216,72 +210,7 @@ function addobservacion(){
     return false;
 }
 
-$('#obsnit').keyup(function (event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode == '13') {
-        if($("#obsnit").val() == ""){
-            Swal.fire({
-                title: "Respuesta",
-                text: 'Nombre o Documento es Requerido',
-                icon: 'warning'
-            });
-        }else{
-            datoscliente()
-        }
-    }
-});
 
-function datoscliente(){
-    nit = $("#obsnit").val();
-    $.ajax({
-        url : "../controller/cartera/buscarcliente.php",
-        data: {'documento': nombre},
-        type : 'GET',
-        dataType: 'json',
-        success: function (data) {
-            if(!data){
-                Swal.fire({
-                    title: "Respuesta",
-                    text: 'No hay Registros con esa identificacion',
-                    icon: 'warning'
-                });
-            }else{
-                $("#obsnit").val(data[0].id);
-                $("#nombre").val(data[0].nombre);
-            }
-            Swal.fire({
-                title: "Datos Cargados",
-                text: 'Datos de ' +data[0].nombre+' cargados',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 2000
-            });
-        }
-    });
-    generarobservaciones();
-}
-
-function generarobservaciones(){
-    nombre = $("#nombre").val();
-    $.ajax({
-        url : "../controller/cartera/observaciones.php",
-        data: {'documento': nombre},
-        type : 'GET',
-        dataType: 'json',
-        success: function (data) {
-            let tbl = '';
-            data.forEach((item) => {
-            tbl += `
-                <tr class="bg-white border-b">
-                    <td class="py-3 px-6 text-center">${item.fecha}</td>
-                    <td class="py-3 px-6 text-center">${item.obser}</td>
-                </tr>
-            `
-            });
-            document.getElementById(`tblobservaciones`).innerHTML = tbl
-        }
-    });
-}
 
 function clear(){
     $('#observacion').empty();
