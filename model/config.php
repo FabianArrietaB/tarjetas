@@ -5,15 +5,9 @@
 
         public function adddatuser($datos){
             $conexion = Conexion::conectar();
-            $sql = "INSERT INTO data_usuario (
-                id_operador,
-                id_datafono,
-                id_usuario) VALUES( ?, ?, ?)";
+            $sql = "INSERT INTO data_usuario ( id_operador, id_datafono, id_usuario) VALUES( ?, ?, ?)";
             $query = $conexion->prepare($sql);
-            $query->bind_param("iii",
-                    $datos['idoperador'],
-                    $datos['iddatafo'],
-                    $datos['idusuario']);
+            $query->bind_param("iii", $datos['idoperador'], $datos['iddatafo'], $datos['idusuario']);
             $respuesta = $query->execute();
             return $respuesta;
         }
@@ -30,15 +24,9 @@
 
         public function addpreuser($datos){
             $conexion = Conexion::conectar();
-            $sql = "INSERT INTO prefij_usuario (
-                id_operador,
-                id_prefijo,
-                id_usuario) VALUES( ?, ?, ?)";
+            $sql = "INSERT INTO prefij_usuario ( id_operador, id_prefijo, id_usuario) VALUES( ?, ?, ?)";
             $query = $conexion->prepare($sql);
-            $query->bind_param("iii",
-                    $datos['idoperador'],
-                    $datos['idprefij'],
-                    $datos['idusuario']);
+            $query->bind_param("iii", $datos['idoperador'], $datos['idprefij'], $datos['idusuario']);
             $respuesta = $query->execute();
             return $respuesta;
         }
@@ -55,17 +43,9 @@
 
         public function adddatafono($datos){
             $conexion = Conexion::conectar();
-            $sql = "INSERT INTO datafonos (
-                id_operador,
-                id_sede,
-                dat_serial,
-                dat_nombre) VALUES( ?, ?, ?, ?)";
+            $sql = "INSERT INTO datafonos ( id_operador, id_sede, dat_serial, dat_nombre) VALUES( ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
-            $query->bind_param("iiss",
-                    $datos['idoperador'],
-                    $datos['idsede'],
-                    $datos['serial'],
-                    $datos['datafono']);
+            $query->bind_param("iiss",  $datos['idoperador'], $datos['idsede'], $datos['serial'], $datos['datafono']);
             $respuesta = $query->execute();
             return $respuesta;
         }
@@ -82,15 +62,9 @@
 
         public function addprefijo($datos){
             $conexion = Conexion::conectar();
-            $sql = "INSERT INTO prefijos (
-                id_operador,
-                id_sede,
-                pre_nombre) VALUES( ?, ?, ?)";
+            $sql = "INSERT INTO prefijos ( id_operador, id_sede, pre_nombre) VALUES( ?, ?, ?)";
             $query = $conexion->prepare($sql);
-            $query->bind_param("iis",
-                    $datos['idoperador'],
-                    $datos['idsede'],
-                    $datos['nombre']);
+            $query->bind_param("iis", $datos['idoperador'], $datos['idsede'], $datos['nombre']);
             $respuesta = $query->execute();
             return $respuesta;
         }
