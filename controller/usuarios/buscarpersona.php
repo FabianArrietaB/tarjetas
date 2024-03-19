@@ -17,4 +17,4 @@
     }
     // return the result in json
     echo json_encode($data);
-    ?>
+?>

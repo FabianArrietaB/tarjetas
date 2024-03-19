@@ -16,6 +16,7 @@
         <!-- <script src="./.././../public/app/publico/js/lib/datatables-net/datatables.min.js"></script> -->
         <!-- sweet alert -->
         <script src="./../public/sweetalert2/sweetalert2.all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="./../public/js/usuarios/funciones.js"></script>
     </body>
 </html>

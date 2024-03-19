@@ -13,10 +13,10 @@
     <div class="page-content">
         <div class="card border-primary">
             <div class="row">
-                <div class="col-12">
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="card-header text-center">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="title">
                                     <h2>EVENTOS DEL SISTEMA</h2>
                                 </div>

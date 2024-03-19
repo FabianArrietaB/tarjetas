@@ -18,7 +18,7 @@
                     <div class="title">
                         <h2>RESUMEN DIFERENCIA BANCO</h2>
                     </div>
-                    <div class="col-2">
+                    <div class="col-xs-12 col-sm-6 col-md-2 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">MEs</span>
                             <select name="mes" id="mes" class="form-control input-sm" require>
@@ -38,7 +38,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
                             <select name="dategen" id="dategen" class="form-control input-sm" require>
@@ -46,7 +46,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Operador</span>
                             <select name="sede" id="sede" class="form-control input-sm" require>
@@ -56,7 +56,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
                         <div class="input-group ">
                             <span class="input-group-text" id="inputGroup-sizing-default">Franquicia</span>
                             <select name="franquicia" id="franquicia" class="form-control input-sm" require>
@@ -71,7 +71,7 @@
 							</select>
                         </div>
                     </div>
-                    <div class="col-1 aling-items-center">
+                    <div class="col-xs-12 col-sm-1 col-md-1 aling-items-center">
                         <div class="input-group input-group-sm">
                             <div class="d-grid gap-1 d-md-block">
                                 <button class="btn btn-info" type="button" value="Buscar" onclick="infgeneral()"><i class="fa-solid fa-magnifying-glass"></i></button>
