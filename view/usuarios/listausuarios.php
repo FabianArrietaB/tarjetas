@@ -80,5 +80,8 @@
         <?php } ?>
         </tbody>
     </table>
+    <div class = "col-md-12 text-center" >
+        <ul class = "paginación paginación-lg buscapersonas" id = "developer_page" ></ul> 
+    </div>
 </div>
 <!-- fin de la tabla -->

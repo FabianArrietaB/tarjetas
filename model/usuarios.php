@@ -26,6 +26,11 @@
 
         public function activarusuario($idusuario, $estado){
             $conexion = Conexion::conectar();
+            if($estado == 1){
+                $estado = 0;
+            }else{
+                $estado = 1;
+            }
             $sql = "UPDATE usuarios SET user_estado = ? WHERE id_usuario = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('ii', $estado, $idusuario);

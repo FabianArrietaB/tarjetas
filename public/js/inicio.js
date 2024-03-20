@@ -18,6 +18,17 @@ $(document).ready(function(){
     $('#tablaregistrosgeneral').load('tablas/tablageneral.php');
 });
 
+$(document).ready(function () {
+    (function($) {
+        $('#filtro').keyup(function () {
+            var ValorBusqueda = new RegExp($(this).val(), 'i');
+            $('#tblregistros tr').hide();
+            $('#tblregistros tr').filter(function () {
+                return ValorBusqueda.test($(this).text());
+            }).show();
+        })
+    }(jQuery));
+});
 
 function validar(){
     $.ajax({
@@ -247,7 +258,7 @@ jQuery('#valoru , #ivau , #portaru').on('change',function(){
     $('#diferenciau').val(diferenciau);
 });
 
-//CONSULTA USUARIO
+//CONSULTA FECHA
 function obtenerfecha(){
     var fecha = $('#date').val();
     $.ajax({
@@ -258,19 +269,29 @@ function obtenerfecha(){
     //console.log(fecha)
 }
 
-//CONSULTA ADMINISTRADOR Y SUPERVISOR
-//RESUMEN CAJA
-function generar(){
-    var date = $('#date').val();
-    var idoperador = $('#idoperador').val();
+function obtenerregistros(){
+    var fecha = $('#regfecha').val();
+    var usuario = $('#user').val();
     $.ajax({
         method: 'GET',
     }).done(function(info) {
-        $('#tablageneral').load('tablas/general.php?date='+date+'&idoperador='+idoperador);
+        $('#tablaresumen').load('tablas/resumen.php?date='+fecha+'&usuario='+usuario);
     })
-    //console.log(date)
-    //console.log(idoperador)
+    //console.log(fecha)
+    //console.log(usuario)
 }
+
+function registrosusuario(){
+    var usuario = $('#usuario').val();
+    $.ajax({
+        method: 'GET',
+    }).done(function(info) {
+        $('#tablaregistros').load('tablas/registros.php?usuario='+usuario);
+    })
+    console.log(usuario)
+}
+
+//CONSULTA ADMINISTRADOR Y SUPERVISOR
 //RESUMEN DIFERENCIA
 function infgeneral(){
     var dategen = $('#dategen').val();
@@ -460,4 +481,25 @@ function eliminarregistro(){
         }
     });
     return false;
+}
+
+//CARGAR MESES
+jQuery('#idmes').on('change', function(){
+    var idmes = $('#idmes').val();
+    fechasregistros();
+    console.log(idmes)
+})
+
+//Función para cargar las provincias al campo "select".
+function fechasregistros(){
+    var regfecha = $('#regfecha');
+    $.ajax({
+        type: "GET",
+        url: "../controller/registros/detallefecha.php",
+        data: "mes=" + $('#idmes').val(),
+        success:function(data){
+            regfecha.html(data);
+        }
+    });
+    console.log(regfecha)
 }

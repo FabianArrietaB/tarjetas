@@ -210,8 +210,6 @@ function addobservacion(){
     return false;
 }
 
-
-
 function clear(){
     $('#observacion').empty();
     $('#frmaddobservacion')[0].reset();

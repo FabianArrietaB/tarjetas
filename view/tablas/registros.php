@@ -1,8 +1,13 @@
 <?php
     session_start();
-    if ($_SESSION['usuario']['tarrol'] == 4) {
+    if ($_SESSION['usuario']['tarrol'] == 4 ||
+    $_SESSION['usuario']['tarrol'] == 2) {
     include "../../model/conexion.php";
     $con = new Conexion();
+    $usuario = "";
+    if(isset($_GET['usuario'])){
+        $usuario = $_GET['usuario'];
+    }
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['tarid'];
     $sql = "SELECT
@@ -24,8 +29,10 @@
         r.reg_estado      as estado,
         r.reg_fecope      as fecha
         FROM registros    AS r
-        WHERE r.reg_estado = 1
-        ORDER BY r.id_registro DESC";
+        WHERE r.reg_estado = 1";
+    if($usuario != ""){
+        $sql .= " AND r.id_operador = '$usuario'";
+    }
     $query = mysqli_query($conexion, $sql);
 } else {
      include "../../model/conexion.php";
@@ -72,7 +79,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody >
+        <tbody id="tblregistros">
         <?php
             while ($registros = mysqli_fetch_array($query)){
         ?>

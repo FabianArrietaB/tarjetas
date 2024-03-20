@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
                         <div class="input-group ">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Operador</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default">Sede</span>
                             <select name="sede" id="sede" class="form-control input-sm" require>
                                 <option value="">Seleccione Sede</option>
                                 <option value="3">METROPOLIS</option>

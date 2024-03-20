@@ -75,7 +75,6 @@
                                     <div class="col-xs-4">
                                         <button value="LISTA" id="listcon" class="btn btn-primary" type="button" onclick="lista()">LISTA</button>
                                     </div>
-                                
                             </div>
                         </div>
                     </div>

@@ -332,13 +332,13 @@
                 WHERE MONTH(r.reg_fecope) = '$mes'
                 ORDER BY fecha DESC";
             $respuesta = mysqli_query($conexion,$sql);
-            $null = "No Hay Fechas";
+            $null = "No Hay Registros";
             if($respuesta >= 0){
                 while($fecha = mysqli_fetch_array($respuesta)){
                     echo '<option value="'.$fecha['fecha'].'">'.$fecha['fecha'].'</option>';
                 }
-            }else{
-                    echo '<option value="'.$null.'">'.$null.'</option>';
+            }else if($respuesta == 0){
+                    echo '<option value="0">'.$null.'</option>';
             }
         }
 

@@ -190,7 +190,7 @@
 ?>
 <!-- carga ficheros javascript -->
 <script src="../public/js/inicio.js"></script>
-<?php } else if ($_SESSION['usuario']['tarrol'] == 4) {
+<?php } else {
     include "../model/conexion.php";
     $idusuario = $_SESSION['usuario']['tarid'];
     $con = new Conexion();
@@ -215,142 +215,51 @@
     FROM prefij_usuario pu
     INNER JOIN prefijos p ON p.id_prefij = pu.id_prefijo
     INNER JOIN usuarios u ON u.id_usuario = pu.id_usuario";
+    $sqluser ="SELECT DISTINCT
+    r.id_operador as idoperador,
+    u.user_nombre as operador
+    FROM registros as r
+    INNER JOIN usuarios as u ON u.id_usuario = r.id_operador
+    ORDER BY operador DESC";
+    $rwuser = mysqli_query($conexion, $sqluser);
 ?>
 <!-- inicio del contenido principal -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-            <div class="card border-primary">
-                <div class="card-header text-center">
-                    <div class="title">
-                        <h2>AGREGAR REGISTRO</h2>
-                    </div>
-                </div>
-                <div class="card-body text-center">
-                    <form id="frmaddregistro" method="post" onsubmit="return validar()">
-                        <div class="row text-center">
-                            <input hidden type="text" class="form-control" name="tiptar" id="tiptar" placeholder="">
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Datafono</label>
-                                    <select id="iddatafo" name="iddatafo" class="form-select" aria-label="Default select example" required>
-                                        <option selected>Seleccione</option>
-                                        <?php
-                                            while($datafono = mysqli_fetch_array($rwdatafono)) {
-                                        ?>
-                                            <option value="<?php echo $datafono['iddatafo']?>"><?php echo $datafono['iddatafo']?> . <?php echo $datafono['datafo'] ?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
-                                    <select id="idtiptar" name="idtiptar" class="form-select" aria-label="Default select example" required>
-                                        <option selected>Seleccione</option>
-                                        <?php
-                                            while($tiptar = mysqli_fetch_array($respuesta)) {
-                                        ?>
-                                            <option value="<?php echo $tiptar['idporcentaje']?>"><?php echo $tiptar['idporcentaje']?> . <?php echo $tiptar['tiptar'];?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">%</label>
-                                    <input type="text" class="form-control"  name="portar" id="portar" placeholder="000" required>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Ticket</label>
-                                    <div class="input-group">
-                                        <select id="pretik" name="pretik" class="form-select" aria-label="Default select example" required>
-                                            <option value="CM01">CM01</option>
-                                            <option value="CM02">CM02</option>
-                                            <option value="CBM">CBM</option>
-                                            <option value="CFC">CFC</option>
-                                        </select>
-                                        <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Valor</label>
-                                    <input type="text" class="form-control" name="valor" id="valor" placeholder="000000" required>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Iva</label>
-                                    <input type="text" class="form-control" name="iva" id="iva" placeholder="000000" required>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Neto</label>
-                                    <input type="text" class="form-control" name="neto" id="neto" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Rete Fuente</label>
-                                    <input type="text" class="form-control" name="retfue" id="retfue" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Comision</label>
-                                    <input type="text" class="form-control" name="comisi" id="comisi" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Rete IVA</label>
-                                    <input type="text" class="form-control" name="retiva" id="retiva" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Rete ICA</label>
-                                    <input type="text" class="form-control" name="retica" id="retica" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Banco</label>
-                                    <input type="text" class="form-control" name="banco" id="banco" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Diferencia</label>
-                                    <input type="text" class="form-control" name="diferencia" id="diferencia" placeholder="000000" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div >
-                                    <button type="submit" class="btn btn-success" >Agregar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="card border-primary">
                 <div class="card-header text-center">
-                    <div class="title">
-                        <h2>LISTA REGISTROS</h2>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-3">
+                            <div class="title">
+                                <h2>LISTA REGISTROS</h2>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <form action="" method="GET">
+                                <input class="form-control me-xl-2" type="search" placeholder="Ingrese Dato o Nombre a Buscar" name="filtro" id="filtro">
+                            </form>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2">
+                            <div class="input-group ">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Usuario</span>
+                                <select name="usuario" id="usuario" class="form-control input-sm">
+                                    <option value="" selected>Seleccione</option>
+                                    <?php
+                                        while($usuario = mysqli_fetch_array($rwuser)) {
+                                    ?>
+                                        <option value="<?php echo $usuario['idoperador']?>"><?php echo $usuario['operador'];?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-1 col-md-1 aling-items-center">
+                        <div class="input-group input-group-sm">
+                            <div class="d-grid gap-1 d-md-block">
+                                <button class="btn btn-info" type="button" value="Buscar" onclick="registrosusuario()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -360,7 +269,6 @@
         </div>
     </div>
 </div>
-?>
 <!-- por ultimo se carga el footer -->
 <?php
     include "tablas/detaelireg.php";

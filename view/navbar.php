@@ -22,6 +22,9 @@
                         <a class="nav-link active" href="inicio.php">INICIO</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" href="registros.php">REGISTROS</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="consultas.php">GENERAL</a>
                     </li>
                     <li class="nav-item">
