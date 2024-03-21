@@ -1,10 +1,6 @@
 <?php
     session_start();
     include "../../model/conexionbd.php";
-    $vendedor = "CASTIGO DE CARTERA";
-    if(isset($_GET['vendedor'])){
-        $vendedor = $_GET['vendedor'];
-    }
     $sentencia = $base_de_datos->query ("SELECT
         id
         ,nit
@@ -27,9 +23,6 @@
     FROM MAECXC
     INNER JOIN MAEVEN ON VEN_CEDULA = CLI_VENDED
     INNER JOIN [METROPOLIS_EXT].[cartera].[saldos_clientes] ON [nit] = [CLI_CEDULA]");
-    if ($vendedor !="") {
-        $sentencia .= "WHERE [VEN_NOMBRE] LIKE ('%$vendedor%');";
-    }
     $empleados = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
 ?>
@@ -46,7 +39,7 @@
                 <th>VALOR SALDO</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tblrecaudos">
             <?php
             foreach($empleados as $empleados) {
             ?>

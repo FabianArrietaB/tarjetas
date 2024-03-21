@@ -7,6 +7,18 @@ const formatterPeso = new Intl.NumberFormat('es-CO', {
     minimumFractionDigits: 0
 })
 
+$(document).ready(function () {
+    (function($) {
+        $('#filtro').keyup(function () {
+            var ValorBusqueda = new RegExp($(this).val(), 'i');
+            $('#tblrecaudos tr').hide();
+            $('#tblrecaudos tr').filter(function () {
+                return ValorBusqueda.test($(this).text());
+            }).show();
+        })
+    }(jQuery));
+});
+
 function tblclientes(){
     $.ajax({
         url : "../controller/cartera/clientes.php",
