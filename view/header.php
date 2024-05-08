@@ -13,6 +13,9 @@ setlocale(LC_ALL,"es_ES");
   <meta name="viewport" content="width=device-width, initial-scale=1"&amp;gt>
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/boxed/boxed-check.css">
+    <link rel="stylesheet" href="../public/boxed/boxed-check.min.css">
+
     <!--<title> Bootstrap </title>-->
     <link rel="stylesheet" href="../public/bootstrap5/css/bootstrap.min.css">
     <!--<title> Boxicons </title>-->

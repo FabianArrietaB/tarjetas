@@ -333,7 +333,7 @@
                 ORDER BY fecha DESC";
             $respuesta = mysqli_query($conexion,$sql);
             $null = "No Hay Registros";
-            if($respuesta >= 0){
+            if($respuesta > 0){
                 while($fecha = mysqli_fetch_array($respuesta)){
                     echo '<option value="'.$fecha['fecha'].'">'.$fecha['fecha'].'</option>';
                 }

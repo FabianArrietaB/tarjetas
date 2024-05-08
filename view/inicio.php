@@ -17,6 +17,7 @@
     u.user_nombre as operador
     FROM registros as r
     INNER JOIN usuarios as u ON u.id_usuario = r.id_operador
+    WHERE u.user_estado = 1
     ORDER BY operador DESC";
     $rwuser = mysqli_query($conexion, $sqluser);
 ?>

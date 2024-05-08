@@ -32,6 +32,7 @@
         WHERE r.reg_estado = 1";
     if($usuario != ""){
         $sql .= " AND r.id_operador = '$usuario'";
+        $sql .= " ORDER BY r.id_registro DESC";
     }
     $query = mysqli_query($conexion, $sql);
 } else {

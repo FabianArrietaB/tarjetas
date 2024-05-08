@@ -73,8 +73,7 @@
         SUM(r.reg_comision)   as comision
     FROM registros  AS r
     INNER JOIN porcentajes AS p ON p.id_porcentaje = r.reg_tipcuenta
-    WHERE r.reg_estado = 1 AND r.reg_fecope = '$hoy'
-    ";
+    WHERE r.reg_estado = 1 AND r.reg_fecope = '$hoy'";
     if($sede = "1"){
         $sql .=" AND r.id_operador = '$idusuario'";
     }
