@@ -68,7 +68,7 @@ function infmes(){
     var sede = $('#sede').val();
     var master = ($('#master').is(":checked")) ? $('#master').val() : '';
     var visa = ($('#visa').is(":checked")) ? $('#visa').val() : '';
-    var davi = ($('davi').is(":checked")) ? $('davi').val() : '';
+    var davi = ($('#davi').is(":checked")) ? $('#davi').val() : '';
     $.ajax({
         method: 'GET',
     }).done(function(info) {

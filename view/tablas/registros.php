@@ -10,6 +10,7 @@
     }
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['tarid'];
+    $rol = $_SESSION['usuario']['tarrol'];
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
@@ -40,6 +41,7 @@
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['tarid'];
+    $rol = $_SESSION['usuario']['tarrol'];
     $sql = "SELECT
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
@@ -77,7 +79,9 @@
                 <th scope="col" >Valor</th>
                 <th scope="col" >Iva</th>
                 <th scope="col" >Neto</th>
-                <th></th>
+                <?php if($rol == 1 OR $rol == 5) { ?>
+                    <th></th>
+                <?php } ?>
             </tr>
         </thead>
         <tbody id="tblregistros">
@@ -86,15 +90,21 @@
         ?>
             <tr>
                 <td><?php echo $registros['fecha'];?></td>
+                <?php if($rol == 1 OR $rol == 5) { ?>
                 <td data-bs-toggle="modal" data-bs-target="#elireg" onclick="detalleeliminacionregistro(<?php echo $registros['idregistro'] ?>)"><?php echo str_pad($registros['iddatafono'],2,"0",STR_PAD_LEFT). ' - ' . $registros['ticket']; ?></td>
+                <?php } else { ?>
+                    <td><?php echo str_pad($registros['iddatafono'],2,"0",STR_PAD_LEFT). ' - ' . $registros['ticket']; ?></td>
+                <?php } ?>
 				<td><?php echo $registros['idtipcuenta']; ?></td>
 				<td><?php echo $registros['tiptar']; ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['iva']); ?></td>
                 <td><?php echo '$ ' . number_format($registros['valor'] - $registros['iva']); ?></td>
+                <?php if($rol == 1 OR $rol == 5) { ?>
                 <td>
                     <button data-bs-toggle="modal" data-bs-target="#editar"  type="button" class="btn btn-warning" onclick="detalleregistro('<?php echo $registros['idregistro']?>')"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
                 </td>
+                <?php } ?>
             </tr>
         <?php } ?>
         </tbody>
