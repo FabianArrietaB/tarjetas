@@ -5,12 +5,19 @@
     if(isset($_SESSION['usuario']) &&
     include "permisos.php"){
     include "../model/conexion.php";
+    $idrol = $_SESSION['usuario']['tarrol'];
+    $idusuario = $_SESSION['usuario']['tarid'];
     $con = new Conexion();
     $conexion = $con->conectar();
     $sqldate ="SELECT DISTINCT
     r.reg_fecope as fecha
     FROM registros as r
-    ORDER BY fecha DESC";
+    WHERE r.reg_estado = 1";
+    if($idrol == 4){
+        $sqldate .= " ORDER BY fecha DESC";
+    } else {
+        $sqldate .= " AND r.id_operador = '$idusuario' ORDER BY fecha DESC";
+    }
     $rwdate = mysqli_query($conexion, $sqldate);
     $sqluser ="SELECT DISTINCT
     r.id_operador as idoperador,
