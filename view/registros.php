@@ -32,7 +32,6 @@
     INNER JOIN usuarios u ON u.id_usuario = pu.id_usuario
     WHERE pu.id_usuario = $idusuario";
     $rwprefijo = mysqli_query($conexion, $sqlprefijo);
-    $rwprefijo = mysqli_query($conexion, $sqlprefijo);
     $data = mysqli_fetch_array($rwprefijo);
     $prefijo = $data['prefijo'];
 ?>
@@ -86,12 +85,6 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
                                     <div class="input-group">
-                                        <!-- <select id="pretik" name="pretik" class="form-select" aria-label="Default select example" required>
-                                            <option value="CM01">CM01</option>
-                                            <option value="CM02">CM02</option>
-                                            <option value="CBM">CBM</option>
-                                            <option value="CFC">CFC</option>
-                                        </select> -->
                                         <input type="text" class="form-control" name="pretik" id="pretik" value="<?php echo $prefijo?>" placeholder="000000" required>
                                         <input type="text" class="form-control" name="ticket" id="ticket" placeholder="000000" required>
                                     </div>
@@ -220,6 +213,7 @@
     u.user_nombre as operador
     FROM registros as r
     INNER JOIN usuarios as u ON u.id_usuario = r.id_operador
+    WHERE u.user_estado = 1
     ORDER BY operador DESC";
     $rwuser = mysqli_query($conexion, $sqluser);
 ?>

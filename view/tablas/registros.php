@@ -14,7 +14,7 @@
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
         r.id_datafono     as iddatafono,
-        r.reg_numticket   as ticket,
+        CONCAT(r.reg_prefijo, ' - ' , r.reg_numticket) as ticket,
         r.reg_tipcuenta   as idtipcuenta,
         r.reg_tiptar      as tiptar,
         r.reg_valor       as valor,
@@ -32,6 +32,7 @@
         WHERE r.reg_estado = 1";
     if($usuario != ""){
         $sql .= " AND r.id_operador = '$usuario'";
+        $sql .= " ORDER BY r.id_registro DESC";
     }
     $query = mysqli_query($conexion, $sql);
 } else {
@@ -43,7 +44,7 @@
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
         r.id_datafono     as iddatafono,
-        r.reg_numticket   as ticket,
+        CONCAT(r.reg_prefijo, ' - ' , r.reg_numticket) as ticket,
         r.reg_tipcuenta   as idtipcuenta,
         r.reg_tiptar      as tiptar,
         r.reg_valor       as valor,

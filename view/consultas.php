@@ -62,7 +62,7 @@
                             <select name="franquicia" id="franquicia" class="form-control input-sm" require>
                                 <option value="">Seleccione Franquicia</option>
 								<?php
-                                    $sql_registros = "SELECT DISTINCT r.reg_tiptar as tipo FROM registros AS r";
+                                    $sql_registros = "SELECT DISTINCT r.reg_tiptar as tipo FROM registros AS r WHERE r.reg_estado = 1";
                                     $resultados = mysqli_query($conexion,$sql_registros);
 									while($fecha = mysqli_fetch_array($resultados)) {
 								?>

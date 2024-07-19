@@ -41,40 +41,51 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="d-grid gap-2">
+                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                    <div class="input-group input-group-sm">
+                                        <div class="col-xs-4">
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label" for="inlineCheckbox1">Mastercard</label>
+                                                <input id="master" name="master" class="form-check-input" type="checkbox" value="MASTERCARD">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label" for="inlineCheckbox1">Visa</label>
+                                                <input id="visa" name="visa" class="form-check-input" type="checkbox" value="VISA">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-check form-check-inline">
+                                                <label class="form-check-label" for="inlineCheckbox1">Davivienda</label>
+                                                <input id="davi" name="davi" class="form-check-input" type="checkbox" value="DAVIVIENDA">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                         <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
-                            <div class="input-group input-group-sm">
-                                <div class="col-xs-4">
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="inlineCheckbox1">Mastercard</label>
-                                        <input id="master" name="master" class="form-check-input" type="checkbox" value="MASTERCARD">
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="inlineCheckbox1">Visa</label>
-                                        <input id="visa" name="visa" class="form-check-input" type="checkbox" value="VISA">
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="inlineCheckbox1">Davivienda</label>
-                                        <input id="davi" name="davi" class="form-check-input" type="checkbox" value="DAVIVIENDA">
-                                    </div>
+                            <div class="d-grid gap-2">
+                                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                    <input type="checkbox" class="btn-check" id="master" name="master" value="MASTERCARD"/>
+                                    <label class="btn btn-outline-warning check-label" for="master">MASTERCARD</label>
+                                    <input type="checkbox" class="btn-check" id="visa" name="visa" value="VISA"/>
+                                    <label class="btn btn-outline-primary check-label" for="visa">VISA</label>
+                                    <input type="checkbox" class="btn-check" id="davi" name="davi" value="DAVIVIENDA"/>
+                                    <label class="btn btn-outline-danger check-label" for="davi">DAVIVIENDA</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-3 mb-2">
-                            <div class="input-group input-group-sm">
-                                    <!-- <input value="DIA" id="condia" class="btn btn-warning" type="button" onclick="infdetalle()"> -->
-                                    <div class="col-xs-4">
-                                        <button value="MES" id="conmes" class="btn btn-success mr-2" type="button" onclick="infmes()">MES</button>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <button value="GENERAL" id="contotal" class="btn btn-info" type="button"  onclick="infvalores()">GENERAL</button>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <button value="LISTA" id="listcon" class="btn btn-primary" type="button" onclick="lista()">LISTA</button>
-                                    </div>
+                            <div class="d-grid gap-2">
+                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                    <button type="button" class="btn btn-outline-success" value="MES" id="conmes" onclick="infmes()">MES</button>
+                                    <button type="button" class="btn btn-outline-info" value="GENERAL" id="contotal" onclick="infvalores()">GENERAL</button>
+                                    <button type="button" class="btn btn-outline-primary" value="LISTA" id="listcon" onclick="lista()">LISTA</button>
+                                </div>
                             </div>
                         </div>
                     </div>

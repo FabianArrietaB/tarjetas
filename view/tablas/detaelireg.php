@@ -14,6 +14,7 @@
                         <div class="row text-center">
                             <input hidden type="text" class="form-control" name="eliidregistro" id="eliidregistro" placeholder="">
                             <input hidden type="text" class="form-control" name="eliestado" id="eliestado" placeholder="">
+                            <input hidden type="text" class="form-control" name="eliprefijo" id="eliprefijo" placeholder="">
                             <input hidden type="text" class="form-control" name="eliticket" id="eliticket" placeholder="">
                             <input hidden type="text" class="form-control" name="eliidsede" id="eliidsede" placeholder="">
                             <div class="col">

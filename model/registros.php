@@ -6,12 +6,12 @@
 
         public function addregistro($datos){
             $conexion = Conexion::conectar();
-            $prefijo = $datos['pretik'] .' - '. $datos['ticket'];
             $sql = "INSERT INTO registros (
                 id_sede,
                 id_operador,
                 id_datafono,
                 id_tipregistro,
+                reg_prefijo,
                 reg_numticket,
                 reg_tipcuenta,
                 reg_tiptar,
@@ -24,21 +24,22 @@
                 reg_tardesc,
                 reg_banco,
                 reg_diferencia,
-                reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                reg_fecope) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $conexion->prepare($sql);
             $fecha = date("Y-m-d");
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
-            if ($datos['area'] = 3) {
+            if ($datos['idarea'] == 3) {
                 $idtipregistro = 2;
             }else{
                 $idtipregistro = 1;
             }
-            $query->bind_param("iiiisisssssssssss",
+            $query->bind_param("iiiisissssssssssss",
                     $datos['idsede'],
                     $datos['idoperador'],
                     $datos['iddatafo'],
                     $idtipregistro,
-                    $prefijo,
+                    $datos['pretik'],
+                    $datos['ticket'],
                     $datos['idtiptar'],
                     $datos['tiptar'],
                     $datos['valor'],
@@ -80,6 +81,7 @@
             $sql ="SELECT
             r.id_registro     as idregistro,
             r.id_sede         as idsede,
+            r.reg_prefijo     as prefijo,
             r.reg_numticket   as ticket,
             r.reg_tipcuenta   as idtipcuenta,
             r.reg_tiptar      as tiptar,
@@ -103,6 +105,7 @@
             $datos = array(
                 'idregistro' => $registro['idregistro'],
                 'idsede' => $registro['idsede'],
+                'prefijo' => $registro['prefijo'],
                 'ticket' => $registro['ticket'],
                 'idtipcuenta' => $registro['idtipcuenta'],
                 'tiptar' => $registro['tiptar'],
@@ -126,6 +129,7 @@
         public function editarregistro($datos){
             $conexion = Conexion::conectar();
             $sql = "UPDATE registros SET 
+                                        reg_prefijo = ?,
                                         reg_numticket = ?,
                                         reg_tipcuenta = ?,
                                         reg_tiptar = ?,
@@ -142,7 +146,8 @@
                                         WHERE id_registro = ?";
             $query = $conexion->prepare($sql);
             $descuento = $datos['retfue'] + $datos['retiva'] + $datos['retica'] + $datos['comisi'];
-            $query->bind_param('sssssssssssssi',
+            $query->bind_param('ssssssssssssssi',
+                                $datos['prefijo'],
                                 $datos['ticket'],
                                 $datos['idtiptar'],
                                 $datos['tiptar'],
@@ -333,7 +338,7 @@
                 ORDER BY fecha DESC";
             $respuesta = mysqli_query($conexion,$sql);
             $null = "No Hay Registros";
-            if($respuesta >= 0){
+            if($respuesta > 0){
                 while($fecha = mysqli_fetch_array($respuesta)){
                     echo '<option value="'.$fecha['fecha'].'">'.$fecha['fecha'].'</option>';
                 }
@@ -344,14 +349,13 @@
 
         public function ConsultaFactura($pretik, $iddatafo, $ticket){
             $conexion = Conexion::conectar();
-            $numtik = $pretik . ' - ' . $ticket;
-            $sql = "SELECT * FROM registros r INNER JOIN usuarios u ON u.id_usuario = r.id_operador WHERE r.reg_numticket = '$numtik' AND r.id_datafono = $iddatafo";
+            $sql = "SELECT * FROM registros r INNER JOIN usuarios u ON u.id_usuario = r.id_operador WHERE r.reg_prefijo = '$pretik' AND r.reg_numticket = '$ticket' AND r.id_datafono = $iddatafo";
             $respuesta = mysqli_query($conexion,$sql);
             if(mysqli_num_rows($respuesta) > 0){
                 $datosFactura = mysqli_fetch_array($respuesta);
                 if($datosFactura['reg_estado'] == 1){
                     $factura = $datosFactura['reg_numticket'];
-                    $fecha = $datosFactura['reg_fecope'];
+                    $fecha =   $datosFactura['reg_fecope'];
                     $usuario = $datosFactura['user_nombre'];
                     return 1;
                 }else{
@@ -391,6 +395,7 @@
                 $proceso = 'SE RESTAURO';
             }
             $modulo = 'REGISTRO';
+            $ticket = $datos['prefijo'] . ' - ' . $datos['ticket'];
             $sql = "UPDATE registros SET reg_estado = ? WHERE id_registro = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('ii', $estado, $datos['idregistro']);
@@ -398,7 +403,7 @@
             if($respuesta > 0){
                 $historial = "INSERT INTO historial (id_operador, id_sede, his_numdoc, his_detall, his_tipope, his_modulo, his_fecope) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $query = $conexion->prepare($historial);
-                $query->bind_param('issssss', $datos['idoperador'], $datos['idsede'], $datos['ticket'], $datos['detalle'], $proceso, $modulo, $fecha);
+                $query->bind_param('issssss', $datos['idoperador'], $datos['idsede'], $ticket, $datos['detalle'], $proceso, $modulo, $fecha);
                 $respuesta = $query->execute();
             }
             return $respuesta;

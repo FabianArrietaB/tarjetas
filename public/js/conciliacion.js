@@ -80,7 +80,7 @@ function infmes(){
     // console.log(sede)
     //console.log(master)
     //console.log(visa)
-    //console.log(davi)
+    console.log(davi)
 }
 
 function lista(){

@@ -1,22 +1,22 @@
 <?php
    session_start();
    $datos = array(
-    'idoperador'     => $_SESSION['usuario']['tarid'],
-    'idsede'         => $_SESSION['usuario']['tarsede'],
-    'idarea'         => $_SESSION['usuario']['tararea'],
-    "iddatafo"       => $_POST['iddatafo'],
-    "pretik"         => $_POST['pretik'],
-    "ticket"         => $_POST['ticket'],
-    "idtiptar"       => $_POST['idtiptar'],
-    "tiptar"         => $_POST['tiptar'],
-    "valor"          => $_POST['valor'],
-    "iva"            => $_POST['iva'],
-    "retfue"         => $_POST['retfue'],
-    "retiva"         => $_POST['retiva'],
-    "retica"         => $_POST['retica'],
-    "comisi"         => $_POST['comisi'],
-    "banco"          => $_POST['banco'],
-    "diferencia"     => $_POST['diferencia'],
+      'idoperador'     => $_SESSION['usuario']['tarid'],
+      'idsede'         => $_SESSION['usuario']['tarsede'],
+      'idarea'         => $_SESSION['usuario']['tararea'],
+      "iddatafo"       => $_POST['iddatafo'],
+      "pretik"         => $_POST['pretik'],
+      "ticket"         => $_POST['ticket'],
+      "idtiptar"       => $_POST['idtiptar'],
+      "tiptar"         => $_POST['tiptar'],
+      "valor"          => $_POST['valor'],
+      "iva"            => $_POST['iva'],
+      "retfue"         => $_POST['retfue'],
+      "retiva"         => $_POST['retiva'],
+      "retica"         => $_POST['retica'],
+      "comisi"         => $_POST['comisi'],
+      "banco"          => $_POST['banco'],
+      "diferencia"     => $_POST['diferencia'],
    );
 
    include "../../model/registros.php";

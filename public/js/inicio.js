@@ -97,6 +97,7 @@ function detalleregistro(idregistro){
             $('#tiptaru').val(respuesta['tiptar']);
             $('#idtiptaru').val(respuesta['idtipcuenta']);
             $('#portaru').val(respuesta['portar']);
+            $('#prefijou').val(respuesta['prefijo']);
             $('#ticketu').val(respuesta['ticket']);
             $('#valoru').val(respuesta['valor']);
             $('#ivau').val(respuesta['iva']);
@@ -445,6 +446,7 @@ function detalleeliminacionregistro(idregistro){
             respuesta = jQuery.parseJSON(respuesta);
             console.log(respuesta)
             $('#eliidregistro').val(respuesta['idregistro']);
+            $('#eliprefijo').val(respuesta['prefijo']);
             $('#eliticket').val(respuesta['ticket']);
             $('#eliestado').val(respuesta['estado']);
             $('#eliidsede').val(respuesta['idsede']);

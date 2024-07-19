@@ -15,7 +15,7 @@
                             <input hidden type="text" class="form-control" name="idregistro" id="idregistro" placeholder="">
                             <input hidden type="text" class="form-control" name="tiptaru" id="tiptaru" placeholder="">
                             <div class="col-3">
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Tipo Tarjeta</label>
                                     <select id="idtiptaru" name="idtiptaru" class="form-select" aria-label="Default select example">
                                         <option selected>Seleccione</option>
@@ -38,7 +38,10 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ticket</label>
-                                    <input type="text" class="form-control" name="ticketu" id="ticketu" placeholder="000000" readonly>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="prefijou" id="prefijou" placeholder="000000" required>
+                                        <input type="text" class="form-control" name="ticketu" id="ticketu" placeholder="000000" required>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-2">
