@@ -26,6 +26,7 @@
     $con = new Conexion();
     $conexion = $con->conectar();
     $idusuario = $_SESSION['usuario']['tarid'];
+    $rol = $_SESSION['usuario']['tarrol'];
     //CONSULTA RESUMEN
     $sqlunico = "SELECT
         c.id_conciliacion AS idconciliacion,
@@ -78,14 +79,20 @@
             <?php
             while ($valor = mysqli_fetch_array($rwunico)) { ?>
                 <tr>
+                    <?php if($rol == 2) { ?>
                     <td data-bs-toggle="modal" data-bs-target="#elicon" onclick="detalleeliminarconciliacion('<?php echo $valor['idconciliacion']?>')" ><?php echo str_pad($valor['idconciliacion'], 3, "0", STR_PAD_LEFT);?></td>
+                    <?php } else { ?>
+                        <td><?php echo str_pad($valor['idconciliacion'], 3, "0", STR_PAD_LEFT);?></td>
+                    <?php } ?>
                     <td><?php echo $valor['fechaconci'];?></td>
                     <td><?php echo $valor['franquicia'];?></td>
                     <td><?php echo $valor['sede'];?></td>
                     <td><?php echo $valor['nombre'];?></td>
+                    <?php if($rol == 2) { ?>
                     <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editconciliacion" onclick="detalleconciliacion('<?php echo $valor['idconciliacion']?>')"><i class="fa-solid fa-pen-to-square fa-beat fa-xl"></i></button>
                     </td>
+                    <?php } ?>
                 </tr>
             <?php } ?>
         </tbody>
