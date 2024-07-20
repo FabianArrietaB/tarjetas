@@ -11,10 +11,10 @@
                 $datosUsuario = mysqli_fetch_array($respuesta);
                 if($datosUsuario['user_estado'] == 1 ){
                     $_SESSION['usuario']['tarusuario'] = $datosUsuario['user_nombre'];
-                    $_SESSION['usuario']['tarid'] = $datosUsuario['id_usuario'];
-                    $_SESSION['usuario']['tarrol'] = $datosUsuario['id_rol'];
-                    $_SESSION['usuario']['tarsede'] = $datosUsuario['id_sede'];
-                    $_SESSION['usuario']['tararea'] = $datosUsuario['id_area'];
+                    $_SESSION['usuario']['tarid']      = $datosUsuario['id_usuario'];
+                    $_SESSION['usuario']['tarrol']     = $datosUsuario['id_rol'];
+                    $_SESSION['usuario']['tarsede']    = $datosUsuario['id_sede'];
+                    $_SESSION['usuario']['tararea']    = $datosUsuario['id_area'];
                     return 1;
                 }else{
                     return 0;
