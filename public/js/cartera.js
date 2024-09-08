@@ -30,21 +30,21 @@ function tblclientes(){
             let totalinactivos = 0;
             data.forEach((item) => {
             if(item.activo === '0'){
-                total += Number(item.total);
+                total += Number(item.saldo);
             }else{
-                totalinactivos += Number(item.total);
+                totalinactivos += Number(item.saldo);
             }
                 if(item.activo === '0'){
                     tbl += `
                         <tr ondblclick="clientes('${item.docume}')" class="bg-white border-b">
                             <td class="text-center">${item.vendedor}</td>
-                            <td class="text-center ${(item.total < 0) ? 'text-danger':''}">${formatterPeso.format(Number(item.total))}</td>
+                            <td class="text-center ${(item.saldo < 0) ? 'text-danger':''}">${formatterPeso.format(Number(item.saldo))}</td>
                         </tr>
                     `
                 }
             });
             tbl += `
-                        <tr ondblclick="clientes('1'))" class="bg-white border-b">
+                        <tr ondblclick="clientes('null')" class="bg-white border-b">
                             <td class="text-center">INATIVOS</td>
                             <td class="text-center ${(totalinactivos < 0) ? 'text-danger':''}">${formatterPeso.format(Number(totalinactivos))}</td>
                         </tr>
@@ -112,14 +112,14 @@ function facturas(nit, cliente){
             totalvalor += Number(item.valor);
             totalabono += Number(item.abono);
             totalsaldo += Number(item.saldo);
-            direcc =  item.direccion;
-            telefono = item.telefono;
+            direcc =  item.direcc;
+            telefono = item.telefo;
             email = item.correo;
             tbl += `
                 <tr class="bg-white border-b">
                     <td class="text-center">${item.factura}</td>
                     <td class="text-center">${item.fecha}</td>
-                    <td class="text-center">${item.documento}</td>
+                    <td class="text-center">${item.docume}</td>
                     <td class="text-center">${item.vendedor}</td>
                     <td class="text-center ${(item.valor < 0) ? 'text-danger':''}">${ formatterPeso.format(Number(item.valor))}</td>
                     <td class="text-center ${(item.abono < 0) ? 'text-danger':''}">${ formatterPeso.format(Number(item.abono))}</td>

@@ -15,7 +15,7 @@
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
         r.id_datafono     as iddatafono,
-        CONCAT(r.reg_prefijo, ' - ' , r.reg_numticket) as ticket,
+        CONCAT(r.reg_prefijo, ' ' , r.reg_numticket) as ticket,
         r.reg_tipcuenta   as idtipcuenta,
         r.reg_tiptar      as tiptar,
         r.reg_valor       as valor,
@@ -46,7 +46,7 @@
         r.id_registro     as idregistro,
         r.id_operador     as idoperador,
         r.id_datafono     as iddatafono,
-        CONCAT(r.reg_prefijo, ' - ' , r.reg_numticket) as ticket,
+        CONCAT(r.reg_prefijo, ' ' , r.reg_numticket) as ticket,
         r.reg_tipcuenta   as idtipcuenta,
         r.reg_tiptar      as tiptar,
         r.reg_valor       as valor,
@@ -73,7 +73,7 @@
         <thead>
             <tr>
                 <th scope="col" >Fecha</th>
-                <th scope="col" >Ticket</th>
+                <th scope="col" >Datafono - Ticket</th>
 				<th scope="col" >Tipo</th>
 				<th scope="col" >Franquicia</th>
                 <th scope="col" >Valor</th>

@@ -2,6 +2,6 @@
     session_start();
     include "../../model/cartera.php";
     $Cartera = new Cartera();
-    $nit = $_GET['nit'];
-    echo json_encode($Cartera->facturas($nit));
+    $pedido = $_GET['pedido'];
+    echo json_encode($Cartera->pedido($pedido));
 ?>

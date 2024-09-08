@@ -24,8 +24,9 @@
                         </form>
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-3">
-                        <div class="d-grid gap-2">
+                        <div class="btn-group" role="group" aria-label="Basic example">
                             <a  href="observaciones.php" class="btn btn-outline-primary" type="button">Observaciones</a>
+                            <a  href="autorizaciones.php" class="btn btn-outline-primary" type="button">Autorizaciones</a>
                         </div>
                     </div>
                 </div>
