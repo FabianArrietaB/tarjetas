@@ -31,14 +31,15 @@
                                 <table class="table table-sm table-striped font-small">
                                     <thead>
                                         <tr>
-                                            <th scope="col" >#</th>
                                             <th scope="col" >PEDIDO</th>
                                             <th scope="col" >REMISIONES</th>
                                             <th scope="col" >FACTURA</th>
                                             <th scope="col" >MONTO</th>
+                                            <th scope="col" >FECHA PEDIDO</th>
                                             <th scope="col" >CLIENTE</th>
                                             <th scope="col" >VENDEDOR</th>
                                             <th scope="col" >AUTORIZADO</th>
+                                            <th scope="col" >FECHA AUTUROZIDADO</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tblautorizaciones">
