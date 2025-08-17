@@ -1,7 +1,7 @@
 <?php
-    $contraseña = ".Metropolis1943..";
-    $usuario = "si";
-    $nombreBaseDeDatos = "METROCERAMICA";
+    $contraseña = "";
+    $usuario = "";
+    $nombreBaseDeDatos = "";
     # Puede ser 127.0.0.1 o el nombre de tu equipo; o la IP de un servidor remoto
     $rutaServidor = "SERVIDOR";
     
